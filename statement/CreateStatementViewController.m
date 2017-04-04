@@ -5,14 +5,13 @@
 //  Created by Alexander Kuhar on 4/4/17.
 //  Copyright © 2017 Alexander Kuhar. All rights reserved.
 //
+#import "CreateStatementViewController.h"
 
-#import "ViewController.h"
-
-@interface ViewController ()
+@interface CreateStatementViewController ()
 
 @end
 
-@implementation ViewController
+@implementation CreateStatementViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
