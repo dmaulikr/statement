@@ -9,8 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "CreateStatementViewController.m"
 
-@interface CreateStatementViewController : UIViewController
+@interface CreateStatementViewController : UIViewController <UITextFieldDelegate>
 
+@property (weak, nonatomic) IBOutlet UILabel *statementLabel;
+
+@property (weak, nonatomic) IBOutlet UITextField *statementTextField;
+
+- (IBAction)createStatement:(UITextField *)sender;
 
 @end
 

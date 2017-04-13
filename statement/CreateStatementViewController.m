@@ -15,6 +15,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _statementTextField.delegate = self;
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -24,5 +26,16 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (IBAction)createStatement:(UITextField *)sender {
+    
+    _statementLabel.text = _statementTextField.text;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+
+    [textField resignFirstResponder];
+    return TRUE;
+}
 
 @end
