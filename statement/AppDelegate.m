@@ -14,13 +14,6 @@
 
 @implementation AppDelegate
 
-@synthesize persistentContext = _persistentContext;
-@synthesize mainQueueContext = _mainQueueContext;
-@synthesize backgroundContext = _backgroundContext;
-
-@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
-@synthesize managedObjectModel = _managedObjectModel;
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     return YES;
@@ -36,6 +29,8 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    [self saveContext];
 }
 
 
@@ -51,134 +46,53 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    [self saveContext];
+    
 }
 
-- (NSManagedObjectModel *)managedObjectModel {
-    
-    if (_managedObjectModel != nil) {
-        return _managedObjectModel;
-    }
-    
-    NSURL *modelUrl = [[NSBundle mainBundle] URLForResource: @"DataModel" withExtension: @"momd"];
-    _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL: modelUrl];
-    return _managedObjectModel;
-}
+#pragma mark - Core Data Stack
 
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+@synthesize persistentContainer = _persistentContainer;
+
+- (NSPersistentContainer *)persistentContainer {
     
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-    NSURL *storeUrl = [[self applicationDirectory] URLByAppendingPathComponent: @"DataModel.sqlite"];
-    
-    NSError *error = nil;
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    
-    if (![_persistentStoreCoordinator addPersistentStoreWithType: NSSQLiteStoreType configuration: nil URL: storeUrl options: nil error: &error]) {
+    @synchronized (self) {
         
-        NSLog(@"Unresolved error: %@, %@", error, [error userInfo]);
-        abort();
-    }
-    
-    return _persistentStoreCoordinator;
-}
-
-- (NSManagedObjectContext *)persistentContext {
-    
-    if (_persistentContext != nil) {
-        return _persistentContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    
-    if (coordinator != nil) {
-        
-        _persistentContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSPrivateQueueConcurrencyType];
-        [_persistentContext setPersistentStoreCoordinator: coordinator];
-    }
-    
-    return _persistentContext;
-}
-
-- (NSManagedObjectContext *)mainQueueContext {
-    
-    if (_mainQueueContext != nil) {
-        return _mainQueueContext;
-    }
-    
-    _mainQueueContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSMainQueueConcurrencyType];
-    [_mainQueueContext setParentContext:_persistentContext];
-    
-    return _mainQueueContext;
-}
-
-- (NSManagedObjectContext *)backgroundContext {
-    
-    if (_backgroundContext != nil) {
-        return _backgroundContext;
-    }
-    
-    _backgroundContext = [[NSManagedObjectContext alloc] initWithConcurrencyType: NSPrivateQueueConcurrencyType];
-    [_backgroundContext setParentContext:_mainQueueContext];
-    
-    return _backgroundContext;
-}
-
-- (void)saveBackgroundContext {
-    
-    NSError *error = nil;
-    NSManagedObjectContext *backgroundContext = [self backgroundContext];
-    
-    if (backgroundContext != nil) {
-        
-        if ([backgroundContext hasChanges] && ![backgroundContext save: &error]) {
-            
-            NSLog(@"Unresolved errors saving: %@, %@", error, [error userInfo]);
-            abort();
-        } else {
-            
-            [backgroundContext save: &error];
-            NSLog(@"Background context saved");
+        if (_persistentContainer == nil) {
+            _persistentContainer = [[NSPersistentContainer alloc] initWithName:@"DataModel"];
+            [_persistentContainer loadPersistentStoresWithCompletionHandler:^(NSPersistentStoreDescription *storeDescription, NSError *error) {
+                
+                if (error != nil) {
+                    
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    
+                    NSLog(@"Unresolved error creating persistent container: %@, %@", error, error.userInfo);
+                    abort();
+                }
+            }];
         }
     }
+    
+    return _persistentContainer;
 }
+
+#pragma mark - Core Data Saving
 
 - (void)saveContext {
     
+    NSManagedObjectContext *context = self.persistentContainer.viewContext;
     NSError *error = nil;
-    NSManagedObjectContext *mainQueueContext = [self mainQueueContext];
-    NSManagedObjectContext *persistentContext = [self persistentContext];
     
-    if (mainQueueContext != nil) {
+    if ([context hasChanges] && ![context save:&error]) {
         
-        if ([mainQueueContext hasChanges] && ![mainQueueContext save: &error]) {
-            
-            NSLog(@"Unresolved errors saving: %@, %@", error, [error userInfo]);
-            abort();
-        } else {
-            
-            [mainQueueContext save: &error];
-            NSLog(@"Main queue context saved");
-        }
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
         
-        if (persistentContext != nil) {
-            
-            if ([persistentContext hasChanges] && ![persistentContext save: &error]) {
-                
-                NSLog(@"Unresolved errors saving: %@, %@", error, [error userInfo]);
-                abort();
-            } else {
-                
-                [persistentContext save: &error];
-                NSLog(@"Persistent context saved");
-            }
-        }
+        NSLog(@"Unresolved error saving context: %@, %@", error, error.userInfo);
+        abort();
     }
-}
-
-- (NSURL *)applicationDirectory {
-    return [[[NSFileManager defaultManager] URLsForDirectory: NSDocumentDirectory inDomains: NSUserDomainMask] lastObject];
 }
 
 @end
