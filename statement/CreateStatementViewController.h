@@ -10,10 +10,13 @@
 #import "AppDelegate.h"
 #import "Statement+CoreDataClass.h"
 
-@interface CreateStatementViewController : UIViewController <UITextFieldDelegate>
+@interface CreateStatementViewController : UIViewController <UITextFieldDelegate, NSFetchedResultsControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *statementLabel;
 @property (weak, nonatomic) IBOutlet UITextField *statementTextField;
+
+@property (nonatomic, retain) NSFetchedResultsController *fetchController;
+@property (nonatomic, retain) NSManagedObjectContext *context;
 
 @property (strong, nonatomic) Statement *createdStatement;
 

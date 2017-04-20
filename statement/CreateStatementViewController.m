@@ -15,20 +15,28 @@
 @implementation CreateStatementViewController
 
 @synthesize createdStatement;
+
 AppDelegate *appDelegate;
-NSManagedObjectContext *context;
+Statement *fetchedStatement;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     _statementTextField.delegate = self;
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    context = [[appDelegate persistentContainer] viewContext];
+    _context = [[appDelegate persistentContainer] viewContext];
     
-    // Do any additional setup after loading the view, typically from a nib.
+    _fetchController = [appDelegate initializeFetchedResultsController];
+    fetchedStatement = (Statement *)_fetchController.fetchedObjects.firstObject;
+    
+    NSLog(@"%@", fetchedStatement.statementText);
+    
+    _statementLabel.text = fetchedStatement.statementText;
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    
     
 }
 
@@ -39,15 +47,22 @@ NSManagedObjectContext *context;
 
 - (IBAction)createStatement:(UITextField *)sender {
     
-    _statementLabel.text = _statementTextField.text;
+    for (NSManagedObject *object in _fetchController.fetchedObjects) {
+     [_fetchController.managedObjectContext deleteObject:object];
+    }
     
+    _statementLabel.text = _statementTextField.text;
+    NSLog(@"%@", _statementLabel.text);
+    
+    
+    self.createdStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
     self.createdStatement.statementText = _statementLabel.text;
     
-    self.createdStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:context];
+    [appDelegate saveContext];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-
+    
     [textField resignFirstResponder];
     return TRUE;
 }
