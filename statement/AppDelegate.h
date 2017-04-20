@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, NSFetchedResultsControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, readonly) NSPersistentContainer *persistentContainer;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
--(void)saveContext;
+- (void)saveContext;
+- (NSFetchedResultsController *)initializeFetchedResultsController;
 
 @end
 

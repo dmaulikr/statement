@@ -82,7 +82,7 @@
 
 - (void)saveContext {
     
-    NSManagedObjectContext *context = self.persistentContainer.viewContext;
+    NSManagedObjectContext *context = _persistentContainer.viewContext;
     NSError *error = nil;
     
     if ([context hasChanges] && ![context save:&error]) {
@@ -92,7 +92,39 @@
         
         NSLog(@"Unresolved error saving context: %@, %@", error, error.userInfo);
         abort();
+    } else {
+        
+        NSLog(@"Context successfully saved.");;
     }
+}
+
+#pragma mark - Fetched Results Controller Initialization
+
+- (NSFetchedResultsController *)initializeFetchedResultsController {
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Statement"];
+    NSSortDescriptor *textSort = [NSSortDescriptor sortDescriptorWithKey:@"statementText" ascending:YES];
+    
+    [request setSortDescriptors:@[textSort]];
+    
+    NSManagedObjectContext *moc = _persistentContainer.viewContext;
+    
+    [self setFetchedResultsController:[[NSFetchedResultsController alloc] initWithFetchRequest:request managedObjectContext:moc sectionNameKeyPath:nil cacheName:nil]];
+    
+    [_fetchedResultsController setDelegate:self];
+    
+    NSError *error = nil;
+    
+    if (![_fetchedResultsController performFetch:&error]) {
+        
+        NSLog(@"Failed to initialize Fetched Requests Controller : %@, %@", [error localizedDescription], [error userInfo]);
+        abort();
+    } else {
+        
+        NSLog(@"Fetched Results Controller successfully initialized.");
+    }
+    
+    return _fetchedResultsController;
 }
 
 @end
