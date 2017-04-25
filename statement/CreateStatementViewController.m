@@ -76,14 +76,15 @@ NSMutableArray *statementArray;
     _inputTextField.delegate = self;
     UIBarButtonItem *textFieldItem = [[UIBarButtonItem alloc] initWithCustomView:_inputTextField];
     
-    _addButton = [[UIButton alloc] initWithFrame:CGRectMake(_inputTextField.frame.size
-                                                            .width + 10, 0.0, 40, 40)];
+    _addButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30, 30)];
     [_addButton setTitle:@"Add" forState:UIControlStateNormal];
-    [_addButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [_addButton setImage:[UIImage imageNamed:@"Create Arrow"] forState:UIControlStateNormal];
     [_addButton addTarget:self action:@selector(createStatement) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_addButton];
     
-    [_inputAccessoryView setItems:@[textFieldItem, addButtonItem]];
+    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    [_inputAccessoryView setItems:@[textFieldItem, flexibleSpace, addButtonItem]];
 }
 
 #pragma mark - Keyboard Notification Selectors
