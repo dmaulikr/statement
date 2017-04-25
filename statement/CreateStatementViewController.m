@@ -24,39 +24,73 @@ NSMutableArray *statementArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _statementTextField.delegate = self;
-    
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _context = [[appDelegate persistentContainer] viewContext];
     
     _fetchController = [appDelegate initializeFetchedResultsController];
     
     statementArray = [_fetchController.fetchedObjects mutableCopy];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFirstResponder) name:UIKeyboardWillShowNotification object:nil];
+    
+    [self createInputAccessoryView];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [appDelegate saveContext];
 }
 
-- (IBAction)createStatement:(UITextField *)sender {
+- (void)createStatement {
     
-    /*for (NSManagedObject *object in _fetchController.fetchedObjects) {
+    if (![_inputTextField.text isEqual:@""]) {
         
-     [_fetchController.managedObjectContext deleteObject:object];
-    }*/
+        self.createdStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
+        self.createdStatement.statementText = _inputTextField.text;
+        
+        [statementArray addObject:createdStatement];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[statementArray indexOfObject:createdStatement] inSection:0];
+        
+        [_tableView beginUpdates];
+        [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+        [_tableView endUpdates];
+        
+        [appDelegate saveContext];
+    }
     
-    self.createdStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
-    self.createdStatement.statementText = _statementTextField.text;
+    [_inputTextField resignFirstResponder];
+}
+
+#pragma mark: Input Accessory View Implementation
+
+- (void)createInputAccessoryView {
     
-    [statementArray addObject:createdStatement];
-    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[statementArray indexOfObject:createdStatement] inSection:0];
+    _inputAccessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 40)];
     
-    [_tableView beginUpdates];
-    [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-    [_tableView endUpdates];
+    _inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(10.0, 0.0, self.view.frame.size.width * 0.75, 40)];
+    [_inputTextField setPlaceholder:@"Add a new Statement"];
+    [_inputTextField setBorderStyle:UITextBorderStyleNone];
+    _inputTextField.delegate = self;
+    UIBarButtonItem *textFieldItem = [[UIBarButtonItem alloc] initWithCustomView:_inputTextField];
     
-    [appDelegate saveContext];
+    _addButton = [[UIButton alloc] initWithFrame:CGRectMake(_inputTextField.frame.size
+                                                            .width + 10, 0.0, 40, 40)];
+    [_addButton setTitle:@"Add" forState:UIControlStateNormal];
+    [_addButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [_addButton addTarget:self action:@selector(createStatement) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_addButton];
+    
+    [_inputAccessoryView setItems:@[textFieldItem, addButtonItem]];
+}
+
+#pragma mark - Keyboard Notification Selectors
+
+- (void)changeFirstResponder {
+    
+    [_inputTextField becomeFirstResponder];
 }
 
 #pragma mark - TableView Delegate
@@ -86,8 +120,18 @@ NSMutableArray *statementArray;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
+    if (![_inputTextField.text  isEqual: @""]) {
+        
+        [self createStatement];
+    }
+
     [textField resignFirstResponder];
     return TRUE;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    textField.text = nil;
 }
 
 @end
