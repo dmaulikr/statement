@@ -13,7 +13,6 @@
 @interface CreateStatementViewController : UIViewController <UITextFieldDelegate, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (nonatomic, retain) UIToolbar *inputAccessoryView;
 @property (strong) UITextField *inputTextField;
