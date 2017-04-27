@@ -114,7 +114,7 @@ AppDelegate *appDelegate;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"statementCell"];
+    StatementCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"statementCell"];
     Statement *statementIndexObject = (Statement *)[_fetchController objectAtIndexPath:indexPath];
     
     cell.textLabel.text = statementIndexObject.statementText;
