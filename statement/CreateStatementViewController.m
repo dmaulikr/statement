@@ -62,6 +62,25 @@ AppDelegate *appDelegate;
     [_inputTextField resignFirstResponder];
 }
 
+- (void)checkTask:(UIButton *)sender {
+    
+    StatementCustomCell *cell = (StatementCustomCell *) [[sender superview] superview];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+    
+    Statement *statementIndexObject = [_fetchController objectAtIndexPath:indexPath];
+    NSMutableAttributedString *strikethroughString = [[NSMutableAttributedString alloc] initWithString:statementIndexObject.statementText];
+    [strikethroughString addAttribute:NSStrikethroughStyleAttributeName value:@1 range:NSMakeRange(0, [strikethroughString length])];
+    
+    
+    cell.textLabel.attributedText = strikethroughString;
+}
+
+- (void)strikeThrough:(NSString *)text withAttributedText:(NSMutableAttributedString *)attributedString {
+    
+    attributedString = [[NSMutableAttributedString alloc] initWithString:text];
+    
+}
+
 #pragma mark: Input Accessory View Implementation
 
 - (void)createInputAccessoryView {
@@ -116,6 +135,8 @@ AppDelegate *appDelegate;
     
     StatementCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"statementCell"];
     Statement *statementIndexObject = (Statement *)[_fetchController objectAtIndexPath:indexPath];
+    
+    [cell.checkboxButton addTarget:self action:@selector(checkTask:) forControlEvents:UIControlEventTouchUpInside];
     
     cell.textLabel.text = statementIndexObject.statementText;
     
