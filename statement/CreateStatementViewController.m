@@ -19,7 +19,6 @@
 @synthesize createdStatement;
 
 AppDelegate *appDelegate;
-NSMutableArray *statementArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -48,17 +47,17 @@ NSMutableArray *statementArray;
     
     if (![_inputTextField.text isEqual:@""]) {
         
+        NSError *error = nil;
+        
         self.createdStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         self.createdStatement.statementText = _inputTextField.text;
         
-        [statementArray addObject:createdStatement];
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[statementArray indexOfObject:createdStatement] inSection:0];
-        
-        [_tableView beginUpdates];
-        [_tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationBottom];
-        [_tableView endUpdates];
-        
         [appDelegate saveContext];
+        
+        if(![_fetchController performFetch:&error]) {
+            
+            NSLog(@"Failed to perform fetch: %@", error);
+        }
     }
     
     [_inputTextField resignFirstResponder];
@@ -98,10 +97,10 @@ NSMutableArray *statementArray;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (statementArray == nil) {
-        return 0;
+    if (_fetchController.fetchedObjects.count > 0) {
+        return _fetchController.fetchedObjects.count;
     } else {
-        return [statementArray count];
+        return 0;
     }
 }
 
@@ -110,7 +109,7 @@ NSMutableArray *statementArray;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"statementCell"];
-    Statement *statementIndexObject = (Statement *)[statementArray objectAtIndex:indexPath.row];
+    Statement *statementIndexObject = (Statement *)[_fetchController objectAtIndexPath:indexPath];
     
     cell.textLabel.text = statementIndexObject.statementText;
     
