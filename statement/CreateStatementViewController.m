@@ -27,8 +27,7 @@ AppDelegate *appDelegate;
     _context = [[appDelegate persistentContainer] viewContext];
     
     _fetchController = [appDelegate initializeFetchedResultsController];
-    
-    statementArray = [_fetchController.fetchedObjects mutableCopy];
+    _fetchController.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFirstResponder) name:UIKeyboardWillShowNotification object:nil];
     
@@ -114,6 +113,31 @@ AppDelegate *appDelegate;
     cell.textLabel.text = statementIndexObject.statementText;
     
     return cell;
+}
+
+#pragma mark - Fetched Results Controller Delegate
+
+- (void) controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    
+    controller = _fetchController;
+    
+    switch (type) {
+        case NSFetchedResultsChangeInsert:
+            [[self tableView]insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    
+    [self.tableView beginUpdates];
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    
+    [self.tableView endUpdates];
 }
 
 #pragma mark - TextField Delegate
