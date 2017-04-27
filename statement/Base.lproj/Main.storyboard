@@ -40,12 +40,13 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-A8-xhI">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zm0-A8-xhI">
                                                     <rect key="frame" x="8" y="8" width="43.5" height="43.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Zm0-A8-xhI" secondAttribute="height" multiplier="1:1" id="tcL-FI-5TM"/>
                                                     </constraints>
-                                                    <state key="normal" title="Button"/>
+                                                    <state key="normal" title="Button" image="Unchecked Box"/>
+                                                    <state key="selected" image="Checked Box"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -105,4 +106,8 @@
             <point key="canvasLocation" x="136.80000000000001" y="138.98050974512745"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Checked Box" width="50" height="50"/>
+        <image name="Unchecked Box" width="50" height="50"/>
+    </resources>
 </document>

@@ -64,6 +64,8 @@ AppDelegate *appDelegate;
 
 - (void)checkTask:(UIButton *)sender {
     
+    [sender setSelected:YES];
+    
     StatementCustomCell *cell = (StatementCustomCell *) [[sender superview] superview];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
