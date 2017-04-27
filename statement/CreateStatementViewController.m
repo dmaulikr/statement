@@ -103,6 +103,13 @@ AppDelegate *appDelegate;
     }
 }
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        [[_fetchController managedObjectContext] deleteObject:[_fetchController objectAtIndexPath:indexPath]];
+    }
+}
+
 #pragma mark - TableView Data Source
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,6 +132,8 @@ AppDelegate *appDelegate;
         case NSFetchedResultsChangeInsert:
             [[self tableView]insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
             break;
+        case NSFetchedResultsChangeDelete:
+            [[self tableView]deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         default:
             break;
     }
