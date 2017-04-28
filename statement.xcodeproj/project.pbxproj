@@ -14,9 +14,9 @@
 		A12EE36D1EA8010A004B0664 /* CreateStatementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B44541E94675100D4517B /* CreateStatementViewController.m */; };
 		A12EE3701EA80118004B0664 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B444E1E94675100D4517B /* main.m */; };
 		A12EE3711EA80151004B0664 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1DD3C2E1EA1377E00A21F3D /* DataModel.xcdatamodeld */; };
+		A18675BA1EB3A83400535E68 /* Statement+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A18675B71EB3A83400535E68 /* Statement+CoreDataClass.m */; };
+		A18675BB1EB3A83400535E68 /* Statement+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A18675B91EB3A83400535E68 /* Statement+CoreDataProperties.m */; };
 		A1D0A9A61EB267720007C584 /* StatementCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D0A9A51EB267720007C584 /* StatementCustomCell.m */; };
-		A1D0A9AB1EB2E3740007C584 /* Statement+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D0A9A81EB2E3740007C584 /* Statement+CoreDataClass.m */; };
-		A1D0A9AC1EB2E3740007C584 /* Statement+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D0A9AA1EB2E3740007C584 /* Statement+CoreDataProperties.m */; };
 		A1DD3C391EA141FF00A21F3D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1DD3C381EA141FF00A21F3D /* CoreData.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,12 +31,12 @@
 		A10B44591E94675100D4517B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10B445C1E94675100D4517B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A10B445E1E94675100D4517B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A18675B61EB3A83400535E68 /* Statement+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataClass.h"; sourceTree = "<group>"; };
+		A18675B71EB3A83400535E68 /* Statement+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataClass.m"; sourceTree = "<group>"; };
+		A18675B81EB3A83400535E68 /* Statement+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A18675B91EB3A83400535E68 /* Statement+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A1D0A9A41EB267720007C584 /* StatementCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementCustomCell.h; sourceTree = "<group>"; };
 		A1D0A9A51EB267720007C584 /* StatementCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementCustomCell.m; sourceTree = "<group>"; };
-		A1D0A9A71EB2E3740007C584 /* Statement+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataClass.h"; sourceTree = "<group>"; };
-		A1D0A9A81EB2E3740007C584 /* Statement+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataClass.m"; sourceTree = "<group>"; };
-		A1D0A9A91EB2E3740007C584 /* Statement+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataProperties.h"; sourceTree = "<group>"; };
-		A1D0A9AA1EB2E3740007C584 /* Statement+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A1DD3C2F1EA1377E00A21F3D /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		A1DD3C381EA141FF00A21F3D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -97,10 +97,10 @@
 			isa = PBXGroup;
 			children = (
 				A1DD3C2E1EA1377E00A21F3D /* DataModel.xcdatamodeld */,
-				A1D0A9A71EB2E3740007C584 /* Statement+CoreDataClass.h */,
-				A1D0A9A81EB2E3740007C584 /* Statement+CoreDataClass.m */,
-				A1D0A9A91EB2E3740007C584 /* Statement+CoreDataProperties.h */,
-				A1D0A9AA1EB2E3740007C584 /* Statement+CoreDataProperties.m */,
+				A18675B61EB3A83400535E68 /* Statement+CoreDataClass.h */,
+				A18675B71EB3A83400535E68 /* Statement+CoreDataClass.m */,
+				A18675B81EB3A83400535E68 /* Statement+CoreDataProperties.h */,
+				A18675B91EB3A83400535E68 /* Statement+CoreDataProperties.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -206,9 +206,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1D0A9AC1EB2E3740007C584 /* Statement+CoreDataProperties.m in Sources */,
+				A18675BB1EB3A83400535E68 /* Statement+CoreDataProperties.m in Sources */,
 				A12EE3711EA80151004B0664 /* DataModel.xcdatamodeld in Sources */,
-				A1D0A9AB1EB2E3740007C584 /* Statement+CoreDataClass.m in Sources */,
+				A18675BA1EB3A83400535E68 /* Statement+CoreDataClass.m in Sources */,
 				A1D0A9A61EB267720007C584 /* StatementCustomCell.m in Sources */,
 				A12EE3701EA80118004B0664 /* main.m in Sources */,
 				A12EE36D1EA8010A004B0664 /* CreateStatementViewController.m in Sources */,
