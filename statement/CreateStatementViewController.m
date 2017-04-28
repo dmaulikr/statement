@@ -26,7 +26,8 @@ AppDelegate *appDelegate;
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _context = [[appDelegate persistentContainer] viewContext];
     
-    _fetchController = [appDelegate initializeFetchedResultsController];
+    _fetchController = [appDelegate initializeFetchedResultsControllerForEntity:@"Statement" withSortDescriptor:@"createdDate"];
+    
     _fetchController.delegate = self;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFirstResponder) name:UIKeyboardWillShowNotification object:nil];
@@ -51,6 +52,9 @@ AppDelegate *appDelegate;
         self.createdStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         self.createdStatement.statementText = _inputTextField.text;
         self.createdStatement.completed = NO;
+        self.createdStatement.createdDate = [NSDate date];
+        
+        NSLog(@"%@", self.createdStatement.createdDate);
         
         [appDelegate saveContext];
         
@@ -142,6 +146,11 @@ AppDelegate *appDelegate;
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [[_fetchController managedObjectContext] deleteObject:[_fetchController objectAtIndexPath:indexPath]];
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - TableView Data Source

@@ -100,10 +100,10 @@
 
 #pragma mark - Fetched Results Controller Initialization
 
-- (NSFetchedResultsController *)initializeFetchedResultsController {
+- (NSFetchedResultsController *)initializeFetchedResultsControllerForEntity:(NSString *)entity withSortDescriptor:(NSString *)sortDescriptor {
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Statement"];
-    NSSortDescriptor *textSort = [NSSortDescriptor sortDescriptorWithKey:@"statementText" ascending:YES];
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName: entity];
+    NSSortDescriptor *textSort = [NSSortDescriptor sortDescriptorWithKey: sortDescriptor ascending:YES];
     
     [request setSortDescriptors:@[textSort]];
     

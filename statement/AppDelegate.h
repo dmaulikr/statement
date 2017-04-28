@@ -16,7 +16,7 @@
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 - (void)saveContext;
-- (NSFetchedResultsController *)initializeFetchedResultsController;
+- (NSFetchedResultsController *)initializeFetchedResultsControllerForEntity:(NSString *)entity withSortDescriptor:(NSString *)sortDescriptor;
 
 @end
 
