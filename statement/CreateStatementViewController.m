@@ -151,9 +151,20 @@ AppDelegate *appDelegate;
     StatementCustomCell *cell = [tableView dequeueReusableCellWithIdentifier:@"statementCell"];
     Statement *statementIndexObject = (Statement *)[_fetchController objectAtIndexPath:indexPath];
     
-    [cell.checkboxButton addTarget:self action:@selector(checkTask:) forControlEvents:UIControlEventTouchUpInside];
+    if(statementIndexObject.completed == NO){
+        
+        [cell.checkboxButton setSelected:NO];
+        cell.textLabel.text = statementIndexObject.statementText;
+    } else if(statementIndexObject.completed == YES) {
+        
+        [cell.checkboxButton setSelected:YES];
+        
+        NSMutableAttributedString *strikethroughString = [[NSMutableAttributedString alloc] initWithString:statementIndexObject.statementText];
+        [strikethroughString addAttribute:NSStrikethroughStyleAttributeName value:@1 range:NSMakeRange(0, [strikethroughString length])];
+        cell.textLabel.attributedText = strikethroughString;
+    }
     
-    cell.textLabel.text = statementIndexObject.statementText;
+    [cell.checkboxButton addTarget:self action:@selector(checkTask:) forControlEvents:UIControlEventTouchUpInside];
     
     return cell;
 }
