@@ -50,6 +50,7 @@ AppDelegate *appDelegate;
         
         self.createdStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         self.createdStatement.statementText = _inputTextField.text;
+        self.createdStatement.completed = NO;
         
         [appDelegate saveContext];
         
@@ -64,17 +65,29 @@ AppDelegate *appDelegate;
 
 - (void)checkTask:(UIButton *)sender {
     
-    [sender setSelected:YES];
-    
     StatementCustomCell *cell = (StatementCustomCell *) [[sender superview] superview];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     
     Statement *statementIndexObject = [_fetchController objectAtIndexPath:indexPath];
-    NSMutableAttributedString *strikethroughString = [[NSMutableAttributedString alloc] initWithString:statementIndexObject.statementText];
-    [strikethroughString addAttribute:NSStrikethroughStyleAttributeName value:@1 range:NSMakeRange(0, [strikethroughString length])];
     
-    
-    cell.textLabel.attributedText = strikethroughString;
+    if(statementIndexObject.completed == NO) {
+        
+        statementIndexObject.completed = YES;
+        
+        [cell.checkboxButton setSelected:YES];
+        
+        NSMutableAttributedString *strikethroughString = [[NSMutableAttributedString alloc] initWithString:statementIndexObject.statementText];
+        [strikethroughString addAttribute:NSStrikethroughStyleAttributeName value:@1 range:NSMakeRange(0, [strikethroughString length])];
+        cell.textLabel.attributedText = strikethroughString;
+        
+    } else if(statementIndexObject.completed == YES) {
+        
+        statementIndexObject.completed = NO;
+        
+        [cell.checkboxButton setSelected:NO];
+        
+        cell.textLabel.text = statementIndexObject.statementText;
+    }
 }
 
 - (void)strikeThrough:(NSString *)text withAttributedText:(NSMutableAttributedString *)attributedString {
