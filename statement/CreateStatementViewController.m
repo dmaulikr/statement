@@ -169,6 +169,10 @@ CGFloat initialBottomConstraint;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    selectedStatement = [_fetchController objectAtIndexPath:indexPath];
+    
+    [self performSegueWithIdentifier:@"statementDetails" sender:self];
+    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -245,6 +249,26 @@ CGFloat initialBottomConstraint;
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
     textField.text = nil;
+}
+
+#pragma mark - Segue Preparation
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if([segue.identifier  isEqual: @"statementDetails"]) {
+        
+        StatementDetailsViewController *nextController = segue.destinationViewController;
+        
+        NSFetchRequest *statementFetch = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+        statementFetch.sortDescriptors = @[[[NSSortDescriptor alloc] initWithKey:@"createdDate" ascending:YES]];
+        statementFetch.predicate = [NSPredicate predicateWithFormat:@"statementText == %@" argumentArray:@[selectedStatement.statementText]];
+        
+        NSFetchedResultsController *nextFetchController = [[NSFetchedResultsController alloc] initWithFetchRequest:statementFetch managedObjectContext:_fetchController.managedObjectContext sectionNameKeyPath:nil cacheName:nil];
+        
+        nextController.fetchController = nextFetchController;
+        nextController.statementFetch = statementFetch;
+        nextController.selectedStatement = selectedStatement;
+    }
 }
 
 @end
