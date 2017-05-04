@@ -13,5 +13,6 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *checkboxButton;
 @property (weak, nonatomic) IBOutlet UILabel *textLabel;
+@property (weak, nonatomic) IBOutlet UITextField *textField;
 
 @end
