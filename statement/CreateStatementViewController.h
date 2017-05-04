@@ -16,9 +16,6 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (nonatomic, retain) UIToolbar *inputAccessoryView;
-@property (strong) UITextField *inputTextField;
-@property (strong) UIButton *addButton;
 @property (strong, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 @property (weak, nonatomic) IBOutlet UITextField *statementTextField;
 

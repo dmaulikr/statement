@@ -107,35 +107,6 @@ CGFloat initialBottomConstraint;
     }
 }
 
-- (void)strikeThrough:(NSString *)text withAttributedText:(NSMutableAttributedString *)attributedString {
-    
-    attributedString = [[NSMutableAttributedString alloc] initWithString:text];
-    
-}
-
-#pragma mark: Input Accessory View Implementation
-
-- (void)createInputAccessoryView {
-    
-    _inputAccessoryView = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 40)];
-    
-    _inputTextField = [[UITextField alloc] initWithFrame:CGRectMake(10.0, 0.0, self.view.frame.size.width * 0.75, 40)];
-    [_inputTextField setPlaceholder:@"Add a new Statement"];
-    [_inputTextField setBorderStyle:UITextBorderStyleNone];
-    _inputTextField.delegate = self;
-    UIBarButtonItem *textFieldItem = [[UIBarButtonItem alloc] initWithCustomView:_inputTextField];
-    
-    _addButton = [[UIButton alloc] initWithFrame:CGRectMake(0.0, 0.0, 30, 30)];
-    [_addButton setTitle:@"Add" forState:UIControlStateNormal];
-    [_addButton setImage:[UIImage imageNamed:@"Create Arrow"] forState:UIControlStateNormal];
-    [_addButton addTarget:self action:@selector(createStatement) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_addButton];
-    
-    UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    [_inputAccessoryView setItems:@[textFieldItem, flexibleSpace, addButtonItem]];
-}
-
 #pragma mark - Keyboard Notification Selectors
 
 - (void)keyboardWillShow: (NSNotification *)notification {
@@ -269,10 +240,6 @@ CGFloat initialBottomConstraint;
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     
     textField.text = nil;
-    //[textField setInputView:_bottomToolbar];
-    
-    //[_bottomToolbar setHidden:YES];
-    //[_bottomToolbar setAlpha:0.0];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
