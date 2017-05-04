@@ -16,6 +16,7 @@
 		A12EE3711EA80151004B0664 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1DD3C2E1EA1377E00A21F3D /* DataModel.xcdatamodeld */; };
 		A18675BA1EB3A83400535E68 /* Statement+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A18675B71EB3A83400535E68 /* Statement+CoreDataClass.m */; };
 		A18675BB1EB3A83400535E68 /* Statement+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A18675B91EB3A83400535E68 /* Statement+CoreDataProperties.m */; };
+		A18675BE1EB3B55000535E68 /* StatementDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A18675BD1EB3B55000535E68 /* StatementDetailsViewController.m */; };
 		A1D0A9A61EB267720007C584 /* StatementCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1D0A9A51EB267720007C584 /* StatementCustomCell.m */; };
 		A1DD3C391EA141FF00A21F3D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1DD3C381EA141FF00A21F3D /* CoreData.framework */; };
 /* End PBXBuildFile section */
@@ -35,6 +36,8 @@
 		A18675B71EB3A83400535E68 /* Statement+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataClass.m"; sourceTree = "<group>"; };
 		A18675B81EB3A83400535E68 /* Statement+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataProperties.h"; sourceTree = "<group>"; };
 		A18675B91EB3A83400535E68 /* Statement+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A18675BC1EB3B55000535E68 /* StatementDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementDetailsViewController.h; sourceTree = "<group>"; };
+		A18675BD1EB3B55000535E68 /* StatementDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementDetailsViewController.m; sourceTree = "<group>"; };
 		A1D0A9A41EB267720007C584 /* StatementCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementCustomCell.h; sourceTree = "<group>"; };
 		A1D0A9A51EB267720007C584 /* StatementCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementCustomCell.m; sourceTree = "<group>"; };
 		A1DD3C2F1EA1377E00A21F3D /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 			children = (
 				A10B44531E94675100D4517B /* CreateStatementViewController.h */,
 				A10B44541E94675100D4517B /* CreateStatementViewController.m */,
+				A18675BC1EB3B55000535E68 /* StatementDetailsViewController.h */,
+				A18675BD1EB3B55000535E68 /* StatementDetailsViewController.m */,
 				A1D0A9A41EB267720007C584 /* StatementCustomCell.h */,
 				A1D0A9A51EB267720007C584 /* StatementCustomCell.m */,
 			);
@@ -208,6 +213,7 @@
 			files = (
 				A18675BB1EB3A83400535E68 /* Statement+CoreDataProperties.m in Sources */,
 				A12EE3711EA80151004B0664 /* DataModel.xcdatamodeld in Sources */,
+				A18675BE1EB3B55000535E68 /* StatementDetailsViewController.m in Sources */,
 				A18675BA1EB3A83400535E68 /* Statement+CoreDataClass.m in Sources */,
 				A1D0A9A61EB267720007C584 /* StatementCustomCell.m in Sources */,
 				A12EE3701EA80118004B0664 /* main.m in Sources */,

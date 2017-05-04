@@ -10,6 +10,8 @@
 
 @interface CreateStatementViewController ()
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *toolbarBottomConstraint;
+
 @end
 
 @implementation CreateStatementViewController
@@ -19,6 +21,9 @@
 @synthesize createdStatement;
 
 AppDelegate *appDelegate;
+Statement *selectedStatement;
+
+CGFloat initialBottomConstraint;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -29,10 +34,12 @@ AppDelegate *appDelegate;
     _fetchController = [appDelegate initializeFetchedResultsControllerForEntity:@"Statement" withSortDescriptor:@"createdDate"];
     
     _fetchController.delegate = self;
+    _statementTextField.delegate = self;
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeFirstResponder) name:UIKeyboardWillShowNotification object:nil];
+    initialBottomConstraint = _toolbarBottomConstraint.constant;
     
-    [self createInputAccessoryView];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -125,9 +132,44 @@ AppDelegate *appDelegate;
 
 #pragma mark - Keyboard Notification Selectors
 
-- (void)changeFirstResponder {
+- (void)keyboardWillShow: (NSNotification *)notification {
     
-    [_inputTextField becomeFirstResponder];
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    NSNumber *animationNumber = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    double animationDuration = [animationNumber doubleValue];
+    
+    NSNumber *curveDuration = [[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    UIViewAnimationCurve animationCurve = curveDuration.intValue;
+    
+    [UIView animateWithDuration:animationDuration delay:0.0 options:(animationCurve << 16) animations:^ {
+        
+        self.toolbarBottomConstraint.constant += keyboardSize.height;
+        
+        CGRect frame = _bottomToolbar.frame;
+        frame.origin.y = keyboardSize.height;
+        _bottomToolbar.frame = frame;
+        
+    }completion:nil];
+}
+
+- (void)keyboardWillHide: (NSNotification *)notification {
+
+    NSNumber *animationNumber = [[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey];
+    double animationDuration = [animationNumber doubleValue];
+    
+    NSNumber *curveDuration = [[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey];
+    UIViewAnimationCurve animationCurve = curveDuration.intValue;
+    
+    [UIView animateWithDuration:animationDuration delay:0.0 options:(animationCurve << 16) animations:^ {
+        
+        self.toolbarBottomConstraint.constant = initialBottomConstraint;
+        
+        CGRect frame = _bottomToolbar.frame;
+        frame.origin.y = self.view.frame.size.height - frame.size.height;
+        _bottomToolbar.frame = frame;
+        
+    }completion:nil];
+    
 }
 
 #pragma mark - TableView Delegate
@@ -209,13 +251,22 @@ AppDelegate *appDelegate;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    if (![_inputTextField.text  isEqual: @""]) {
+    if (![textField.text  isEqual: @""]) {
         
         [self createStatement];
     }
 
     [textField resignFirstResponder];
     return TRUE;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+    textField.text = nil;
+    //[textField setInputView:_bottomToolbar];
+    
+    //[_bottomToolbar setHidden:YES];
+    //[_bottomToolbar setAlpha:0.0];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {

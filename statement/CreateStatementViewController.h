@@ -10,6 +10,7 @@
 #import "AppDelegate.h"
 #import "Statement+CoreDataClass.h"
 #import "StatementCustomCell.h"
+#import "StatementDetailsViewController.h"
 
 @interface CreateStatementViewController : UIViewController <UITextFieldDelegate, NSFetchedResultsControllerDelegate, UITableViewDelegate, UITableViewDataSource>
 
@@ -18,6 +19,8 @@
 @property (nonatomic, retain) UIToolbar *inputAccessoryView;
 @property (strong) UITextField *inputTextField;
 @property (strong) UIButton *addButton;
+@property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
+@property (weak, nonatomic) IBOutlet UITextField *statementTextField;
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchController;
 @property (nonatomic, retain) NSManagedObjectContext *context;
