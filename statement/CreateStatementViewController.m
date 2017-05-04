@@ -50,14 +50,20 @@ CGFloat initialBottomConstraint;
     [appDelegate saveContext];
 }
 
+- (IBAction)touchUpCreateStatement:(id)sender {
+    
+    [self createStatement];
+}
+
+
 - (void)createStatement {
     
-    if (![_inputTextField.text isEqual:@""]) {
+    if (![_statementTextField.text isEqual:@""]) {
         
         NSError *error = nil;
         
         self.createdStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
-        self.createdStatement.statementText = _inputTextField.text;
+        self.createdStatement.statementText = _statementTextField.text;
         self.createdStatement.completed = NO;
         self.createdStatement.createdDate = [NSDate date];
         
@@ -69,9 +75,9 @@ CGFloat initialBottomConstraint;
             
             NSLog(@"Failed to perform fetch: %@", error);
         }
+        
+        [_statementTextField resignFirstResponder];
     }
-    
-    [_inputTextField resignFirstResponder];
 }
 
 - (void)checkTask:(UIButton *)sender {

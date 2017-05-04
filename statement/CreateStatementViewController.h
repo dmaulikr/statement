@@ -19,7 +19,7 @@
 @property (nonatomic, retain) UIToolbar *inputAccessoryView;
 @property (strong) UITextField *inputTextField;
 @property (strong) UIButton *addButton;
-@property (weak, nonatomic) IBOutlet UIToolbar *bottomToolbar;
+@property (strong, nonatomic) IBOutlet UIToolbar *bottomToolbar;
 @property (weak, nonatomic) IBOutlet UITextField *statementTextField;
 
 @property (nonatomic, retain) NSFetchedResultsController *fetchController;
