@@ -30,8 +30,8 @@ CGFloat initialBottomConstraint;
     
     appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     _context = [[appDelegate persistentContainer] viewContext];
-    
-    _fetchController = [appDelegate initializeFetchedResultsControllerForEntity:@"Statement" withSortDescriptor:@"createdDate"];
+    _fetchController = [appDelegate initializeFetchedResultsControllerForEntity:@"Statement"
+                                                             withSortDescriptor:@"createdDate"];
     
     _fetchController.delegate = self;
     _statementTextField.delegate = self;
