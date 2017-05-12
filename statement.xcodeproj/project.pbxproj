@@ -14,6 +14,7 @@
 		A12EE36D1EA8010A004B0664 /* CreateStatementViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B44541E94675100D4517B /* CreateStatementViewController.m */; };
 		A12EE3701EA80118004B0664 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B444E1E94675100D4517B /* main.m */; };
 		A12EE3711EA80151004B0664 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1DD3C2E1EA1377E00A21F3D /* DataModel.xcdatamodeld */; };
+		A18300A21EC534F700D50E9B /* StatementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A18300A11EC534F700D50E9B /* StatementsViewController.m */; };
 		A18675BA1EB3A83400535E68 /* Statement+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A18675B71EB3A83400535E68 /* Statement+CoreDataClass.m */; };
 		A18675BB1EB3A83400535E68 /* Statement+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A18675B91EB3A83400535E68 /* Statement+CoreDataProperties.m */; };
 		A18675BE1EB3B55000535E68 /* StatementDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A18675BD1EB3B55000535E68 /* StatementDetailsViewController.m */; };
@@ -32,6 +33,8 @@
 		A10B44591E94675100D4517B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10B445C1E94675100D4517B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A10B445E1E94675100D4517B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A18300A01EC534F700D50E9B /* StatementsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementsViewController.h; sourceTree = "<group>"; };
+		A18300A11EC534F700D50E9B /* StatementsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementsViewController.m; sourceTree = "<group>"; };
 		A18675B61EB3A83400535E68 /* Statement+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataClass.h"; sourceTree = "<group>"; };
 		A18675B71EB3A83400535E68 /* Statement+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataClass.m"; sourceTree = "<group>"; };
 		A18675B81EB3A83400535E68 /* Statement+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -120,6 +123,8 @@
 		A1DD3C331EA137A800A21F3D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A18300A01EC534F700D50E9B /* StatementsViewController.h */,
+				A18300A11EC534F700D50E9B /* StatementsViewController.m */,
 				A10B44531E94675100D4517B /* CreateStatementViewController.h */,
 				A10B44541E94675100D4517B /* CreateStatementViewController.m */,
 				A18675BC1EB3B55000535E68 /* StatementDetailsViewController.h */,
@@ -212,6 +217,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A18675BB1EB3A83400535E68 /* Statement+CoreDataProperties.m in Sources */,
+				A18300A21EC534F700D50E9B /* StatementsViewController.m in Sources */,
 				A12EE3711EA80151004B0664 /* DataModel.xcdatamodeld in Sources */,
 				A18675BE1EB3B55000535E68 /* StatementDetailsViewController.m in Sources */,
 				A18675BA1EB3A83400535E68 /* Statement+CoreDataClass.m in Sources */,
