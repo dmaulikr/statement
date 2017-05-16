@@ -16,10 +16,14 @@
 @property (weak, nonatomic) IBOutlet UITextField *professionalStatementTextField;
 
 @property (retain, nonatomic) NSManagedObjectContext *context;
+@property (retain, nonatomic) NSFetchedResultsController *fetchController;
 
 @property Statement *personalStatement;
 @property Statement *professionalStatement;
 
 -(void)createStatement;
+-(void)thumbsUp:(id)sender;
+-(void)thumbsDown:(id)sender;
+-(Statement *)fetchStatementWithType:(NSString *)type;
 
 @end
