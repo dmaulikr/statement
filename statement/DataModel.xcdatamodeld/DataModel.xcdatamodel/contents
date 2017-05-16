@@ -4,8 +4,9 @@
         <attribute name="completed" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="statementText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Statement" positionX="-63" positionY="-18" width="128" height="90"/>
+        <element name="Statement" positionX="-63" positionY="-18" width="128" height="105"/>
     </elements>
 </model>

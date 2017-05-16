@@ -2,7 +2,7 @@
 //  Statement+CoreDataProperties.m
 //  statement
 //
-//  Created by Alexander Kuhar on 4/28/17.
+//  Created by Alexander Kuhar on 5/12/17.
 //  Copyright © 2017 Alexander Kuhar. All rights reserved.
 //
 
@@ -15,7 +15,8 @@
 }
 
 @dynamic completed;
-@dynamic statementText;
 @dynamic createdDate;
+@dynamic statementText;
+@dynamic type;
 
 @end
