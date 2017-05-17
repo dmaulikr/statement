@@ -15,6 +15,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *personalStatementTextField;
 @property (weak, nonatomic) IBOutlet UITextField *professionalStatementTextField;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIView *personalView;
+@property (weak, nonatomic) IBOutlet UIView *professionalView;
 
 @property (retain, nonatomic) NSManagedObjectContext *context;
 @property (retain, nonatomic) NSFetchedResultsController *fetchController;

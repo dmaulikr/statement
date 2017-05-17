@@ -31,6 +31,12 @@ UITextField *activeField;
     _personalStatementTextField.delegate = self;
     _professionalStatementTextField.delegate = self;
     
+    self.personalView.layer.borderWidth = 3;
+    self.personalView.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f].CGColor;
+    
+    self.professionalView.layer.borderWidth = 3;
+    self.professionalView.layer.borderColor = [UIColor colorWithRed:126.0f/255.0f green:243.0f/255.0f blue:139.0f/255.0f alpha:1.0f].CGColor;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
     
