@@ -18,6 +18,7 @@
 @synthesize professionalStatement;
 
 AppDelegate *statementsVCAppDelegate;
+UITextField *activeField;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,11 +31,8 @@ AppDelegate *statementsVCAppDelegate;
     _personalStatementTextField.delegate = self;
     _professionalStatementTextField.delegate = self;
     
-    /*NSError *fetchError = nil;
-    if(![_fetchController performFetch:&fetchError]){
-        
-        NSLog(@"Failed to perform fetch: %@", fetchError);
-    }*/
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
     
     NSArray *personalStatementArray = [self fetchStatementWithType:@"personal"];
     
@@ -42,8 +40,6 @@ AppDelegate *statementsVCAppDelegate;
         
         Statement *currentPersonalStatement = personalStatementArray[0];
         _personalStatementTextField.text = currentPersonalStatement.statementText;
-    } else {
-        _personalStatementTextField.text = @"You haven't created any personal statements yet!";
     }
     
     NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional"];
@@ -52,15 +48,13 @@ AppDelegate *statementsVCAppDelegate;
         
         Statement *currentProfessionalStatement = professionalStatementArray[0];
         _professionalStatementTextField.text = currentProfessionalStatement.statementText;
-    } else {
-        _professionalStatementTextField.text = @"You haven't created any professional statements yet!";
     }
-    
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [statementsVCAppDelegate saveContext];
 }
@@ -111,6 +105,8 @@ AppDelegate *statementsVCAppDelegate;
     }
 }
 
+#pragma mark - Button Functionality
+
 - (IBAction)thumbsUp:(id)sender {
     
     if ([sender tag] == 1) {
@@ -137,6 +133,33 @@ AppDelegate *statementsVCAppDelegate;
     }
 }
 
+- (void)keyboardWasShown:(NSNotification *)keyboardNotification {
+    
+    NSDictionary *userInfo = [keyboardNotification userInfo];
+    CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height + 5, 0.0);
+    
+    _scrollView.contentInset = contentInsets;
+    _scrollView.scrollIndicatorInsets = contentInsets;
+    
+    CGRect viewRect = self.view.frame;
+    viewRect.size.height -= keyboardSize.height;
+    
+    if (!CGRectContainsPoint(viewRect, activeField.frame.origin)) {
+        
+        [self.scrollView scrollRectToVisible:activeField.frame animated:YES];
+    }
+}
+
+- (void)keyboardWillBeHiden:(NSNotification *)keyboardNotification {
+    
+    UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+    _scrollView.contentInset = contentInsets;
+    _scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+#pragma mark - Core Data Helper Functions
+
 -(NSArray *)fetchStatementWithType:(NSString *)type {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
@@ -158,6 +181,16 @@ AppDelegate *statementsVCAppDelegate;
 }
 
 #pragma mark - Text Field Delegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    
+    activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    activeField = nil;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
