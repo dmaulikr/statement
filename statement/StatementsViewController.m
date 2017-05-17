@@ -30,11 +30,33 @@ AppDelegate *statementsVCAppDelegate;
     _personalStatementTextField.delegate = self;
     _professionalStatementTextField.delegate = self;
     
-    NSError *fetchError = nil;
+    /*NSError *fetchError = nil;
     if(![_fetchController performFetch:&fetchError]){
         
         NSLog(@"Failed to perform fetch: %@", fetchError);
+    }*/
+    
+    NSArray *personalStatementArray = [self fetchStatementWithType:@"personal"];
+    
+    if ([personalStatementArray count] > 0) {
+        
+        Statement *currentPersonalStatement = personalStatementArray[0];
+        _personalStatementTextField.text = currentPersonalStatement.statementText;
+    } else {
+        _personalStatementTextField.text = @"You haven't created any personal statements yet!";
     }
+    
+    NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional"];
+    
+    if ([professionalStatementArray count] > 0) {
+        
+        Statement *currentProfessionalStatement = professionalStatementArray[0];
+        _professionalStatementTextField.text = currentProfessionalStatement.statementText;
+    } else {
+        _professionalStatementTextField.text = @"You haven't created any professional statements yet!";
+    }
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -125,9 +147,9 @@ AppDelegate *statementsVCAppDelegate;
     
     NSArray *fetchedPersonal = [_context executeFetchRequest:fetchRequest error:&error];
     
-    if (error != nil) {
+    if ([fetchedPersonal count] < 1) {
         
-        NSLog(@"%@", error);
+        return nil;
     }
     
     NSLog(@"%@", fetchedPersonal[0]);
