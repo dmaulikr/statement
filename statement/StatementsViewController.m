@@ -47,6 +47,14 @@ AppDelegate *statementsVCAppDelegate;
     
     if ([_personalStatementTextField isFirstResponder]) {
         
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", @"personal"]];
+        
+        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
+        NSError *deleteError = nil;
+        
+        [[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
+        
         personalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         personalStatement.statementText = _personalStatementTextField.text;
         personalStatement.type = @"personal";
@@ -57,9 +65,15 @@ AppDelegate *statementsVCAppDelegate;
         
         [statementsVCAppDelegate saveContext];
         
-        [self fetchStatementWithType:@"personal"];
+    } else if ([_professionalStatementTextField isFirstResponder]) {
         
-    } else if ([_professionalStatementTextField isFirstResponder]){
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", @"professional"]];
+        
+        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
+        NSError *deleteError = nil;
+        
+        [[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
         
         professionalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         professionalStatement.statementText = _professionalStatementTextField.text;
@@ -101,7 +115,7 @@ AppDelegate *statementsVCAppDelegate;
     }
 }
 
--(Statement *)fetchStatementWithType:(NSString *)type {
+-(NSArray *)fetchStatementWithType:(NSString *)type {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
     [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", type]];
@@ -118,7 +132,7 @@ AppDelegate *statementsVCAppDelegate;
     
     NSLog(@"%@", fetchedPersonal[0]);
     
-    return fetchedPersonal[0];
+    return fetchedPersonal;
 }
 
 #pragma mark - Text Field Delegate
@@ -128,6 +142,20 @@ AppDelegate *statementsVCAppDelegate;
     if (![textField.text  isEqual: @""]) {
         
         [self createStatement];
+    }
+    
+    if (textField == _personalStatementTextField) {
+        
+        NSArray *personalStatementArray = [self fetchStatementWithType:@"personal"];
+        Statement *thisPersonalStatement = personalStatementArray[0];
+        textField.text = thisPersonalStatement.statementText;
+    }
+    
+    if (textField == _professionalStatementTextField) {
+        
+        NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional"];
+        Statement *thisProfessionalStatement = professionalStatementArray[0];
+        textField.text = thisProfessionalStatement.statementText;
     }
     
     [textField resignFirstResponder];
