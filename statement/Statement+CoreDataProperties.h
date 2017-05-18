@@ -2,7 +2,7 @@
 //  Statement+CoreDataProperties.h
 //  statement
 //
-//  Created by Alexander Kuhar on 5/12/17.
+//  Created by Alexander Kuhar on 5/18/17.
 //  Copyright © 2017 Alexander Kuhar. All rights reserved.
 //
 
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Statement *> *)fetchRequest;
 
-@property (nonatomic) BOOL completed;
+@property (nonatomic) int16_t completed;
 @property (nullable, nonatomic, copy) NSDate *createdDate;
 @property (nullable, nonatomic, copy) NSString *statementText;
 @property (nullable, nonatomic, copy) NSString *type;

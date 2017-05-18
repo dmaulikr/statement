@@ -79,23 +79,23 @@ UITextView *activeTextView;
         _professionalNoButton.alpha = 0.25;
     }
     
-    if (personalStatement.completed == YES) {
+    if (personalStatement.completed == 2) {
         
         [_personalYesButton setSelected:YES];
         [_personalNoButton setSelected:NO];
         
-    } else if (personalStatement.completed == NO) {
+    } else if (personalStatement.completed == 1) {
         
         [_personalYesButton setSelected:NO];
         [_personalNoButton setSelected:YES];
     }
     
-    if (professionalStatement.completed == YES) {
+    if (professionalStatement.completed == 2) {
         
         [_professionalYesButton setSelected:YES];
         [_professionalNoButton setSelected:NO];
         
-    } else if (professionalStatement.completed == NO) {
+    } else if (professionalStatement.completed == 1) {
         
         [_professionalYesButton setSelected:NO];
         [_professionalNoButton setSelected:YES];
@@ -125,7 +125,7 @@ UITextView *activeTextView;
         personalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         personalStatement.statementText = _personalStatementTextField.text;
         personalStatement.type = @"personal";
-        //personalStatement.completed = NO;
+        personalStatement.completed = 0;
         personalStatement.createdDate = [NSDate date];
         
         NSLog(@"%@", personalStatement);
@@ -148,7 +148,7 @@ UITextView *activeTextView;
         professionalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         professionalStatement.statementText = _professionalStatementTextField.text;
         professionalStatement.type = @"professional";
-        //professionalStatement.completed = NO;
+        professionalStatement.completed = 0;
         professionalStatement.createdDate = [NSDate date];
         
         NSLog(@"%@", professionalStatement);
@@ -168,17 +168,17 @@ UITextView *activeTextView;
     
     if ([sender tag] == 1) {
         
-        if (personalStatement.completed == NO) {
+        if (personalStatement.completed == 0 || personalStatement.completed == 1) {
             
-            personalStatement.completed = YES;
+            personalStatement.completed = 2;
             [_personalYesButton setSelected:YES];
             [_personalNoButton setSelected:NO];
             
             NSLog(@"%@", personalStatement);
             
-        } else if (personalStatement.completed == YES) {
+        } else if (personalStatement.completed == 2) {
             
-            personalStatement.completed = NO;
+            personalStatement.completed = 1;
             [_personalYesButton setSelected:NO];
             
             NSLog(@"%@", personalStatement);
@@ -187,17 +187,17 @@ UITextView *activeTextView;
     
     if ([sender tag] == 3) {
         
-        if (professionalStatement.completed == NO) {
+        if (professionalStatement.completed == 0 || professionalStatement.completed == 1) {
             
-            professionalStatement.completed = YES;
+            professionalStatement.completed = 2;
             [_professionalYesButton setSelected:YES];
-            [_personalNoButton setSelected:NO];
+            [_professionalNoButton setSelected:NO];
             
             NSLog(@"%@", professionalStatement);
             
-        } else if (professionalStatement.completed == YES) {
+        } else if (professionalStatement.completed == 2) {
             
-            professionalStatement.completed = NO;
+            professionalStatement.completed = 1;
             [_professionalYesButton setSelected:NO];
             
             NSLog(@"%@", professionalStatement);
@@ -209,35 +209,35 @@ UITextView *activeTextView;
     
     if ([sender tag] == 2) {
         
-        if (personalStatement.completed == NO) {
+        if (personalStatement.completed == 0 || personalStatement.completed == 2) {
             
-            personalStatement.completed = NO;
-            [_personalNoButton setSelected:NO];
-            
-            NSLog(@"%@", personalStatement);
-            
-        } else if (personalStatement.completed == YES) {
-            
-            personalStatement.completed = NO;
+            personalStatement.completed = 1;
             [_personalNoButton setSelected:YES];
             [_personalYesButton setSelected:NO];
+            
+            NSLog(@"%@", personalStatement);
+        } else if (personalStatement.completed == 1) {
+            
+            personalStatement.completed = 0;
+            [_personalNoButton setSelected:NO];
             
             NSLog(@"%@", personalStatement);
         }
         
     } else if ([sender tag] == 4) {
         
-        if (professionalStatement.completed == NO) {
+        if (professionalStatement.completed == 0 || professionalStatement.completed == 2) {
             
-            professionalStatement.completed = NO;
-            [_professionalNoButton setSelected:NO];
+            professionalStatement.completed = 1;
+            [_professionalNoButton setSelected:YES];
+            [_professionalYesButton setSelected:NO];
+            
             NSLog(@"%@", professionalStatement);
             
-        } else if (professionalStatement.completed == YES) {
+        } else if (professionalStatement.completed == 1) {
             
-            professionalStatement.completed = NO;
-            [_professionalNoButton setSelected:YES];
-            [_personalYesButton setSelected:NO];
+            professionalStatement.completed = 0;
+            [_professionalNoButton setSelected:NO];
             
             NSLog(@"%@", professionalStatement);
         }
