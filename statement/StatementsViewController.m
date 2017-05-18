@@ -19,6 +19,7 @@
 
 AppDelegate *statementsVCAppDelegate;
 UITextField *activeField;
+UITextView *activeTextView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,7 +36,7 @@ UITextField *activeField;
     self.personalView.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f].CGColor;
     
     self.professionalView.layer.borderWidth = 3;
-    self.professionalView.layer.borderColor = [UIColor colorWithRed:126.0f/255.0f green:243.0f/255.0f blue:139.0f/255.0f alpha:1.0f].CGColor;
+    self.professionalView.layer.borderColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f].CGColor;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
@@ -44,16 +45,60 @@ UITextField *activeField;
     
     if ([personalStatementArray count] > 0) {
         
+        personalStatement = personalStatementArray[0];
         Statement *currentPersonalStatement = personalStatementArray[0];
         _personalStatementTextField.text = currentPersonalStatement.statementText;
+        
+    } else {
+        
+        [_personalYesButton setUserInteractionEnabled:NO];
+        [_personalYesButton setSelected:NO];
+        _personalYesButton.alpha = 0.25;
+        
+        [_personalNoButton setUserInteractionEnabled:NO];
+        [_personalNoButton setSelected:NO];
+        _personalNoButton.alpha = 0.25;
     }
     
     NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional"];
     
     if ([professionalStatementArray count] > 0) {
         
+        professionalStatement = professionalStatementArray[0];
         Statement *currentProfessionalStatement = professionalStatementArray[0];
         _professionalStatementTextField.text = currentProfessionalStatement.statementText;
+        
+    } else {
+        
+        [_professionalYesButton setUserInteractionEnabled:NO];
+        [_professionalYesButton setSelected:NO];
+        _professionalYesButton.alpha = 0.25;
+        
+        [_professionalNoButton setUserInteractionEnabled:NO];
+        [_professionalNoButton setSelected:NO];
+        _professionalNoButton.alpha = 0.25;
+    }
+    
+    if (personalStatement.completed == YES) {
+        
+        [_personalYesButton setSelected:YES];
+        [_personalNoButton setSelected:NO];
+        
+    } else if (personalStatement.completed == NO) {
+        
+        [_personalYesButton setSelected:NO];
+        [_personalNoButton setSelected:YES];
+    }
+    
+    if (professionalStatement.completed == YES) {
+        
+        [_professionalYesButton setSelected:YES];
+        [_professionalNoButton setSelected:NO];
+        
+    } else if (professionalStatement.completed == NO) {
+        
+        [_professionalYesButton setSelected:NO];
+        [_professionalNoButton setSelected:YES];
     }
 }
 
@@ -80,12 +125,15 @@ UITextField *activeField;
         personalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         personalStatement.statementText = _personalStatementTextField.text;
         personalStatement.type = @"personal";
-        personalStatement.completed = NO;
+        //personalStatement.completed = NO;
         personalStatement.createdDate = [NSDate date];
         
         NSLog(@"%@", personalStatement);
         
         [statementsVCAppDelegate saveContext];
+        
+        NSArray *personalArray = [self fetchStatementWithType:@"personal"];
+        personalStatement = personalArray[0];
         
     } else if ([_professionalStatementTextField isFirstResponder]) {
         
@@ -100,14 +148,15 @@ UITextField *activeField;
         professionalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         professionalStatement.statementText = _professionalStatementTextField.text;
         professionalStatement.type = @"professional";
-        professionalStatement.completed = NO;
+        //professionalStatement.completed = NO;
         professionalStatement.createdDate = [NSDate date];
         
         NSLog(@"%@", professionalStatement);
         
         [statementsVCAppDelegate saveContext];
         
-        [self fetchStatementWithType:@"professional"];
+        NSArray *professionalArray = [self fetchStatementWithType:@"professional"];
+        professionalStatement = professionalArray[0];
     }
 }
 
@@ -115,15 +164,44 @@ UITextField *activeField;
 
 - (IBAction)thumbsUp:(id)sender {
     
+    NSLog(@"button pressed");
+    
     if ([sender tag] == 1) {
         
-        personalStatement.completed = YES;
-        NSLog(@"%@", personalStatement);
+        if (personalStatement.completed == NO) {
+            
+            personalStatement.completed = YES;
+            [_personalYesButton setSelected:YES];
+            [_personalNoButton setSelected:NO];
+            
+            NSLog(@"%@", personalStatement);
+            
+        } else if (personalStatement.completed == YES) {
+            
+            personalStatement.completed = NO;
+            [_personalYesButton setSelected:NO];
+            
+            NSLog(@"%@", personalStatement);
+        }
+    }
+    
+    if ([sender tag] == 3) {
         
-    } if ([sender tag] == 3) {
-        
-        professionalStatement.completed = YES;
-        NSLog(@"%@", professionalStatement);
+        if (professionalStatement.completed == NO) {
+            
+            professionalStatement.completed = YES;
+            [_professionalYesButton setSelected:YES];
+            [_personalNoButton setSelected:NO];
+            
+            NSLog(@"%@", professionalStatement);
+            
+        } else if (professionalStatement.completed == YES) {
+            
+            professionalStatement.completed = NO;
+            [_professionalYesButton setSelected:NO];
+            
+            NSLog(@"%@", professionalStatement);
+        }
     }
 }
 
@@ -131,11 +209,38 @@ UITextField *activeField;
     
     if ([sender tag] == 2) {
         
-        personalStatement.completed = NO;
+        if (personalStatement.completed == NO) {
+            
+            personalStatement.completed = NO;
+            [_personalNoButton setSelected:NO];
+            
+            NSLog(@"%@", personalStatement);
+            
+        } else if (personalStatement.completed == YES) {
+            
+            personalStatement.completed = NO;
+            [_personalNoButton setSelected:YES];
+            [_personalYesButton setSelected:NO];
+            
+            NSLog(@"%@", personalStatement);
+        }
         
     } else if ([sender tag] == 4) {
         
-        professionalStatement.completed = NO;
+        if (professionalStatement.completed == NO) {
+            
+            professionalStatement.completed = NO;
+            [_professionalNoButton setSelected:NO];
+            NSLog(@"%@", professionalStatement);
+            
+        } else if (professionalStatement.completed == YES) {
+            
+            professionalStatement.completed = NO;
+            [_professionalNoButton setSelected:YES];
+            [_personalYesButton setSelected:NO];
+            
+            NSLog(@"%@", professionalStatement);
+        }
     }
 }
 
