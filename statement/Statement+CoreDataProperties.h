@@ -2,7 +2,7 @@
 //  Statement+CoreDataProperties.h
 //  statement
 //
-//  Created by Alexander Kuhar on 5/18/17.
+//  Created by Alexander Kuhar on 5/19/17.
 //  Copyright © 2017 Alexander Kuhar. All rights reserved.
 //
 
@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSDate *createdDate;
 @property (nullable, nonatomic, copy) NSString *statementText;
 @property (nullable, nonatomic, copy) NSString *type;
+@property (nullable, nonatomic, copy) NSString *comments;
 
 @end
 
