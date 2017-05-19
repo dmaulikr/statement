@@ -135,6 +135,12 @@ UITextView *activeTextView;
         NSArray *personalArray = [self fetchStatementWithType:@"personal"];
         personalStatement = personalArray[0];
         
+        [_personalYesButton setUserInteractionEnabled:YES];
+        _personalYesButton.alpha = 1.0;
+        
+        [_personalNoButton setUserInteractionEnabled:YES];
+        _personalNoButton.alpha = 1.0;
+        
     } else if ([_professionalStatementTextField isFirstResponder]) {
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
@@ -157,6 +163,12 @@ UITextView *activeTextView;
         
         NSArray *professionalArray = [self fetchStatementWithType:@"professional"];
         professionalStatement = professionalArray[0];
+        
+        [_professionalYesButton setUserInteractionEnabled:YES];
+        _professionalYesButton.alpha = 1.0;
+        
+        [_professionalNoButton setUserInteractionEnabled:YES];
+        _professionalNoButton.alpha = 1.0;
     }
 }
 

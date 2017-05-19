@@ -151,7 +151,7 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X1N-hc-h5O">
-                                                        <rect key="frame" x="20" y="137.5" width="335" height="30"/>
+                                                        <rect key="frame" x="20" y="137.5" width="335" height="60"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A6G-B1-bKV" userLabel="Yes">
                                                                 <rect key="frame" x="0.0" y="10" width="50" height="50"/>
@@ -189,7 +189,7 @@
                                                 <constraints>
                                                     <constraint firstItem="D52-AF-Zxu" firstAttribute="top" secondItem="340-7n-S9d" secondAttribute="top" constant="25" id="2rl-9L-Cpk"/>
                                                     <constraint firstItem="dRV-FL-NbH" firstAttribute="leading" secondItem="340-7n-S9d" secondAttribute="leading" constant="20" id="CXK-RT-wh7"/>
-                                                    <constraint firstItem="X1N-hc-h5O" firstAttribute="height" secondItem="dRV-FL-NbH" secondAttribute="height" id="D5I-B6-6Xn"/>
+                                                    <constraint firstItem="X1N-hc-h5O" firstAttribute="height" secondItem="dRV-FL-NbH" secondAttribute="height" multiplier="2" id="D5I-B6-6Xn"/>
                                                     <constraint firstItem="X1N-hc-h5O" firstAttribute="centerX" secondItem="340-7n-S9d" secondAttribute="centerX" id="Dcm-50-v7M"/>
                                                     <constraint firstItem="D52-AF-Zxu" firstAttribute="height" secondItem="340-7n-S9d" secondAttribute="height" multiplier="0.1" id="M1f-GI-R3E"/>
                                                     <constraint firstItem="D52-AF-Zxu" firstAttribute="leading" secondItem="340-7n-S9d" secondAttribute="leading" constant="20" id="O8S-3W-ETP"/>
@@ -202,14 +202,14 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6z-hR-wuR" userLabel="Professional View">
                                                 <rect key="frame" x="0.0" y="323.5" width="375" height="323.5"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Professional goal for the day?" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mix-hu-dkI">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Professional goal for the day?" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="mix-hu-dkI">
                                                         <rect key="frame" x="20" y="97.5" width="335" height="30"/>
                                                         <color key="textColor" red="0.43992362925223505" green="0.84991135416497454" blue="0.49164079303042973" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="25"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2z-yR-Hr9">
-                                                        <rect key="frame" x="20" y="137.5" width="335" height="30"/>
+                                                        <rect key="frame" x="20" y="137.5" width="335" height="60"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGW-Sl-vxf" userLabel="Yes">
                                                                 <rect key="frame" x="0.0" y="10" width="50" height="50"/>
@@ -254,7 +254,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="mix-hu-dkI" secondAttribute="trailing" constant="20" id="Wm6-I9-JkH"/>
                                                     <constraint firstItem="a2z-yR-Hr9" firstAttribute="top" secondItem="mix-hu-dkI" secondAttribute="bottom" constant="10" id="Wry-xq-Mpz"/>
                                                     <constraint firstItem="a2z-yR-Hr9" firstAttribute="width" secondItem="mix-hu-dkI" secondAttribute="width" id="c6n-VD-rUT"/>
-                                                    <constraint firstItem="a2z-yR-Hr9" firstAttribute="height" secondItem="mix-hu-dkI" secondAttribute="height" id="fMr-MT-VeZ"/>
+                                                    <constraint firstItem="a2z-yR-Hr9" firstAttribute="height" secondItem="mix-hu-dkI" secondAttribute="height" multiplier="2" id="fMr-MT-VeZ"/>
                                                     <constraint firstItem="a2z-yR-Hr9" firstAttribute="centerX" secondItem="n6z-hR-wuR" secondAttribute="centerX" id="gZx-4r-nXT"/>
                                                     <constraint firstItem="mix-hu-dkI" firstAttribute="leading" secondItem="n6z-hR-wuR" secondAttribute="leading" constant="20" id="zel-4u-rti"/>
                                                 </constraints>
@@ -306,7 +306,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lEq-aa-qcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="133.33333333333334" y="826.63043478260875"/>
+            <point key="canvasLocation" x="132" y="826.23688155922048"/>
         </scene>
         <!--Statement Details View Controller-->
         <scene sceneID="osa-hk-LBZ">
