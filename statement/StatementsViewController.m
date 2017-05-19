@@ -32,11 +32,17 @@ UITextView *activeTextView;
     _personalStatementTextField.delegate = self;
     _professionalStatementTextField.delegate = self;
     
+    _personalTextView.delegate = self;
+    _professionalTextView.delegate = self;
+    
     self.personalView.layer.borderWidth = 3;
     self.personalView.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f].CGColor;
     
     self.professionalView.layer.borderWidth = 3;
     self.professionalView.layer.borderColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f].CGColor;
+    
+    [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
+    NSLog(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
@@ -48,6 +54,9 @@ UITextView *activeTextView;
         personalStatement = personalStatementArray[0];
         Statement *currentPersonalStatement = personalStatementArray[0];
         _personalStatementTextField.text = currentPersonalStatement.statementText;
+        
+        _personalTextView.text = @"How did your personal goal go today?";
+        _personalTextView.textColor = [UIColor lightGrayColor];
         
     } else {
         
@@ -67,6 +76,9 @@ UITextView *activeTextView;
         professionalStatement = professionalStatementArray[0];
         Statement *currentProfessionalStatement = professionalStatementArray[0];
         _professionalStatementTextField.text = currentProfessionalStatement.statementText;
+        
+        _professionalTextView.text = @"How did your professional goal go today?";
+        _professionalTextView.textColor = [UIColor lightGrayColor];
         
     } else {
         
@@ -262,15 +274,33 @@ UITextView *activeTextView;
     CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height + 5, 0.0);
     
-    _scrollView.contentInset = contentInsets;
-    _scrollView.scrollIndicatorInsets = contentInsets;
+    self.scrollView.contentInset = contentInsets;
+    self.scrollView.scrollIndicatorInsets = contentInsets;
     
     CGRect viewRect = self.view.frame;
     viewRect.size.height -= keyboardSize.height;
     
-    if (!CGRectContainsPoint(viewRect, activeField.frame.origin)) {
+    if ([activeField isFirstResponder]) {
         
-        [self.scrollView scrollRectToVisible:activeField.frame animated:YES];
+        if (CGRectContainsPoint(viewRect, activeField.frame.origin)) {
+            
+            NSLog(@"%@", NSStringFromCGRect(activeField.frame));
+            
+            CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y);
+            [_scrollView setContentOffset:scrollPoint animated:YES];
+            
+        }
+    }
+    
+    if ([activeTextView isFirstResponder]) {
+        
+        if (CGRectContainsPoint(viewRect, activeTextView.frame.origin)) {
+            
+            NSLog(@"%@", NSStringFromCGRect(activeTextView.frame));
+            
+            CGPoint scrollPoint = CGPointMake(0.0, activeTextView.frame.origin.y);
+            [_scrollView setContentOffset:scrollPoint animated:YES];
+        }
     }
 }
 
@@ -305,9 +335,14 @@ UITextView *activeTextView;
 
 #pragma mark - Text Field Delegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
-    activeField = textField;
+    if (textField == _professionalStatementTextField) {
+        
+        activeField = textField;
+    }
+    
+    return YES;
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField {
@@ -338,6 +373,58 @@ UITextView *activeTextView;
     
     [textField resignFirstResponder];
     return YES;
+}
+
+#pragma mark - Text View Delegate 
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    
+    if (textView == _professionalTextView) {
+        
+        activeTextView = textView;
+    }
+    
+    return YES;
+}
+
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    if (textView == _personalTextView) {
+        
+        if ([textView.text  isEqualToString: @"How did your personal goal go today?"]) {
+            
+            textView.text = @"";
+        }
+    }
+    
+    if (textView == _professionalTextView) {
+        
+        if ([textView.text isEqualToString:@"How did your professional goal go today?"]) {
+            
+            textView.text = @"";
+        }
+    }
+}
+
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    
+    activeTextView = nil;
+    
+    if (textView == _personalTextView) {
+        
+        if ([textView.text isEqualToString: @""]) {
+            
+            textView.text = @"How did your personal goal go today?";
+        }
+    }
+    
+    if (textView == _professionalTextView) {
+        
+        if ([textView.text isEqualToString:@""]) {
+            
+            textView.text = @"How did your professional goal go today?";
+        }
+    }
 }
 
 @end

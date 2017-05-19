@@ -14,13 +14,18 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *personalStatementTextField;
 @property (weak, nonatomic) IBOutlet UITextField *professionalStatementTextField;
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIView *personalView;
 @property (weak, nonatomic) IBOutlet UIView *professionalView;
+
 @property (weak, nonatomic) IBOutlet UIButton *personalYesButton;
 @property (weak, nonatomic) IBOutlet UIButton *personalNoButton;
 @property (weak, nonatomic) IBOutlet UIButton *professionalYesButton;
 @property (weak, nonatomic) IBOutlet UIButton *professionalNoButton;
+
+@property (weak, nonatomic) IBOutlet UITextView *personalTextView;
+@property (weak, nonatomic) IBOutlet UITextView *professionalTextView;
 
 @property (retain, nonatomic) NSManagedObjectContext *context;
 @property (retain, nonatomic) NSFetchedResultsController *fetchController;
