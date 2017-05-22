@@ -77,8 +77,16 @@ UITextView *activeTextView;
         Statement *currentProfessionalStatement = professionalStatementArray[0];
         _professionalStatementTextField.text = currentProfessionalStatement.statementText;
         
-        _professionalTextView.text = @"How did your professional goal go today?";
-        _professionalTextView.textColor = [UIColor lightGrayColor];
+        if (professionalStatement.comments != nil) {
+            
+            _professionalTextView.text = professionalStatement.comments;
+            _professionalTextView.textColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f];
+            
+        } else {
+            
+            _professionalTextView.text = @"How did your professional goal go today?";
+            _professionalTextView.textColor = [UIColor lightGrayColor];
+        }
         
     } else {
         
@@ -274,8 +282,8 @@ UITextView *activeTextView;
     CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
     UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, keyboardSize.height + 5, 0.0);
     
-    self.scrollView.contentInset = contentInsets;
-    self.scrollView.scrollIndicatorInsets = contentInsets;
+    _scrollView.contentInset = contentInsets;
+    _scrollView.scrollIndicatorInsets = contentInsets;
     
     CGRect viewRect = self.view.frame;
     viewRect.size.height -= keyboardSize.height;
@@ -423,8 +431,41 @@ UITextView *activeTextView;
         if ([textView.text isEqualToString:@""]) {
             
             textView.text = @"How did your professional goal go today?";
+            
+        } else {
+            
+            textView.textColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f];
         }
     }
+}
+
+- (void)textViewDidChange:(UITextView *)textView {
+    
+    if (![textView.text isEqualToString:@""]) {
+        
+        if (textView == _personalTextView ) {
+            
+            personalStatement.comments = textView.text;
+            NSLog(@"%@", personalStatement.comments);
+        }
+        
+        if (textView == _professionalTextView) {
+            
+            professionalStatement.comments = textView.text;
+            NSLog(@"%@", professionalStatement.comments);
+        }
+    }
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    if ([text isEqualToString:@"\n"]) {
+        
+        [textView resignFirstResponder];
+        return NO;
+    }
+    
+    return YES;
 }
 
 @end
