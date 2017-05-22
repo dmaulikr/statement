@@ -55,8 +55,15 @@ UITextView *activeTextView;
         Statement *currentPersonalStatement = personalStatementArray[0];
         _personalStatementTextField.text = currentPersonalStatement.statementText;
         
-        _personalTextView.text = @"How did your personal goal go today?";
-        _personalTextView.textColor = [UIColor lightGrayColor];
+        if (personalStatement.comments != nil) {
+            
+            _personalTextView.text = personalStatement.comments;
+            _personalTextView.textColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f];
+        } else {
+            
+            _personalTextView.text = @"How did your personal goal go today?";
+            _personalTextView.textColor = [UIColor lightGrayColor];
+        }
         
     } else {
         
@@ -67,6 +74,9 @@ UITextView *activeTextView;
         [_personalNoButton setUserInteractionEnabled:NO];
         [_personalNoButton setSelected:NO];
         _personalNoButton.alpha = 0.25;
+        
+        _personalTextView.text = @"How did your personal goal go today?";
+        _personalTextView.textColor = [UIColor lightGrayColor];
     }
     
     NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional"];
@@ -97,6 +107,9 @@ UITextView *activeTextView;
         [_professionalNoButton setUserInteractionEnabled:NO];
         [_professionalNoButton setSelected:NO];
         _professionalNoButton.alpha = 0.25;
+        
+        _professionalTextView.text = @"How did your professional goal go today?";
+        _professionalTextView.textColor = [UIColor lightGrayColor];
     }
     
     if (personalStatement.completed == 2) {
@@ -423,6 +436,10 @@ UITextView *activeTextView;
         if ([textView.text isEqualToString: @""]) {
             
             textView.text = @"How did your personal goal go today?";
+            
+        } else {
+            
+            textView.textColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f];
         }
     }
     
