@@ -25,114 +25,25 @@ UITextView *activeTextView;
     [super viewDidLoad];
     
     statementsVCAppDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
-    
     _context = [[statementsVCAppDelegate persistentContainer] viewContext];
     _fetchController = [statementsVCAppDelegate initializeFetchedResultsControllerForEntity:@"Statement" withSortDescriptor:@"type"];
     
     _personalStatementTextField.delegate = self;
     _professionalStatementTextField.delegate = self;
-    
     _personalTextView.delegate = self;
     _professionalTextView.delegate = self;
     
-    self.personalView.layer.borderWidth = 3;
-    self.personalView.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f].CGColor;
-    
-    self.professionalView.layer.borderWidth = 3;
-    self.professionalView.layer.borderColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f].CGColor;
-    
-    [_scrollView setContentSize:CGSizeMake(self.view.frame.size.width, self.view.frame.size.height)];
-    NSLog(@"%@", NSStringFromCGSize(self.scrollView.contentSize));
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
+    [self subscribeToKeyboard];
+    [self setViewUI];
     
     NSArray *personalStatementArray = [self fetchStatementWithType:@"personal"];
-    
-    if ([personalStatementArray count] > 0) {
-        
-        personalStatement = personalStatementArray[0];
-        Statement *currentPersonalStatement = personalStatementArray[0];
-        _personalStatementTextField.text = currentPersonalStatement.statementText;
-        
-        if (personalStatement.comments != nil) {
-            
-            _personalTextView.text = personalStatement.comments;
-            _personalTextView.textColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f];
-        } else {
-            
-            _personalTextView.text = @"How did your personal goal go today?";
-            _personalTextView.textColor = [UIColor lightGrayColor];
-        }
-        
-    } else {
-        
-        [_personalYesButton setUserInteractionEnabled:NO];
-        [_personalYesButton setSelected:NO];
-        _personalYesButton.alpha = 0.25;
-        
-        [_personalNoButton setUserInteractionEnabled:NO];
-        [_personalNoButton setSelected:NO];
-        _personalNoButton.alpha = 0.25;
-        
-        _personalTextView.text = @"How did your personal goal go today?";
-        _personalTextView.textColor = [UIColor lightGrayColor];
-    }
+    [self setPersonalStatementWithArray:personalStatementArray];
     
     NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional"];
+    [self setProfessionalStatementWithArray:professionalStatementArray];
     
-    if ([professionalStatementArray count] > 0) {
-        
-        professionalStatement = professionalStatementArray[0];
-        Statement *currentProfessionalStatement = professionalStatementArray[0];
-        _professionalStatementTextField.text = currentProfessionalStatement.statementText;
-        
-        if (professionalStatement.comments != nil) {
-            
-            _professionalTextView.text = professionalStatement.comments;
-            _professionalTextView.textColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f];
-            
-        } else {
-            
-            _professionalTextView.text = @"How did your professional goal go today?";
-            _professionalTextView.textColor = [UIColor lightGrayColor];
-        }
-        
-    } else {
-        
-        [_professionalYesButton setUserInteractionEnabled:NO];
-        [_professionalYesButton setSelected:NO];
-        _professionalYesButton.alpha = 0.25;
-        
-        [_professionalNoButton setUserInteractionEnabled:NO];
-        [_professionalNoButton setSelected:NO];
-        _professionalNoButton.alpha = 0.25;
-        
-        _professionalTextView.text = @"How did your professional goal go today?";
-        _professionalTextView.textColor = [UIColor lightGrayColor];
-    }
-    
-    if (personalStatement.completed == 2) {
-        
-        [_personalYesButton setSelected:YES];
-        [_personalNoButton setSelected:NO];
-        
-    } else if (personalStatement.completed == 1) {
-        
-        [_personalYesButton setSelected:NO];
-        [_personalNoButton setSelected:YES];
-    }
-    
-    if (professionalStatement.completed == 2) {
-        
-        [_professionalYesButton setSelected:YES];
-        [_professionalNoButton setSelected:NO];
-        
-    } else if (professionalStatement.completed == 1) {
-        
-        [_professionalYesButton setSelected:NO];
-        [_professionalNoButton setSelected:YES];
-    }
+    [self setPersonalButtonStates];
+    [self setProfessionalButtonStates];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -483,6 +394,126 @@ UITextView *activeTextView;
     }
     
     return YES;
+}
+
+#pragma mark - Helper Functions 
+
+- (void)setViewUI {
+    
+    self.personalView.layer.borderWidth = 3;
+    self.personalView.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f].CGColor;
+    
+    self.professionalView.layer.borderWidth = 3;
+    self.professionalView.layer.borderColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f].CGColor;
+}
+
+- (void)subscribeToKeyboard {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillBeHiden:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)setPersonalStatementWithArray:(NSArray *)array {
+    
+    if ([array count] > 0) {
+        
+        personalStatement = array[0];
+        _personalStatementTextField.text = personalStatement.statementText;
+        
+        if (personalStatement.comments != nil) {
+            
+            _personalTextView.text = personalStatement.comments;
+            _personalTextView.textColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f];
+        } else {
+            
+            _personalTextView.text = @"How did your personal goal go today?";
+            _personalTextView.textColor = [UIColor lightGrayColor];
+        }
+        
+    } else {
+        
+        [_personalYesButton setUserInteractionEnabled:NO];
+        [_personalYesButton setSelected:NO];
+        _personalYesButton.alpha = 0.25;
+        
+        [_personalNoButton setUserInteractionEnabled:NO];
+        [_personalNoButton setSelected:NO];
+        _personalNoButton.alpha = 0.25;
+        
+        _personalTextView.text = @"How did your personal goal go today?";
+        _personalTextView.textColor = [UIColor lightGrayColor];
+    }
+}
+
+- (void)setProfessionalStatementWithArray: (NSArray *)array {
+    
+    if ([array count] > 0) {
+        
+        professionalStatement = array[0];
+        _professionalStatementTextField.text = professionalStatement.statementText;
+        
+        if (professionalStatement.comments != nil) {
+            
+            _professionalTextView.text = professionalStatement.comments;
+            _professionalTextView.textColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f];
+            
+        } else {
+            
+            _professionalTextView.text = @"How did your professional goal go today?";
+            _professionalTextView.textColor = [UIColor lightGrayColor];
+        }
+        
+    } else {
+        
+        [_professionalYesButton setUserInteractionEnabled:NO];
+        [_professionalYesButton setSelected:NO];
+        _professionalYesButton.alpha = 0.25;
+        
+        [_professionalNoButton setUserInteractionEnabled:NO];
+        [_professionalNoButton setSelected:NO];
+        _professionalNoButton.alpha = 0.25;
+        
+        _professionalTextView.text = @"How did your professional goal go today?";
+        _professionalTextView.textColor = [UIColor lightGrayColor];
+    }
+}
+
+- (void)setPersonalButtonStates {
+    
+    if (personalStatement.completed == 2) {
+        
+        [_personalYesButton setSelected:YES];
+        [_personalNoButton setSelected:NO];
+        
+    } else if (personalStatement.completed == 1) {
+        
+        [_personalYesButton setSelected:NO];
+        [_personalNoButton setSelected:YES];
+        
+    } else if (personalStatement.completed == 0) {
+        
+        [_personalYesButton setSelected:NO];
+        [_personalNoButton setSelected:NO];
+    }
+}
+
+- (void)setProfessionalButtonStates {
+    
+    if (professionalStatement.completed == 2) {
+        
+        [_professionalYesButton setSelected:YES];
+        [_professionalNoButton setSelected:NO];
+        
+    } else if (professionalStatement.completed == 1) {
+        
+        [_professionalYesButton setSelected:NO];
+        [_professionalNoButton setSelected:YES];
+        
+    } else if (professionalStatement.completed == 0) {
+        
+        [_professionalYesButton setSelected:NO];
+        [_professionalNoButton setSelected:NO];
+    }
 }
 
 @end
