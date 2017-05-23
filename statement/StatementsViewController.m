@@ -85,6 +85,10 @@ UITextView *activeTextView;
         [_personalNoButton setUserInteractionEnabled:YES];
         _personalNoButton.alpha = 1.0;
         
+        [self setPersonalButtonStates];
+        _personalTextView.text = @"How did your personal goal go today?";
+        _personalTextView.textColor = [UIColor lightGrayColor];
+        
     } else if ([_professionalStatementTextField isFirstResponder]) {
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
@@ -113,6 +117,10 @@ UITextView *activeTextView;
         
         [_professionalNoButton setUserInteractionEnabled:YES];
         _professionalNoButton.alpha = 1.0;
+        
+        [self setProfessionalButtonStates];
+        _professionalTextView.text = @"How did your professional goal go today?";
+        _professionalTextView.textColor = [UIColor lightGrayColor];
     }
 }
 
