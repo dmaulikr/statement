@@ -42,6 +42,43 @@ UITextView *activeTextView;
     NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional"];
     [self setProfessionalStatementWithArray:professionalStatementArray];
     
+    NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
+    NSDate *today = [[NSCalendar currentCalendar] dateFromComponents:todayComponents];
+    
+    if([self compareOldStatementDate:personalStatement.createdDate withCurrentDate:today]) {
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", @"personal"]];
+        
+        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
+        NSError *deleteError = nil;
+        
+        [[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
+        
+        NSLog(@"Old personal statement deleted.");
+        
+        _personalStatementTextField.text = nil;
+        _personalTextView.text = @"How did your personal goal go today?";
+        _personalTextView.textColor = [UIColor lightGrayColor];
+    }
+    
+    if ([self compareOldStatementDate:professionalStatement.createdDate withCurrentDate:today]) {
+        
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", @"professional"]];
+        
+        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
+        NSError *deleteError = nil;
+        
+        [[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
+        
+        NSLog(@"Old professional statement deleted.");
+        
+        _professionalStatementTextField.text = nil;
+        _professionalTextView.text = @"How did your professional goal go today?";
+        _professionalTextView.textColor = [UIColor lightGrayColor];
+    }
+    
     [self setPersonalButtonStates];
     [self setProfessionalButtonStates];
 }
@@ -502,6 +539,11 @@ UITextView *activeTextView;
         
         [_personalYesButton setSelected:NO];
         [_personalNoButton setSelected:NO];
+        
+    } else if (personalStatement == nil) {
+        
+        [_personalYesButton setSelected:NO];
+        [_personalNoButton setSelected:NO];
     }
 }
 
@@ -521,7 +563,38 @@ UITextView *activeTextView;
         
         [_professionalYesButton setSelected:NO];
         [_professionalNoButton setSelected:NO];
+        
+    } else if (professionalStatement == nil) {
+        
+        [_professionalYesButton setSelected:NO];
+        [_professionalNoButton setSelected:NO];
     }
+}
+
+- (BOOL)compareOldStatementDate:(NSDate *)oldDate withCurrentDate:(NSDate *)currentDate {
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    
+    if (oldDate != nil) {
+        
+        NSDateComponents *oldDateComponents = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:oldDate];
+        NSDate *convertedOldDate = [calendar dateFromComponents:oldDateComponents];
+        
+        NSDateComponents *currentDateComponents = [calendar components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:currentDate];
+        NSDate *convertedCurrentDate = [calendar dateFromComponents:currentDateComponents];
+        
+        if (convertedOldDate < convertedCurrentDate) {
+            
+            NSLog(@"Statement is from yesterday");
+            return YES;
+            
+        } else {
+            
+            return NO;
+        }
+    }
+    
+    return NO;
 }
 
 @end

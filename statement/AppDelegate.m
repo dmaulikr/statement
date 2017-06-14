@@ -16,7 +16,6 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
     
     /*[OneSignal initWithLaunchOptions:launchOptions appId:@"0b15468a-f452-41c3-b938-3a9068139ecd" handleNotificationAction:nil settings:@{kOSSettingsKeyAutoPrompt: @false}];
     OneSignal.inFocusDisplayType = OSNotificationDisplayTypeNotification;
