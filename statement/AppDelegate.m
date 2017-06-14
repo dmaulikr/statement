@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <OneSignal/OneSignal.h>
 
 @interface AppDelegate ()
 
@@ -16,6 +17,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [OneSignal initWithLaunchOptions:launchOptions appId:@"0b15468a-f452-41c3-b938-3a9068139ecd" handleNotificationAction:nil settings:@{kOSSettingsKeyAutoPrompt: @false}];
+    OneSignal.inFocusDisplayType = OSNotificationDisplayTypeNotification;
+    
+    [OneSignal promptForPushNotificationsWithUserResponse:^(BOOL accepted) {
+        
+        NSLog(@"User accepted notifications: %d", accepted);
+    }];
+    
     return YES;
 }
 
@@ -49,6 +59,15 @@
     
     [self saveContext];
     
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    
+    NSLog(@"Registration failed: %@", error);
 }
 
 #pragma mark - Core Data Stack

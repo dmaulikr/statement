@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import <UserNotifications/UserNotifications.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate, NSFetchedResultsControllerDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, NSFetchedResultsControllerDelegate, UNUserNotificationCenterDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, readonly) NSPersistentContainer *persistentContainer;
