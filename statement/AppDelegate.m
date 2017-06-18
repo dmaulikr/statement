@@ -17,14 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    /*[OneSignal initWithLaunchOptions:launchOptions appId:@"0b15468a-f452-41c3-b938-3a9068139ecd" handleNotificationAction:nil settings:@{kOSSettingsKeyAutoPrompt: @false}];
-    OneSignal.inFocusDisplayType = OSNotificationDisplayTypeNotification;
-    
-    [OneSignal promptForPushNotificationsWithUserResponse:^(BOOL accepted) {
-        
-        NSLog(@"User accepted notifications: %d", accepted);
-    }];*/
-    
     [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionAlert + UNAuthorizationOptionBadge + UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
         
         NSLog(@"Notification permission status: %d", granted);
@@ -32,41 +24,6 @@
     
     [self setNotificationWithTitle:@"Good morning!" andBody:@"Don't forget to set your goals for the day!" forHour:9 withIdentifer:@"morningGoalIdentifier"];
     [self setNotificationWithTitle:@"How'd your day go?" andBody:@"Judge how your goals went today!" forHour:19 withIdentifer:@"eveningEvaluateIdentifier"];
-    
-    /*[[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
-        
-        if(settings.authorizationStatus == UNAuthorizationStatusAuthorized) {
-            
-            UNMutableNotificationContent *notificationContent = [UNMutableNotificationContent new];
-            notificationContent.title = @"Good morning!";
-            notificationContent.body = @"Don't forget to set your goals for the day!";
-            notificationContent.sound = [UNNotificationSound defaultSound];
-            
-            NSDate *date = [NSDate date];
-            
-            NSDateComponents *triggerComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:date];
-            
-            triggerComponents.hour = 9;
-            triggerComponents.minute = 0;
-            triggerComponents.second = 0;
-            NSLog(@"%@", triggerComponents);
-            
-            UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:triggerComponents repeats:YES];
-            
-            NSString *morningGoalIdentifer = @"MorningGoalLocal";
-            UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:morningGoalIdentifer content:notificationContent trigger:trigger];
-            
-            [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
-                
-                if(error != nil) {
-                    
-                    NSLog(@"Something went wrong: %@", error);
-                } else {
-                    NSLog(@"Notification added");
-                }
-            }];
-        }
-    }];*/
     
     return YES;
 }
