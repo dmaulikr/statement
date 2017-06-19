@@ -48,14 +48,20 @@ UITextView *activeTextView;
     if([self compareOldStatementDate:personalStatement.createdDate withCurrentDate:today]) {
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", @"personal"]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"status == %@ AND type == %@", @"new", @"personal"]];
         
-        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
-        NSError *deleteError = nil;
+        NSError *error = nil;
+        NSArray *yesterdayPersonalArray = [_context executeFetchRequest:fetchRequest error:&error];
+        Statement *yesterdayPersonalStatement = yesterdayPersonalArray[0];
+        yesterdayPersonalStatement.status = @"old";
+        NSLog(@"%@", yesterdayPersonalStatement);
         
-        [[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
+        //NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
+        //NSError *deleteError = nil;
         
-        NSLog(@"Old personal statement deleted.");
+        //[[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
+        
+        //NSLog(@"Old personal statement deleted.");
         
         _personalStatementTextField.text = nil;
         _personalTextView.text = @"How did your personal goal go today?";
@@ -65,14 +71,20 @@ UITextView *activeTextView;
     if ([self compareOldStatementDate:professionalStatement.createdDate withCurrentDate:today]) {
         
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", @"professional"]];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"status == %@ AND type == %@", @"new", @"professional"]];
         
-        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
-        NSError *deleteError = nil;
+        NSError *error = nil;
+        NSArray *yesterdayProfessionalArray = [_context executeFetchRequest:fetchRequest error:&error];
+        Statement *yesterdayProfessionalStatement = yesterdayProfessionalArray[0];
+        yesterdayProfessionalStatement.status = @"old";
+        NSLog(@"%@", yesterdayProfessionalStatement);
         
-        [[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
+        //NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
+        //NSError *deleteError = nil;
         
-        NSLog(@"Old professional statement deleted.");
+        //[[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
+        
+        //NSLog(@"Old professional statement deleted.");
         
         _professionalStatementTextField.text = nil;
         _professionalTextView.text = @"How did your professional goal go today?";
@@ -106,6 +118,7 @@ UITextView *activeTextView;
         personalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         personalStatement.statementText = _personalStatementTextField.text;
         personalStatement.type = @"personal";
+        personalStatement.status = @"new";
         personalStatement.completed = 0;
         personalStatement.createdDate = [NSDate date];
         
@@ -139,6 +152,7 @@ UITextView *activeTextView;
         professionalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         professionalStatement.statementText = _professionalStatementTextField.text;
         professionalStatement.type = @"professional";
+        professionalStatement.status = @"new";
         professionalStatement.completed = 0;
         professionalStatement.createdDate = [NSDate date];
         
