@@ -13,9 +13,12 @@
 		A12EE36C1EA80104004B0664 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B44511E94675100D4517B /* AppDelegate.m */; };
 		A12EE3701EA80118004B0664 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A10B444E1E94675100D4517B /* main.m */; };
 		A12EE3711EA80151004B0664 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A1DD3C2E1EA1377E00A21F3D /* DataModel.xcdatamodeld */; };
+		A161E0641EF62C2B00F6557E /* Statement+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A161E0611EF62C2B00F6557E /* Statement+CoreDataClass.m */; };
+		A161E0651EF62C2B00F6557E /* Statement+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A161E0611EF62C2B00F6557E /* Statement+CoreDataClass.m */; };
+		A161E0661EF62C2B00F6557E /* Statement+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A161E0631EF62C2B00F6557E /* Statement+CoreDataProperties.m */; };
+		A161E0671EF62C2B00F6557E /* Statement+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A161E0631EF62C2B00F6557E /* Statement+CoreDataProperties.m */; };
+		A161E06A1EF8604A00F6557E /* PastStatementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A161E0691EF8604A00F6557E /* PastStatementsViewController.m */; };
 		A18300A21EC534F700D50E9B /* StatementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A18300A11EC534F700D50E9B /* StatementsViewController.m */; };
-		A198023A1ECF3E2900A4C0A3 /* Statement+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = A19802371ECF3E2900A4C0A3 /* Statement+CoreDataClass.m */; };
-		A198023B1ECF3E2900A4C0A3 /* Statement+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A19802391ECF3E2900A4C0A3 /* Statement+CoreDataProperties.m */; };
 		A1C215381EF1B281000E2AE0 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C215371EF1B281000E2AE0 /* NotificationService.m */; };
 		A1C2153C1EF1B281000E2AE0 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A1C215341EF1B280000E2AE0 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A1DD3C391EA141FF00A21F3D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1DD3C381EA141FF00A21F3D /* CoreData.framework */; };
@@ -58,12 +61,14 @@
 		A10B44591E94675100D4517B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10B445C1E94675100D4517B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A10B445E1E94675100D4517B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A161E0601EF62C2B00F6557E /* Statement+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataClass.h"; sourceTree = "<group>"; };
+		A161E0611EF62C2B00F6557E /* Statement+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataClass.m"; sourceTree = "<group>"; };
+		A161E0621EF62C2B00F6557E /* Statement+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataProperties.h"; sourceTree = "<group>"; };
+		A161E0631EF62C2B00F6557E /* Statement+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataProperties.m"; sourceTree = "<group>"; };
+		A161E0681EF8604A00F6557E /* PastStatementsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastStatementsViewController.h; sourceTree = "<group>"; };
+		A161E0691EF8604A00F6557E /* PastStatementsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastStatementsViewController.m; sourceTree = "<group>"; };
 		A18300A01EC534F700D50E9B /* StatementsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementsViewController.h; sourceTree = "<group>"; };
 		A18300A11EC534F700D50E9B /* StatementsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementsViewController.m; sourceTree = "<group>"; };
-		A19802361ECF3E2900A4C0A3 /* Statement+CoreDataClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataClass.h"; sourceTree = "<group>"; };
-		A19802371ECF3E2900A4C0A3 /* Statement+CoreDataClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataClass.m"; sourceTree = "<group>"; };
-		A19802381ECF3E2900A4C0A3 /* Statement+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Statement+CoreDataProperties.h"; sourceTree = "<group>"; };
-		A19802391ECF3E2900A4C0A3 /* Statement+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Statement+CoreDataProperties.m"; sourceTree = "<group>"; };
 		A1C2152F1EF19534000E2AE0 /* statement.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = statement.entitlements; sourceTree = "<group>"; };
 		A1C215341EF1B280000E2AE0 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1C215361EF1B281000E2AE0 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
@@ -156,10 +161,10 @@
 			isa = PBXGroup;
 			children = (
 				A1DD3C2E1EA1377E00A21F3D /* DataModel.xcdatamodeld */,
-				A19802361ECF3E2900A4C0A3 /* Statement+CoreDataClass.h */,
-				A19802371ECF3E2900A4C0A3 /* Statement+CoreDataClass.m */,
-				A19802381ECF3E2900A4C0A3 /* Statement+CoreDataProperties.h */,
-				A19802391ECF3E2900A4C0A3 /* Statement+CoreDataProperties.m */,
+				A161E0601EF62C2B00F6557E /* Statement+CoreDataClass.h */,
+				A161E0611EF62C2B00F6557E /* Statement+CoreDataClass.m */,
+				A161E0621EF62C2B00F6557E /* Statement+CoreDataProperties.h */,
+				A161E0631EF62C2B00F6557E /* Statement+CoreDataProperties.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -178,6 +183,8 @@
 			children = (
 				A18300A01EC534F700D50E9B /* StatementsViewController.h */,
 				A18300A11EC534F700D50E9B /* StatementsViewController.m */,
+				A161E0681EF8604A00F6557E /* PastStatementsViewController.h */,
+				A161E0691EF8604A00F6557E /* PastStatementsViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -401,10 +408,11 @@
 			files = (
 				A18300A21EC534F700D50E9B /* StatementsViewController.m in Sources */,
 				A12EE3711EA80151004B0664 /* DataModel.xcdatamodeld in Sources */,
-				A198023B1ECF3E2900A4C0A3 /* Statement+CoreDataProperties.m in Sources */,
 				A12EE3701EA80118004B0664 /* main.m in Sources */,
-				A198023A1ECF3E2900A4C0A3 /* Statement+CoreDataClass.m in Sources */,
+				A161E0641EF62C2B00F6557E /* Statement+CoreDataClass.m in Sources */,
 				A12EE36C1EA80104004B0664 /* AppDelegate.m in Sources */,
+				A161E0661EF62C2B00F6557E /* Statement+CoreDataProperties.m in Sources */,
+				A161E06A1EF8604A00F6557E /* PastStatementsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +421,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A1C215381EF1B281000E2AE0 /* NotificationService.m in Sources */,
+				A161E0651EF62C2B00F6557E /* Statement+CoreDataClass.m in Sources */,
+				A161E0671EF62C2B00F6557E /* Statement+CoreDataProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

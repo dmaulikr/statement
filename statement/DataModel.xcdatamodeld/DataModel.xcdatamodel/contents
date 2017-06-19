@@ -5,9 +5,10 @@
         <attribute name="completed" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="2" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="createdDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="statementText" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Statement" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Statement" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

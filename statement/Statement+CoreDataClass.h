@@ -2,7 +2,7 @@
 //  Statement+CoreDataClass.h
 //  statement
 //
-//  Created by Alexander Kuhar on 5/19/17.
+//  Created by Alexander Kuhar on 6/17/17.
 //  Copyright © 2017 Alexander Kuhar. All rights reserved.
 //
 

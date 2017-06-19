@@ -2,7 +2,7 @@
 //  Statement+CoreDataProperties.m
 //  statement
 //
-//  Created by Alexander Kuhar on 5/19/17.
+//  Created by Alexander Kuhar on 6/17/17.
 //  Copyright © 2017 Alexander Kuhar. All rights reserved.
 //
 
@@ -14,10 +14,11 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
 }
 
+@dynamic comments;
 @dynamic completed;
 @dynamic createdDate;
 @dynamic statementText;
+@dynamic status;
 @dynamic type;
-@dynamic comments;
 
 @end
