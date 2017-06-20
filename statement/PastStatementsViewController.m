@@ -27,6 +27,7 @@ AppDelegate *pastStatementsAppDelegate;
     _pastStatementsTableView.delegate = self;
     
     _oldStatementsArray = [self fetchOldStatements];
+    NSLog(@"%@", _oldStatementsArray);
 }
 
 #pragma mark - Table View Delegate Methods
@@ -44,6 +45,13 @@ AppDelegate *pastStatementsAppDelegate;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pastStatement"];
+    
+    if (_oldStatementsArray != nil) {
+        
+        Statement *statementIndexObject = _oldStatementsArray[indexPath.row];
+        
+        cell.textLabel.text = statementIndexObject.statementText;
+    }
     
     return cell;
 }
