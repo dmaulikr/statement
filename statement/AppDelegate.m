@@ -20,10 +20,10 @@
     [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionAlert + UNAuthorizationOptionBadge + UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
         
         NSLog(@"Notification permission status: %d", granted);
+        
+        [self setNotificationWithTitle:@"Good morning!" andBody:@"Don't forget to set your goals for the day!" forHour:9 withIdentifer:@"morningGoalIdentifier"];
+        [self setNotificationWithTitle:@"How'd your day go?" andBody:@"Judge how your goals went today!" forHour:19 withIdentifer:@"eveningEvaluateIdentifier"];
     }];
-    
-    [self setNotificationWithTitle:@"Good morning!" andBody:@"Don't forget to set your goals for the day!" forHour:9 withIdentifer:@"morningGoalIdentifier"];
-    [self setNotificationWithTitle:@"How'd your day go?" andBody:@"Judge how your goals went today!" forHour:19 withIdentifer:@"eveningEvaluateIdentifier"];
     
     return YES;
 }
