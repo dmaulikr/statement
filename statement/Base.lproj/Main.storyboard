@@ -54,7 +54,7 @@
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     </textField>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2z-yR-Hr9">
-                                                        <rect key="frame" x="20" y="122.5" width="335" height="34"/>
+                                                        <rect key="frame" x="20" y="122.5" width="335" height="40.5"/>
                                                         <subviews>
                                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JGW-Sl-vxf" userLabel="Yes">
                                                                 <rect key="frame" x="0.0" y="10" width="50" height="50"/>
@@ -91,7 +91,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L7H-Pq-RSX">
-                                                        <rect key="frame" x="20" y="176.5" width="335" height="110"/>
+                                                        <rect key="frame" x="20" y="183" width="335" height="103.5"/>
                                                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -108,7 +108,7 @@
                                                     <constraint firstItem="a2z-yR-Hr9" firstAttribute="top" secondItem="mix-hu-dkI" secondAttribute="bottom" constant="10" id="Wry-xq-Mpz"/>
                                                     <constraint firstItem="L7H-Pq-RSX" firstAttribute="top" secondItem="a2z-yR-Hr9" secondAttribute="bottom" constant="20" id="c4c-Sc-M8D"/>
                                                     <constraint firstItem="a2z-yR-Hr9" firstAttribute="width" secondItem="mix-hu-dkI" secondAttribute="width" id="c6n-VD-rUT"/>
-                                                    <constraint firstItem="a2z-yR-Hr9" firstAttribute="height" secondItem="mix-hu-dkI" secondAttribute="height" multiplier="1.25" id="fMr-MT-VeZ"/>
+                                                    <constraint firstItem="a2z-yR-Hr9" firstAttribute="height" secondItem="mix-hu-dkI" secondAttribute="height" multiplier="1.5" id="fMr-MT-VeZ"/>
                                                     <constraint firstItem="a2z-yR-Hr9" firstAttribute="centerX" secondItem="n6z-hR-wuR" secondAttribute="centerX" id="gZx-4r-nXT"/>
                                                     <constraint firstAttribute="bottom" secondItem="L7H-Pq-RSX" secondAttribute="bottom" constant="15" id="ui9-Pu-OYL"/>
                                                     <constraint firstItem="mix-hu-dkI" firstAttribute="leading" secondItem="n6z-hR-wuR" secondAttribute="leading" constant="20" id="zel-4u-rti"/>

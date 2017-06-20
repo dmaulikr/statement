@@ -33,7 +33,6 @@ UITextView *activeTextView;
     _personalTextView.delegate = self;
     _professionalTextView.delegate = self;
     
-    [self subscribeToKeyboard];
     [self setViewUI];
     
     NSArray *personalStatementArray = [self fetchStatementWithType:@"personal"];
@@ -43,11 +42,11 @@ UITextView *activeTextView;
     [self setProfessionalStatementWithArray:professionalStatementArray];
     
     NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
-    NSDate *today = [[NSCalendar currentCalendar] dateFromComponents:todayComponents];
+    NSDate *today = [[NSCalendar autoupdatingCurrentCalendar] dateFromComponents:todayComponents];
     
     if([self compareOldStatementDate:personalStatement.createdDate withCurrentDate:today]) {
         
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+        /*NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
         [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"status == %@ AND type == %@", @"new", @"personal"]];
         
         NSError *error = nil;
@@ -58,23 +57,24 @@ UITextView *activeTextView;
             Statement *yesterdayPersonalStatement = yesterdayPersonalArray[0];
             yesterdayPersonalStatement.status = @"old";
             NSLog(@"%@", yesterdayPersonalStatement);
-        }
+            
+            [statementsVCAppDelegate saveContext];
+        }*/
         
-        //NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
-        //NSError *deleteError = nil;
-        
-        //[[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
-        
-        //NSLog(@"Old personal statement deleted.");
+        personalStatement.status = @"old";
         
         _personalStatementTextField.text = nil;
         _personalTextView.text = @"How did your personal goal go today?";
         _personalTextView.textColor = [UIColor lightGrayColor];
+        
+        NSLog(@"%@", personalStatement);
+        
+        [statementsVCAppDelegate saveContext];
     }
     
     if ([self compareOldStatementDate:professionalStatement.createdDate withCurrentDate:today]) {
         
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+        /*NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
         [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"status == %@ AND type == %@", @"new", @"professional"]];
         
         NSError *error = nil;
@@ -85,22 +85,29 @@ UITextView *activeTextView;
             Statement *yesterdayProfessionalStatement = yesterdayProfessionalArray[0];
             yesterdayProfessionalStatement.status = @"old";
             NSLog(@"%@", yesterdayProfessionalStatement);
-        }
+            
+            [statementsVCAppDelegate saveContext];
+        }*/
         
-        //NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
-        //NSError *deleteError = nil;
-        
-        //[[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
-        
-        //NSLog(@"Old professional statement deleted.");
+        professionalStatement.status = @"old";
         
         _professionalStatementTextField.text = nil;
         _professionalTextView.text = @"How did your professional goal go today?";
         _professionalTextView.textColor = [UIColor lightGrayColor];
+        
+        NSLog(@"%@", professionalStatement);
+        
+        [statementsVCAppDelegate saveContext];
     }
     
     [self setPersonalButtonStates];
     [self setProfessionalButtonStates];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self subscribeToKeyboard];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -186,8 +193,6 @@ UITextView *activeTextView;
 #pragma mark - Button Functionality
 
 - (IBAction)thumbsUp:(id)sender {
-    
-    NSLog(@"button pressed");
     
     if ([sender tag] == 1) {
         
