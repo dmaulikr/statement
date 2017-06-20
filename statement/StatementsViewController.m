@@ -52,9 +52,13 @@ UITextView *activeTextView;
         
         NSError *error = nil;
         NSArray *yesterdayPersonalArray = [_context executeFetchRequest:fetchRequest error:&error];
-        Statement *yesterdayPersonalStatement = yesterdayPersonalArray[0];
-        yesterdayPersonalStatement.status = @"old";
-        NSLog(@"%@", yesterdayPersonalStatement);
+        
+        if ([yesterdayPersonalArray count] > 0) {
+            
+            Statement *yesterdayPersonalStatement = yesterdayPersonalArray[0];
+            yesterdayPersonalStatement.status = @"old";
+            NSLog(@"%@", yesterdayPersonalStatement);
+        }
         
         //NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
         //NSError *deleteError = nil;
@@ -75,9 +79,13 @@ UITextView *activeTextView;
         
         NSError *error = nil;
         NSArray *yesterdayProfessionalArray = [_context executeFetchRequest:fetchRequest error:&error];
-        Statement *yesterdayProfessionalStatement = yesterdayProfessionalArray[0];
-        yesterdayProfessionalStatement.status = @"old";
-        NSLog(@"%@", yesterdayProfessionalStatement);
+        
+        if ([yesterdayProfessionalArray count] > 0) {
+            
+            Statement *yesterdayProfessionalStatement = yesterdayProfessionalArray[0];
+            yesterdayProfessionalStatement.status = @"old";
+            NSLog(@"%@", yesterdayProfessionalStatement);
+        }
         
         //NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
         //NSError *deleteError = nil;
