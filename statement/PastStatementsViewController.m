@@ -18,22 +18,56 @@ AppDelegate *pastStatementsAppDelegate;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    pastStatementsAppDelegate = (AppDelegate *) [[UIApplication sharedApplication] delegate];
+    
+    _context = [[pastStatementsAppDelegate persistentContainer] viewContext];
+    _fetchController = [pastStatementsAppDelegate initializeFetchedResultsControllerForEntity:@"Statement" withSortDescriptor:@"createdDate"];
+    
+    _pastStatementsTableView.delegate = self;
+    
+    _oldStatementsArray = [self fetchOldStatements];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - Table View Delegate Methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if ([_oldStatementsArray count] > 0) {
+
+        return [_oldStatementsArray count];
+    }
+    
+    return 0;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pastStatement"];
+    
+    return cell;
 }
-*/
+
+#pragma mark - Core Data Helper Functions
+
+- (NSArray *)fetchOldStatements {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"status == %@", @"old"]];
+    [fetchRequest setReturnsObjectsAsFaults:NO];
+    
+    NSError *error = nil;
+    
+    NSArray *fetchedOldStatements = [_context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedOldStatements count] < 1) {
+        
+        return nil;
+    }
+    
+    NSLog(@"%@", fetchedOldStatements);
+    
+    return fetchedOldStatements;
+}
 
 @end
