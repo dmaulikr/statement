@@ -245,7 +245,7 @@
         <!--Past Statements View Controller-->
         <scene sceneID="0Q4-ZI-vAg">
             <objects>
-                <viewController id="F7Q-xw-pUA" customClass="PastStatementsViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="F7Q-xw-pUA" customClass="PastStatementsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WSh-ib-5mo"/>
                         <viewControllerLayoutGuide type="bottom" id="iqk-Al-eWI"/>
@@ -258,11 +258,11 @@
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="JqV-YY-jQR">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pastStatement" id="JqV-YY-jQR">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JqV-YY-jQR" id="fC2-uB-d4Q">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -281,6 +281,9 @@
                             <constraint firstAttribute="trailing" secondItem="wNT-VS-7py" secondAttribute="trailing" id="xAP-GF-pTd"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="pastStatementsTableView" destination="wNT-VS-7py" id="b58-wt-AnM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGX-ey-48X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
