@@ -122,14 +122,6 @@ UITextView *activeTextView;
         
     } else if ([_professionalStatementTextField isFirstResponder]) {
         
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", @"professional"]];
-        
-        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
-        NSError *deleteError = nil;
-        
-        [[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
-        
         professionalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         professionalStatement.statementText = _professionalStatementTextField.text;
         professionalStatement.type = @"professional";
