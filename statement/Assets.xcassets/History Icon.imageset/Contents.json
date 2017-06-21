@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Unchecked Checkbox_50.png",
+      "filename" : "icons8-Past_25.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Unchecked Checkbox_100.png",
+      "filename" : "icons8-Past_50.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Unchecked Checkbox_150.png",
+      "filename" : "icons8-Past-75.png",
       "scale" : "3x"
     }
   ],

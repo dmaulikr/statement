@@ -217,8 +217,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="eaG-jp-8Zh">
-                        <barButtonItem key="leftBarButtonItem" title="History" id="eiK-WT-te4">
-                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <barButtonItem key="leftBarButtonItem" image="History Icon" id="eiK-WT-te4">
+                            <color key="tintColor" red="0.2196078431372549" green="0.7803921568627451" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="F7Q-xw-pUA" kind="show" id="0Lx-6C-zcu"/>
                             </connections>
@@ -299,5 +299,6 @@
         <image name="Green Filled Thumbs Up" width="50" height="50"/>
         <image name="Green Unfilled Thumbs Down" width="50" height="50"/>
         <image name="Green Unfilled Thumbs Up" width="50" height="50"/>
+        <image name="History Icon" width="25" height="25"/>
     </resources>
 </document>
