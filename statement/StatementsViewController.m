@@ -363,14 +363,14 @@ UITextView *activeTextView;
     
     if (textField == _personalStatementTextField) {
         
-        NSArray *personalStatementArray = [self fetchStatementWithType:@"personal"];
+        NSArray *personalStatementArray = [self fetchStatementWithType:@"personal" andStatus:@"new"];
         Statement *thisPersonalStatement = personalStatementArray[0];
         textField.text = thisPersonalStatement.statementText;
     }
     
     if (textField == _professionalStatementTextField) {
         
-        NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional"];
+        NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional" andStatus:@"new"];
         Statement *thisProfessionalStatement = professionalStatementArray[0];
         textField.text = thisProfessionalStatement.statementText;
     }
@@ -472,11 +472,15 @@ UITextView *activeTextView;
 
 - (void)setViewUI {
     
-    self.personalView.layer.borderWidth = 3;
-    self.personalView.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f].CGColor;
+    self.personalView.layer.borderWidth = 2;
+    //self.personalView.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f].CGColor;
+    //self.personalView.layer.borderColor = [UIColor colorWithRed:81.0f/255.0f green:143.0f/255.0f blue:149.0f/255.0f alpha:1.0f].CGColor;
+    self.personalView.layer.borderColor = [UIColor colorWithRed:56.0f/255.0f green:199.0f/255.0f blue:185.0f/255.0f alpha:1.0f].CGColor;
     
-    self.professionalView.layer.borderWidth = 3;
-    self.professionalView.layer.borderColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f].CGColor;
+    self.professionalView.layer.borderWidth = 2;
+    //self.professionalView.layer.borderColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f].CGColor;
+    //self.professionalView.layer.borderColor = [UIColor colorWithRed:81.0f/255.0f green:143.0f/255.0f blue:149.0f/255.0f alpha:1.0f].CGColor;
+    self.professionalView.layer.borderColor = [UIColor colorWithRed:56.0f/255.0f green:199.0f/255.0f blue:185.0f/255.0f alpha:1.0f].CGColor;
 }
 
 - (void)subscribeToKeyboard {
