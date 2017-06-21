@@ -35,10 +35,10 @@ UITextView *activeTextView;
     
     [self setViewUI];
     
-    NSArray *personalStatementArray = [self fetchStatementWithType:@"personal"];
+    NSArray *personalStatementArray = [self fetchStatementWithType:@"personal" andStatus:@"new"];
     [self setPersonalStatementWithArray:personalStatementArray];
     
-    NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional"];
+    NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional" andStatus:@"new"];
     [self setProfessionalStatementWithArray:professionalStatementArray];
     
     NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
@@ -122,14 +122,6 @@ UITextView *activeTextView;
     
     if ([_personalStatementTextField isFirstResponder]) {
         
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", @"personal"]];
-        
-        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
-        NSError *deleteError = nil;
-        
-        [[[statementsVCAppDelegate persistentContainer] persistentStoreCoordinator] executeRequest:deleteRequest withContext:_context error:&deleteError];
-        
         personalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         personalStatement.statementText = _personalStatementTextField.text;
         personalStatement.type = @"personal";
@@ -141,7 +133,7 @@ UITextView *activeTextView;
         
         [statementsVCAppDelegate saveContext];
         
-        NSArray *personalArray = [self fetchStatementWithType:@"personal"];
+        NSArray *personalArray = [self fetchStatementWithType:@"personal" andStatus:@"new"];
         personalStatement = personalArray[0];
         
         [_personalYesButton setUserInteractionEnabled:YES];
@@ -175,7 +167,7 @@ UITextView *activeTextView;
         
         [statementsVCAppDelegate saveContext];
         
-        NSArray *professionalArray = [self fetchStatementWithType:@"professional"];
+        NSArray *professionalArray = [self fetchStatementWithType:@"professional" andStatus:@"new"];
         professionalStatement = professionalArray[0];
         
         [_professionalYesButton setUserInteractionEnabled:YES];
@@ -317,10 +309,10 @@ UITextView *activeTextView;
 
 #pragma mark - Core Data Helper Functions
 
--(NSArray *)fetchStatementWithType:(NSString *)type {
+-(NSArray *)fetchStatementWithType:(NSString *)type andStatus:(NSString *)status {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@", type]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@ AND status == %@", type, status]];
     [fetchRequest setReturnsObjectsAsFaults:NO];
 
     NSError *error = nil;

@@ -36,6 +36,6 @@
 -(void)createStatement;
 -(void)thumbsUp:(id)sender;
 -(void)thumbsDown:(id)sender;
--(NSArray *)fetchStatementWithType:(NSString *)type;
+-(NSArray *)fetchStatementWithType:(NSString *)type andStatus:(NSString *)status;
 
 @end
