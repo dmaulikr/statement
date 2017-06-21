@@ -41,25 +41,19 @@ UITextView *activeTextView;
     NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional" andStatus:@"new"];
     [self setProfessionalStatementWithArray:professionalStatementArray];
     
+    [self setPersonalButtonStates];
+    [self setProfessionalButtonStates];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self subscribeToKeyboard];
+    
     NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
     NSDate *today = [[NSCalendar autoupdatingCurrentCalendar] dateFromComponents:todayComponents];
     
     if([self compareOldStatementDate:personalStatement.createdDate withCurrentDate:today]) {
-        
-        /*NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"status == %@ AND type == %@", @"new", @"personal"]];
-        
-        NSError *error = nil;
-        NSArray *yesterdayPersonalArray = [_context executeFetchRequest:fetchRequest error:&error];
-        
-        if ([yesterdayPersonalArray count] > 0) {
-            
-            Statement *yesterdayPersonalStatement = yesterdayPersonalArray[0];
-            yesterdayPersonalStatement.status = @"old";
-            NSLog(@"%@", yesterdayPersonalStatement);
-            
-            [statementsVCAppDelegate saveContext];
-        }*/
         
         personalStatement.status = @"old";
         
@@ -70,24 +64,11 @@ UITextView *activeTextView;
         NSLog(@"%@", personalStatement);
         
         [statementsVCAppDelegate saveContext];
+        
+        personalStatement = nil;
     }
     
     if ([self compareOldStatementDate:professionalStatement.createdDate withCurrentDate:today]) {
-        
-        /*NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
-        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"status == %@ AND type == %@", @"new", @"professional"]];
-        
-        NSError *error = nil;
-        NSArray *yesterdayProfessionalArray = [_context executeFetchRequest:fetchRequest error:&error];
-        
-        if ([yesterdayProfessionalArray count] > 0) {
-            
-            Statement *yesterdayProfessionalStatement = yesterdayProfessionalArray[0];
-            yesterdayProfessionalStatement.status = @"old";
-            NSLog(@"%@", yesterdayProfessionalStatement);
-            
-            [statementsVCAppDelegate saveContext];
-        }*/
         
         professionalStatement.status = @"old";
         
@@ -98,16 +79,9 @@ UITextView *activeTextView;
         NSLog(@"%@", professionalStatement);
         
         [statementsVCAppDelegate saveContext];
+        
+        professionalStatement = nil;
     }
-    
-    [self setPersonalButtonStates];
-    [self setProfessionalButtonStates];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    [self subscribeToKeyboard];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
