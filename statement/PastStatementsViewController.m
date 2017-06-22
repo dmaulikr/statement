@@ -40,9 +40,14 @@ AppDelegate *pastStatementsAppDelegate;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if ([_oldStatementsArray count] > 0) {
-
-        return [_oldStatementsArray count];
+    if (tableView == _pastPersonalTableView) {
+    
+        return [_oldPersonalStatementArray count];
+    }
+    
+    if (tableView == _pastProfessionalTableView) {
+        
+        return [_oldProfessionalStatementArray count];
     }
     
     return 0;
@@ -50,16 +55,77 @@ AppDelegate *pastStatementsAppDelegate;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pastStatement"];
-    
-    if (_oldStatementsArray != nil) {
+    if (tableView == _pastPersonalTableView) {
         
-        Statement *statementIndexObject = _oldStatementsArray[indexPath.row];
+        PastStatementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pastPersonalStatement" forIndexPath:indexPath];
         
-        cell.textLabel.text = statementIndexObject.statementText;
+        Statement *statementIndexObject = _oldPersonalStatementArray[indexPath.row];
+        //NSLog(@"%@", statementIndexObject.statementText);
+        
+        cell.statementText.text = statementIndexObject.statementText;
+        cell.statementType.text = [self setStringFromDate:statementIndexObject.createdDate];
+        
+        if (statementIndexObject.completed == 1) {
+            
+            cell.completionStatusImage.image = [UIImage imageNamed:@"Blue Filled Thumbs Down"];
+        }
+        
+        if (statementIndexObject.completed == 2) {
+            
+            cell.completionStatusImage.image = [UIImage imageNamed:@"Blue Filled Thumbs Up"];
+        }
+        
+        if (statementIndexObject.completed == 0) {
+            
+            cell.completionStatusImage.image = [UIImage imageNamed:@"Thinking Face Emoji"];
+        }
+        
+        return cell;
+        
+    } else {
+        
+        PastStatementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pastProfessionalStatement" forIndexPath:indexPath];
+        
+        Statement *statementIndexObject = _oldProfessionalStatementArray[indexPath.row];
+        //NSLog(@"%@", statementIndexObject);
+        
+        cell.statementText.text = statementIndexObject.statementText;
+        cell.statementType.text = [self setStringFromDate:statementIndexObject.createdDate];
+        
+        if (statementIndexObject.completed == 1) {
+            
+            cell.completionStatusImage.image = [UIImage imageNamed:@"Green Filled Thumbs Down"];
+        }
+        
+        if (statementIndexObject.completed == 2) {
+            
+            cell.completionStatusImage.image = [UIImage imageNamed:@"Green Filled Thumbs Up"];
+        }
+        
+        if (statementIndexObject.completed == 0) {
+            
+            cell.completionStatusImage.image = [UIImage imageNamed:@"Thinking Face Emoji"];
+        }
+        
+        return cell;
     }
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    return cell;
+    if (tableView == _pastPersonalTableView) {
+        
+        return @"Personal";
+        
+    } else {
+        
+        return @"Professional";
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 65;
 }
 
 #pragma mark - Core Data Helper Functions
