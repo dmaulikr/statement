@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import <OneSignal/OneSignal.h>
 
 @interface AppDelegate ()
 
