@@ -7,6 +7,7 @@
 //
 
 #import "PastStatementsViewController.h"
+#import "PastStatementCell.h"
 
 @interface PastStatementsViewController ()
 
@@ -24,10 +25,15 @@ AppDelegate *pastStatementsAppDelegate;
     _context = [[pastStatementsAppDelegate persistentContainer] viewContext];
     _fetchController = [pastStatementsAppDelegate initializeFetchedResultsControllerForEntity:@"Statement" withSortDescriptor:@"createdDate"];
     
-    _pastStatementsTableView.delegate = self;
+    _pastPersonalTableView.delegate = self;
+    _pastPersonalTableView.dataSource = self;
+    _pastProfessionalTableView.delegate = self;
+    _pastProfessionalTableView.dataSource = self;
     
-    _oldStatementsArray = [self fetchOldStatements];
-    NSLog(@"%@", _oldStatementsArray);
+    _oldPersonalStatementArray = [self fetchOldStatementsWithType:@"personal"];
+    _oldProfessionalStatementArray = [self fetchOldStatementsWithType:@"professional"];
+    
+    NSLog(@"%@, %@", _oldPersonalStatementArray, _oldProfessionalStatementArray);
 }
 
 #pragma mark - Table View Delegate Methods
@@ -58,10 +64,10 @@ AppDelegate *pastStatementsAppDelegate;
 
 #pragma mark - Core Data Helper Functions
 
-- (NSArray *)fetchOldStatements {
+- (NSArray *)fetchOldStatementsWithType:(NSString *)type {
     
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"status == %@", @"old"]];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@ AND status == %@", type, @"old"]];
     [fetchRequest setReturnsObjectsAsFaults:NO];
     
     NSError *error = nil;
@@ -73,7 +79,7 @@ AppDelegate *pastStatementsAppDelegate;
         return nil;
     }
     
-    NSLog(@"%@", fetchedOldStatements);
+    //NSLog(@"%@", fetchedOldStatements);
     
     return fetchedOldStatements;
 }

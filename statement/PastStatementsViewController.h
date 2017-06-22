@@ -12,11 +12,15 @@
 
 @interface PastStatementsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) NSArray *oldStatementsArray;
+@property (weak, nonatomic) NSArray *oldPersonalStatementArray;
+@property (weak, nonatomic) NSArray *oldProfessionalStatementArray;
 
-@property (weak, nonatomic) IBOutlet UITableView *pastStatementsTableView;
+@property (weak, nonatomic) IBOutlet UITableView *pastPersonalTableView;
+@property (weak, nonatomic) IBOutlet UITableView *pastProfessionalTableView;
 
 @property (retain, nonatomic) NSManagedObjectContext *context;
 @property (retain, nonatomic) NSFetchedResultsController *fetchController;
+
+- (NSArray *)fetchOldStatementsWithType:(NSString *)type;
 
 @end
