@@ -150,4 +150,15 @@ AppDelegate *pastStatementsAppDelegate;
     return fetchedOldStatements;
 }
 
+#pragma mark - Helper Functions
+
+- (NSString *)setStringFromDate:(NSDate *)date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeZone:[NSTimeZone localTimeZone]];
+    [dateFormatter setDateFormat:@"MMMM dd, yyyy"];
+    
+    return [dateFormatter stringFromDate:date];
+}
+
 @end
