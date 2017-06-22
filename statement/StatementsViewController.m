@@ -66,6 +66,7 @@ UITextView *activeTextView;
         [statementsVCAppDelegate saveContext];
         
         personalStatement = nil;
+        [self setPersonalButtonStates];
     }
     
     if ([self compareOldStatementDate:professionalStatement.createdDate withCurrentDate:today]) {
@@ -81,6 +82,7 @@ UITextView *activeTextView;
         [statementsVCAppDelegate saveContext];
         
         professionalStatement = nil;
+        [self setProfessionalButtonStates];
     }
 }
 
