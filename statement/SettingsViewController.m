@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import "EnableNotificationsCell.h"
 
 @interface SettingsViewController ()
 
@@ -14,24 +15,87 @@
 
 @implementation SettingsViewController
 
+UNNotificationSettings *notificationSettings;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    _settingsTableView.delegate = self;
+    _settingsTableView.dataSource = self;
+    
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+       
+        notificationSettings = settings;
+    }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        
+        return 1;
+        
+    } else {
+        
+        return 2;
+    }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 2;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0) {
+    
+        EnableNotificationsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"enableNotificationsCell"];
+        
+        if (notificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized) {
+            
+            cell.enableNotificationsButton.enabled = NO;
+            
+        } else {
+            
+            cell.enableNotificationsButton.enabled = YES;
+        }
+        
+        [cell.enableNotificationsButton addTarget:self action:@selector(enableNotifications) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"morningNotificationCell"];
+    
+    return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
+        
+        return @"Notification Access";
+        
+    } else {
+        
+        return @"Notification Time Settings";
+    }
+}
+
+- (void)enableNotifications {
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"We need your permission to send you reminder notifications." message:@"Tap 'Settings' to grant that access." preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        
+        NSURL *settingsUrl = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        [[UIApplication sharedApplication] openURL:settingsUrl options:@{} completionHandler:nil];
+    }]];
+    
+    [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:nil]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
 
 @end

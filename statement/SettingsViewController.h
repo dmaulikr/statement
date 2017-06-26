@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <UserNotifications/UserNotifications.h>
 
-@interface SettingsViewController : UIViewController
+@interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *settingsTableView;
 
 @end
