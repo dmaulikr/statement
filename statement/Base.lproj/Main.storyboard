@@ -267,15 +267,20 @@
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="enableNotificationsCell" id="Kdr-Z2-2qb" customClass="EnableNotificationsCell">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Kdr-Z2-2qb" id="zMX-WP-tED">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jCT-Pt-7uw">
                                                     <rect key="frame" x="20" y="7" width="137" height="30"/>
-                                                    <state key="normal" title="Enable Notifications"/>
+                                                    <state key="normal" title="Enable Notifications">
+                                                        <color key="titleColor" red="0.21960784310000001" green="0.78039215689999997" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
+                                                    <state key="disabled">
+                                                        <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -289,21 +294,55 @@
                                             <outlet property="enableNotificationsButton" destination="jCT-Pt-7uw" id="aVt-uc-sKJ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="morningNotificationCell" id="e8w-ze-gIM">
-                                        <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="morningNotificationCell" id="e8w-ze-gIM" customClass="NotificationTimeTableViewCell">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="e8w-ze-gIM" id="LV4-19-b7a">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Morning Notification Time: 9:00am" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aG2-Rj-g2V">
+                                                    <rect key="frame" x="20" y="13" width="243" height="18"/>
+                                                    <color key="textColor" red="0.21960784310000001" green="0.78039215689999997" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="aG2-Rj-g2V" firstAttribute="leading" secondItem="LV4-19-b7a" secondAttribute="leading" constant="20" id="25E-Ll-x3m"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="aG2-Rj-g2V" firstAttribute="centerY" secondItem="e8w-ze-gIM" secondAttribute="centerY" id="RXL-Xk-RuU"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="notificationTextField" destination="aG2-Rj-g2V" id="mTD-na-UgT"/>
+                                        </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eveningNotificationCell" id="tdS-ah-ny1">
-                                        <rect key="frame" x="0.0" y="143.5" width="375" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eveningNotificationCell" id="tdS-ah-ny1" customClass="NotificationTimeTableViewCell">
+                                        <rect key="frame" x="0.0" y="144" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tdS-ah-ny1" id="cdI-qc-6Eq">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Evening Notification Time: 7:00pm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="swq-pI-mjH">
+                                                    <rect key="frame" x="20" y="13" width="240" height="18"/>
+                                                    <color key="textColor" red="0.21960784310000001" green="0.78039215689999997" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="swq-pI-mjH" firstAttribute="leading" secondItem="cdI-qc-6Eq" secondAttribute="leading" constant="20" id="kg1-Fu-V6X"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <constraints>
+                                            <constraint firstItem="swq-pI-mjH" firstAttribute="centerY" secondItem="tdS-ah-ny1" secondAttribute="centerY" id="lND-Jy-lyC"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="notificationTextField" destination="swq-pI-mjH" id="ZSN-4j-aOc"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
