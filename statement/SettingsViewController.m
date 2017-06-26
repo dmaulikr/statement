@@ -8,6 +8,7 @@
 
 #import "SettingsViewController.h"
 #import "EnableNotificationsCell.h"
+#import "NotificationTimeTableViewCell.h"
 
 @interface SettingsViewController ()
 
@@ -27,6 +28,8 @@ UNNotificationSettings *notificationSettings;
        
         notificationSettings = settings;
     }];
+    
+    [self createDatePicker];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -66,7 +69,45 @@ UNNotificationSettings *notificationSettings;
         return cell;
     }
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"morningNotificationCell"];
+    if (indexPath.section == 1) {
+        
+        if (indexPath.row == 0) {
+            
+            NotificationTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"morningNotificationCell"];
+            
+            cell.notificationTextField.delegate = self;
+            
+            [cell.notificationTextField setInputView:[self createDatePicker]];
+            
+            UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissDatePicker)];
+            
+            [toolbar setItems:[NSArray arrayWithObjects:doneButton, nil]];
+            
+            [cell.notificationTextField setInputAccessoryView:toolbar];
+            
+            return cell;
+            
+        } else if (indexPath.row == 1) {
+            
+            NotificationTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eveningNotificationCell"];
+            
+            cell.notificationTextField.delegate = self;
+            
+            [cell.notificationTextField setInputView:[self createDatePicker]];
+            
+            UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissDatePicker)];
+            
+            [toolbar setItems:[NSArray arrayWithObjects:doneButton, nil]];
+            
+            [cell.notificationTextField setInputAccessoryView:toolbar];
+            
+            return cell;
+        }
+    }
+    
+    UITableViewCell *cell;
     
     return cell;
 }
@@ -83,6 +124,8 @@ UNNotificationSettings *notificationSettings;
     }
 }
 
+#pragma mark - Helper Notification Methods
+
 - (void)enableNotifications {
     
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"We need your permission to send you reminder notifications." message:@"Tap 'Settings' to grant that access." preferredStyle:UIAlertControllerStyleAlert];
@@ -96,6 +139,21 @@ UNNotificationSettings *notificationSettings;
     [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:nil]];
     
     [self presentViewController:alert animated:YES completion:nil];
+}
+
+- (UIDatePicker *)createDatePicker {
+    
+    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height / 3))];
+    
+    datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker.date = [NSDate date];
+    
+    return datePicker;
+}
+
+- (void)dismissDatePicker {
+    
+    [self.view endEditing:YES];
 }
 
 @end

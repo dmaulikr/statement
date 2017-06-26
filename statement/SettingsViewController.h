@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 
-@interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface SettingsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *settingsTableView;
 
