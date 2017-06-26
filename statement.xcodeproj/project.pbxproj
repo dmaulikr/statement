@@ -19,6 +19,7 @@
 		A161E06A1EF8604A00F6557E /* PastStatementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A161E0691EF8604A00F6557E /* PastStatementsViewController.m */; };
 		A18300A21EC534F700D50E9B /* StatementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A18300A11EC534F700D50E9B /* StatementsViewController.m */; };
 		A1C77D021EFC6A870060AE22 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C77D011EFC6A870060AE22 /* SettingsViewController.m */; };
+		A1C77D081EFD9F8C0060AE22 /* EnableNotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C77D071EFD9F8C0060AE22 /* EnableNotificationsCell.m */; };
 		A1DD3C391EA141FF00A21F3D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1DD3C381EA141FF00A21F3D /* CoreData.framework */; };
 		C200E7006979E6997153AF6D /* Pods_statement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC2A97CA7324590FBC83156F /* Pods_statement.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,8 @@
 		A1C2152F1EF19534000E2AE0 /* statement.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = statement.entitlements; sourceTree = "<group>"; };
 		A1C77D001EFC6A870060AE22 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		A1C77D011EFC6A870060AE22 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		A1C77D061EFD9F8C0060AE22 /* EnableNotificationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnableNotificationsCell.h; sourceTree = "<group>"; };
+		A1C77D071EFD9F8C0060AE22 /* EnableNotificationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnableNotificationsCell.m; sourceTree = "<group>"; };
 		A1DD3C2F1EA1377E00A21F3D /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		A1DD3C381EA141FF00A21F3D /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E38CE1AAE4698CFA1126E60A /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +144,8 @@
 				A10B44591E94675100D4517B /* Assets.xcassets */,
 				A11B2E0B1EFAF836000F0F78 /* PastStatementCell.h */,
 				A11B2E0C1EFAF836000F0F78 /* PastStatementCell.m */,
+				A1C77D061EFD9F8C0060AE22 /* EnableNotificationsCell.h */,
+				A1C77D071EFD9F8C0060AE22 /* EnableNotificationsCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -320,6 +325,7 @@
 				A12EE36C1EA80104004B0664 /* AppDelegate.m in Sources */,
 				A161E0661EF62C2B00F6557E /* Statement+CoreDataProperties.m in Sources */,
 				A161E06A1EF8604A00F6557E /* PastStatementsViewController.m in Sources */,
+				A1C77D081EFD9F8C0060AE22 /* EnableNotificationsCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
