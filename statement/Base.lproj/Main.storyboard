@@ -301,22 +301,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Morning Notification Time: 9:00am" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aG2-Rj-g2V">
-                                                    <rect key="frame" x="20" y="13" width="243" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Morning Notification Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D14-XK-7gT">
+                                                    <rect key="frame" x="20" y="11" width="327" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.21960784310000001" green="0.78039215689999997" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="aG2-Rj-g2V" firstAttribute="leading" secondItem="LV4-19-b7a" secondAttribute="leading" constant="20" id="25E-Ll-x3m"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="D14-XK-7gT" secondAttribute="trailing" constant="20" id="oD7-Ot-bKS"/>
+                                                <constraint firstItem="D14-XK-7gT" firstAttribute="leading" secondItem="LV4-19-b7a" secondAttribute="leading" constant="20" id="tge-LA-Wpb"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
-                                            <constraint firstItem="aG2-Rj-g2V" firstAttribute="centerY" secondItem="e8w-ze-gIM" secondAttribute="centerY" id="RXL-Xk-RuU"/>
+                                            <constraint firstItem="D14-XK-7gT" firstAttribute="centerY" secondItem="e8w-ze-gIM" secondAttribute="centerY" id="a6J-9h-j9g"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="notificationTextField" destination="aG2-Rj-g2V" id="mTD-na-UgT"/>
+                                            <outlet property="notificationTimeLabel" destination="D14-XK-7gT" id="Lof-pA-fbz"/>
                                             <segue destination="Ii6-pS-pBD" kind="show" identifier="morningNotification" id="nws-ZY-xGl"/>
                                         </connections>
                                     </tableViewCell>
@@ -327,22 +328,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Evening Notification Time: 7:00pm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="swq-pI-mjH">
-                                                    <rect key="frame" x="20" y="13" width="240" height="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Evening Notification Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HEM-7Q-rAe">
+                                                    <rect key="frame" x="20" y="11.5" width="327" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.21960784310000001" green="0.78039215689999997" blue="0.72549019609999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="swq-pI-mjH" firstAttribute="leading" secondItem="cdI-qc-6Eq" secondAttribute="leading" constant="20" id="kg1-Fu-V6X"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="HEM-7Q-rAe" secondAttribute="trailing" constant="20" id="3eP-Zt-rSP"/>
+                                                <constraint firstItem="HEM-7Q-rAe" firstAttribute="leading" secondItem="cdI-qc-6Eq" secondAttribute="leading" constant="20" id="aPL-Zl-VKf"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
-                                            <constraint firstItem="swq-pI-mjH" firstAttribute="centerY" secondItem="tdS-ah-ny1" secondAttribute="centerY" id="lND-Jy-lyC"/>
+                                            <constraint firstItem="HEM-7Q-rAe" firstAttribute="centerY" secondItem="tdS-ah-ny1" secondAttribute="centerY" id="Aqo-9F-yDM"/>
                                         </constraints>
                                         <connections>
-                                            <outlet property="notificationTextField" destination="swq-pI-mjH" id="ZSN-4j-aOc"/>
+                                            <outlet property="notificationTimeLabel" destination="HEM-7Q-rAe" id="dYe-y5-O9q"/>
                                             <segue destination="Ii6-pS-pBD" kind="show" identifier="eveningNotification" id="137-pe-pp9"/>
                                         </connections>
                                     </tableViewCell>

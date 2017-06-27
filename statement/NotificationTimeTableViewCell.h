@@ -10,6 +10,6 @@
 
 @interface NotificationTimeTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UITextField *notificationTextField;
+@property (weak, nonatomic) IBOutlet UILabel *notificationTimeLabel;
 
 @end
