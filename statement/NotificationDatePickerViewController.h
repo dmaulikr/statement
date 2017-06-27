@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 
-@interface NotificationDatePickerViewController : UIViewController <UINavigationControllerDelegate>
+@interface NotificationDatePickerViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIDatePicker *notificationDatePicker;
 
 @property (weak, nonatomic) NSString *notificationIdentifier;
-@property (retain, nonatomic) NSDateComponents *morningNotificationDateComponents;
-@property (retain, nonatomic) NSDateComponents *eveningNotificationDateComponents;
 
 @end

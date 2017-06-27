@@ -18,9 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.delegate = self;
-    
-    NSLog(@"%@", _notificationIdentifier);
+    //NSLog(@"%@", _notificationIdentifier);
     
     [_notificationDatePicker addTarget:self action:@selector(rescheduleNotification) forControlEvents:UIControlEventValueChanged];
     
@@ -70,17 +68,12 @@
             triggerComponents.second = 0;
             //NSLog(@"%@", triggerComponents);
             
-            if ([_notificationIdentifier isEqualToString:@"morningGoalIdentifier"]) {
-                
-                self.morningNotificationDateComponents = triggerComponents;
-                //NSLog(@"%@", _morningNotificationDateComponents);
-            }
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            [dateFormatter setDateFormat:@"h:mm a"];
             
-            if ([_notificationIdentifier isEqualToString:@"eveningGoalIdentifier"]) {
-                
-                self.eveningNotificationDateComponents = triggerComponents;
-                //NSLog(@"%@", _eveningNotificationDateComponents);
-            }
+            NSDate *dateToFormat = [[NSCalendar currentCalendar] dateFromComponents:triggerComponents];
+            NSString *formattedDateString = [dateFormatter stringFromDate:dateToFormat];
+            NSLog(@"%@", formattedDateString);
             
             UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:triggerComponents repeats:YES];
             //NSLog(@"%@", trigger);
@@ -93,36 +86,26 @@
                 if (error != nil) {
                     
                     NSLog(@"Something went wrong: %@", error);
+                    
                 } else {
                     
-                    //NSLog(@"Notification added");
+                    if ([_notificationIdentifier isEqualToString:@"morningGoalIdentifier"]) {
+                        
+                        [[NSUserDefaults standardUserDefaults] setObject:formattedDateString forKey:@"morningNotificationTime"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                    }
+                    
+                    if ([_notificationIdentifier isEqualToString:@"eveningGoalIdentifier"]) {
+                        
+                        [[NSUserDefaults standardUserDefaults] setObject:formattedDateString forKey:@"eveningNotificationTime"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                    }
+                    
+                    NSLog(@"Notification added");
                 }
             }];
         }
     }];
-}
-
-#pragma mark - Navigation Controller Delegate Methods
-
-- (void)navigationController:(UINavigationController *)navigationController willShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
-    
-    if ([_notificationIdentifier isEqualToString:@"morningGoalIdentifier"]) {
-    
-        SettingsViewController *settingsViewController = (SettingsViewController *) viewController;
-        settingsViewController.morningNotificationDateComponents = _morningNotificationDateComponents;
-        
-        //NSLog(@"%@", self.morningNotificationDateComponents);
-    }
-    
-    if ([_notificationIdentifier isEqualToString:@"eveningGoalIdentifier"]) {
-        
-        SettingsViewController *settingsViewController = (SettingsViewController *) viewController;
-        settingsViewController.eveningNotificationDateComponents = _eveningNotificationDateComponents;
-        
-        //NSLog(@"%@", self.eveningNotificationDateComponents);
-    }
-    
-    NSLog(@"Navigation Delegate Method Called");
 }
 
 @end

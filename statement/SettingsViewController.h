@@ -13,7 +13,4 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *settingsTableView;
 
-@property (nonatomic) NSDateComponents *morningNotificationDateComponents;
-@property (nonatomic) NSDateComponents *eveningNotificationDateComponents;
-
 @end

@@ -35,7 +35,7 @@ UNNotificationSettings *notificationSettings;
     
     [super viewWillAppear:animated];
     
-    NSLog(@"%@, %@", _morningNotificationDateComponents, _eveningNotificationDateComponents);
+    [_settingsTableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -80,8 +80,11 @@ UNNotificationSettings *notificationSettings;
         if (indexPath.row == 0) {
             
             NotificationTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"morningNotificationCell"];
+    
+            NSString *morningNotificationTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"morningNotificationTime"];
             
-            cell.notificationTextField.delegate = self;
+            cell.notificationTimeLabel.text = [NSString
+                                               stringWithFormat:@"Morning Notification Time: %@", morningNotificationTime];
             
             return cell;
             
@@ -89,7 +92,10 @@ UNNotificationSettings *notificationSettings;
             
             NotificationTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eveningNotificationCell"];
             
-            cell.notificationTextField.delegate = self;
+            NSString *eveningNotificationTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"eveningNotificationTime"];
+            
+            cell.notificationTimeLabel.text = [NSString
+                                               stringWithFormat:@"Evening Notification Time: %@", eveningNotificationTime];
             
             return cell;
         }
