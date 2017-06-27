@@ -381,7 +381,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="5" translatesAutoresizingMaskIntoConstraints="NO" id="TG7-4T-wT9">
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="TG7-4T-wT9">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <date key="date" timeIntervalSinceReferenceDate="520216445.72798002">
                                     <!--2017-06-27 00:34:05 +0000-->
