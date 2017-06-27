@@ -31,6 +31,13 @@ UNNotificationSettings *notificationSettings;
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    
+    NSLog(@"%@, %@", _morningNotificationDateComponents, _eveningNotificationDateComponents);
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if (section == 0) {
@@ -76,15 +83,6 @@ UNNotificationSettings *notificationSettings;
             
             cell.notificationTextField.delegate = self;
             
-            /*[cell.notificationTextField setInputView:[self createDatePicker]];
-            
-            UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissDatePicker)];
-            
-            [toolbar setItems:[NSArray arrayWithObjects:doneButton, nil]];
-            
-            [cell.notificationTextField setInputAccessoryView:toolbar];*/
-            
             return cell;
             
         } else if (indexPath.row == 1) {
@@ -93,15 +91,6 @@ UNNotificationSettings *notificationSettings;
             
             cell.notificationTextField.delegate = self;
             
-            /*[cell.notificationTextField setInputView:[self createDatePicker]];
-            
-            UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
-            UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissDatePicker)];
-            
-            [toolbar setItems:[NSArray arrayWithObjects:doneButton, nil]];
-            
-            [cell.notificationTextField setInputAccessoryView:toolbar];*/
-            
             return cell;
         }
     }
@@ -109,6 +98,11 @@ UNNotificationSettings *notificationSettings;
     UITableViewCell *cell;
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -156,24 +150,5 @@ UNNotificationSettings *notificationSettings;
         [viewController setNotificationIdentifier:@"eveningGoalIdentifier"];
     }
 }
-
-#pragma mark - Helper Date Picker Methods
-
-/*- (UIDatePicker *)createDatePicker {
-    
-    UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height / 3))];
-    
-    datePicker.datePickerMode = UIDatePickerModeTime;
-    datePicker.date = [NSDate date];
-    
-    [datePicker addTarget:self action:@selector(removeOldNotificationAndSetNotificationWithTitle:andBody:forHour:forMinute:withIdentifer:) forControlEvents:UIControlEventValueChanged];
-    
-    return datePicker;
-}
-
-- (void)dismissDatePicker {
-    
-    [self.view endEditing:YES];
-}*/
 
 @end
