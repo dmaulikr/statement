@@ -9,6 +9,7 @@
 #import "SettingsViewController.h"
 #import "EnableNotificationsCell.h"
 #import "NotificationTimeTableViewCell.h"
+#import "NotificationDatePickerViewController.h"
 
 @interface SettingsViewController ()
 
@@ -28,8 +29,6 @@ UNNotificationSettings *notificationSettings;
        
         notificationSettings = settings;
     }];
-    
-    [self createDatePicker];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -77,14 +76,14 @@ UNNotificationSettings *notificationSettings;
             
             cell.notificationTextField.delegate = self;
             
-            [cell.notificationTextField setInputView:[self createDatePicker]];
+            /*[cell.notificationTextField setInputView:[self createDatePicker]];
             
             UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
             UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissDatePicker)];
             
             [toolbar setItems:[NSArray arrayWithObjects:doneButton, nil]];
             
-            [cell.notificationTextField setInputAccessoryView:toolbar];
+            [cell.notificationTextField setInputAccessoryView:toolbar];*/
             
             return cell;
             
@@ -94,14 +93,14 @@ UNNotificationSettings *notificationSettings;
             
             cell.notificationTextField.delegate = self;
             
-            [cell.notificationTextField setInputView:[self createDatePicker]];
+            /*[cell.notificationTextField setInputView:[self createDatePicker]];
             
             UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
             UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(dismissDatePicker)];
             
             [toolbar setItems:[NSArray arrayWithObjects:doneButton, nil]];
             
-            [cell.notificationTextField setInputAccessoryView:toolbar];
+            [cell.notificationTextField setInputAccessoryView:toolbar];*/
             
             return cell;
         }
@@ -141,12 +140,33 @@ UNNotificationSettings *notificationSettings;
     [self presentViewController:alert animated:YES completion:nil];
 }
 
-- (UIDatePicker *)createDatePicker {
+#pragma mark - Prepare for Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqual: @"morningNotification"]) {
+        
+        NotificationDatePickerViewController *viewController = [segue destinationViewController];
+        [viewController setNotificationIdentifier:@"morningGoalIdentifier"];
+    }
+    
+    if ([segue.identifier isEqual:@"eveningNotification"]) {
+        
+        NotificationDatePickerViewController *viewController = [segue destinationViewController];
+        [viewController setNotificationIdentifier:@"eveningGoalIdentifier"];
+    }
+}
+
+#pragma mark - Helper Date Picker Methods
+
+/*- (UIDatePicker *)createDatePicker {
     
     UIDatePicker *datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, (self.view.frame.size.height / 3))];
     
     datePicker.datePickerMode = UIDatePickerModeTime;
     datePicker.date = [NSDate date];
+    
+    [datePicker addTarget:self action:@selector(removeOldNotificationAndSetNotificationWithTitle:andBody:forHour:forMinute:withIdentifer:) forControlEvents:UIControlEventValueChanged];
     
     return datePicker;
 }
@@ -154,6 +174,6 @@ UNNotificationSettings *notificationSettings;
 - (void)dismissDatePicker {
     
     [self.view endEditing:YES];
-}
+}*/
 
 @end
