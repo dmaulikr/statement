@@ -9,7 +9,6 @@
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
-        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -470,10 +469,6 @@
                                                     <outlet property="completionStatusImage" destination="RCZ-5g-iwK" id="WN6-Yc-3KX"/>
                                                     <outlet property="statementText" destination="FhY-qQ-9Ut" id="WuG-NF-PyS"/>
                                                     <outlet property="statementType" destination="wkK-hw-0Px" id="7Ov-sr-LTy"/>
-                                                    <segue destination="DXF-yu-PVB" kind="show" identifier="personalStatementSegue" id="WUy-Ob-X8T">
-                                                        <segue key="commit" inheritsFrom="parent" id="WFL-Wp-Lnz"/>
-                                                        <segue key="preview" inheritsFrom="commit" id="aOz-bK-zyU"/>
-                                                    </segue>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -530,7 +525,6 @@
                                                     <outlet property="completionStatusImage" destination="Ghk-fb-kc3" id="Hxp-wU-Pvd"/>
                                                     <outlet property="statementText" destination="knd-0W-LaM" id="pLk-nH-Btv"/>
                                                     <outlet property="statementType" destination="Bzn-ek-IKW" id="mB6-Sl-K3B"/>
-                                                    <segue destination="DXF-yu-PVB" kind="show" identifier="professionalStatementSegue" id="wbo-Uk-xJi"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -565,6 +559,7 @@
                     <connections>
                         <outlet property="pastPersonalTableView" destination="wNT-VS-7py" id="aNU-tt-8CB"/>
                         <outlet property="pastProfessionalTableView" destination="ePG-ku-cnF" id="e5W-Y7-FIc"/>
+                        <segue destination="DXF-yu-PVB" kind="show" identifier="statementDetailsSegue" id="V0f-g8-i2A"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YGX-ey-48X" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -631,13 +626,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="statementDetailsComments" destination="Hs0-YX-Jqz" id="70z-qo-pcj"/>
-                        <outlet property="statementDetailsCommentsLabel" destination="Hs0-YX-Jqz" id="4Zx-w1-c7r"/>
-                        <outlet property="statementDetailsCompletedLabel" destination="86V-H3-wMI" id="SOc-Jm-qZ3"/>
-                        <outlet property="statementDetailsDate" destination="jW3-TM-Y48" id="iMm-hl-bL4"/>
-                        <outlet property="statementDetailsDateLabel" destination="jW3-TM-Y48" id="beh-PJ-HWo"/>
-                        <outlet property="statementDetailsTextLabel" destination="3so-qC-EQ1" id="eJQ-Ev-Tx1"/>
-                        <outlet property="statementDetailsView" destination="POK-2N-jDR" id="zJt-eg-ara"/>
+                        <outlet property="statementDetailsCommentsLabel" destination="Hs0-YX-Jqz" id="Rt6-H0-OWB"/>
+                        <outlet property="statementDetailsCompletedLabel" destination="86V-H3-wMI" id="IaF-08-0Z7"/>
+                        <outlet property="statementDetailsDateLabel" destination="jW3-TM-Y48" id="0yZ-fs-k5o"/>
+                        <outlet property="statementDetailsTextLabel" destination="3so-qC-EQ1" id="U0F-Oh-QdV"/>
+                        <outlet property="statementDetailsView" destination="POK-2N-jDR" id="ygm-UY-eF5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s9f-jX-HMQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -659,6 +652,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="137-pe-pp9"/>
-        <segue reference="WUy-Ob-X8T"/>
     </inferredMetricsTieBreakers>
 </document>

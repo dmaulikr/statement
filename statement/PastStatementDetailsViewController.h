@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Statement+CoreDataClass.h"
 
 @interface PastStatementDetailsViewController : UIViewController
+
+@property (weak, nonatomic) NSString *statementIdentifier;
+@property (weak, nonatomic) Statement *pastStatement;
 
 @property (strong, nonatomic) IBOutlet UIView *statementDetailsView;
 @property (weak, nonatomic) IBOutlet UILabel *statementDetailsTextLabel;

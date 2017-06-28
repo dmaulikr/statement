@@ -8,6 +8,7 @@
 
 #import "PastStatementsViewController.h"
 #import "PastStatementCell.h"
+#import "PastStatementDetailsViewController.h"
 
 @interface PastStatementsViewController ()
 
@@ -33,7 +34,32 @@ AppDelegate *pastStatementsAppDelegate;
     _oldPersonalStatementArray = [self fetchOldStatementsWithType:@"personal"];
     _oldProfessionalStatementArray = [self fetchOldStatementsWithType:@"professional"];
     
-    NSLog(@"%@, %@", _oldPersonalStatementArray, _oldProfessionalStatementArray);
+    //NSLog(@"%@, %@", _oldPersonalStatementArray, _oldProfessionalStatementArray);
+    
+    /*Statement *examplePersonalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
+    examplePersonalStatement.statementText = @"example personal3";
+    examplePersonalStatement.comments = @"example personal comments";
+    examplePersonalStatement.completed = 0;
+    examplePersonalStatement.status = @"old";
+    examplePersonalStatement.createdDate = [NSDate date];
+    examplePersonalStatement.type = @"personal";
+    
+    Statement *exampleProfessionalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
+    exampleProfessionalStatement.statementText = @"example professional3";
+    exampleProfessionalStatement.comments = @"example professional comments";
+    exampleProfessionalStatement.completed = 0;
+    exampleProfessionalStatement.status = @"old";
+    exampleProfessionalStatement.createdDate = [NSDate date];
+    exampleProfessionalStatement.type = @"professional";
+    
+    [pastStatementsAppDelegate saveContext];*/
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [_pastPersonalTableView reloadData];
+    [_pastProfessionalTableView reloadData];
 }
 
 #pragma mark - Table View Delegate Methods
@@ -123,6 +149,27 @@ AppDelegate *pastStatementsAppDelegate;
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (tableView == _pastPersonalTableView) {
+        
+        if (_oldPersonalStatementArray != nil) {
+            
+            _selectedStatement = _oldPersonalStatementArray[indexPath.row];
+            [self performSegueWithIdentifier:@"statementDetailsSegue" sender:self];
+        }
+    }
+    
+    if (tableView == _pastProfessionalTableView) {
+        
+        if (_oldProfessionalStatementArray != nil) {
+            
+            _selectedStatement = _oldProfessionalStatementArray[indexPath.row];
+            [self performSegueWithIdentifier:@"statementDetailsSegue" sender:self];
+        }
+    }
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     return 65;
@@ -159,6 +206,17 @@ AppDelegate *pastStatementsAppDelegate;
     [dateFormatter setDateFormat:@"MMMM dd, yyyy"];
     
     return [dateFormatter stringFromDate:date];
+}
+
+#pragma mark - Segue Preparation
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"statementDetailsSegue"]) {
+        
+        PastStatementDetailsViewController *viewController = [segue destinationViewController];
+        [viewController setPastStatement:_selectedStatement];
+    }
 }
 
 @end

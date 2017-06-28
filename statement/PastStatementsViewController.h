@@ -12,8 +12,9 @@
 
 @interface PastStatementsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) NSArray *oldPersonalStatementArray;
-@property (weak, nonatomic) NSArray *oldProfessionalStatementArray;
+@property (retain, nonatomic) NSArray *oldPersonalStatementArray;
+@property (retain, nonatomic) NSArray *oldProfessionalStatementArray;
+@property (retain) Statement *selectedStatement;
 
 @property (weak, nonatomic) IBOutlet UITableView *pastPersonalTableView;
 @property (weak, nonatomic) IBOutlet UITableView *pastProfessionalTableView;
