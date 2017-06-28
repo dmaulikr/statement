@@ -18,6 +18,7 @@
 		A161E0661EF62C2B00F6557E /* Statement+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = A161E0631EF62C2B00F6557E /* Statement+CoreDataProperties.m */; };
 		A161E06A1EF8604A00F6557E /* PastStatementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A161E0691EF8604A00F6557E /* PastStatementsViewController.m */; };
 		A18300A21EC534F700D50E9B /* StatementsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A18300A11EC534F700D50E9B /* StatementsViewController.m */; };
+		A1C2CA0F1F0413AC00E795A8 /* PastStatementDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C2CA0E1F0413AC00E795A8 /* PastStatementDetailsViewController.m */; };
 		A1C77D021EFC6A870060AE22 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C77D011EFC6A870060AE22 /* SettingsViewController.m */; };
 		A1C77D081EFD9F8C0060AE22 /* EnableNotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1C77D071EFD9F8C0060AE22 /* EnableNotificationsCell.m */; };
 		A1DA10271F01879B0085E70A /* NotificationTimeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A1DA10261F01879B0085E70A /* NotificationTimeTableViewCell.m */; };
@@ -60,6 +61,8 @@
 		A18300A01EC534F700D50E9B /* StatementsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatementsViewController.h; sourceTree = "<group>"; };
 		A18300A11EC534F700D50E9B /* StatementsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatementsViewController.m; sourceTree = "<group>"; };
 		A1C2152F1EF19534000E2AE0 /* statement.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = statement.entitlements; sourceTree = "<group>"; };
+		A1C2CA0D1F0413AC00E795A8 /* PastStatementDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PastStatementDetailsViewController.h; sourceTree = "<group>"; };
+		A1C2CA0E1F0413AC00E795A8 /* PastStatementDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PastStatementDetailsViewController.m; sourceTree = "<group>"; };
 		A1C77D001EFC6A870060AE22 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		A1C77D011EFC6A870060AE22 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		A1C77D061EFD9F8C0060AE22 /* EnableNotificationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnableNotificationsCell.h; sourceTree = "<group>"; };
@@ -165,6 +168,8 @@
 				A18300A11EC534F700D50E9B /* StatementsViewController.m */,
 				A161E0681EF8604A00F6557E /* PastStatementsViewController.h */,
 				A161E0691EF8604A00F6557E /* PastStatementsViewController.m */,
+				A1C2CA0D1F0413AC00E795A8 /* PastStatementDetailsViewController.h */,
+				A1C2CA0E1F0413AC00E795A8 /* PastStatementDetailsViewController.m */,
 				A1C77D001EFC6A870060AE22 /* SettingsViewController.h */,
 				A1C77D011EFC6A870060AE22 /* SettingsViewController.m */,
 				A1FBBF221F01E12E0066F360 /* NotificationDatePickerViewController.h */,
@@ -333,6 +338,7 @@
 				A11B2E0D1EFAF836000F0F78 /* PastStatementCell.m in Sources */,
 				A161E0641EF62C2B00F6557E /* Statement+CoreDataClass.m in Sources */,
 				A1DA10271F01879B0085E70A /* NotificationTimeTableViewCell.m in Sources */,
+				A1C2CA0F1F0413AC00E795A8 /* PastStatementDetailsViewController.m in Sources */,
 				A1FBBF241F01E12F0066F360 /* NotificationDatePickerViewController.m in Sources */,
 				A12EE36C1EA80104004B0664 /* AppDelegate.m in Sources */,
 				A161E0661EF62C2B00F6557E /* Statement+CoreDataProperties.m in Sources */,
