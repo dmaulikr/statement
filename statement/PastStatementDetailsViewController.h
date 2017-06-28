@@ -10,4 +10,10 @@
 
 @interface PastStatementDetailsViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIView *statementDetailsView;
+@property (weak, nonatomic) IBOutlet UILabel *statementDetailsTextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statementDetailsDateLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statementDetailsCommentsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *statementDetailsCompletedLabel;
+
 @end
