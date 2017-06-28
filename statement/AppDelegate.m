@@ -157,7 +157,7 @@
     return _fetchedResultsController;
 }
 
-#pragma mark - Notification Configuration
+#pragma mark - Default Notification Configuration
 
 - (void)setNotificationWithTitle:(NSString *)title andBody:(NSString *)body forHour:(NSInteger)hour withIdentifer:(NSString *)identifer {
     

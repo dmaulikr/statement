@@ -20,15 +20,29 @@
     
     //NSLog(@"%@", _notificationIdentifier);
     
-    [_notificationDatePicker addTarget:self action:@selector(rescheduleNotification) forControlEvents:UIControlEventValueChanged];
-    
-    UIColor *blueGreenColor = [UIColor colorWithRed:56.0/255.0 green:199.0/255.0 blue:185.0/255.0 alpha:1.0];
-    [_notificationDatePicker setValue:blueGreenColor forKey:@"textColor"];
-    
     [[UNUserNotificationCenter currentNotificationCenter] getPendingNotificationRequestsWithCompletionHandler: ^(NSArray<UNNotificationRequest *> * _Nonnull requests) {
         
         NSLog(@"%@", requests);
     }];
+    
+    [_notificationDatePicker addTarget:self action:@selector(rescheduleNotification) forControlEvents:UIControlEventValueChanged];
+    
+    UIColor *blueGreenColor = [UIColor colorWithRed:56.0/255.0 green:199.0/255.0 blue:185.0/255.0 alpha:1.0];
+    [_notificationDatePicker setValue:blueGreenColor forKey:@"textColor"];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if ([_notificationIdentifier isEqualToString:@"morningGoalIdentifier"]) {
+        
+        [self setInitialDatePickerTimeForKey:@"morningNotificationTime"];
+    }
+    
+    if ([_notificationIdentifier isEqualToString:@"eveningGoalIdentifier"]) {
+        
+        [self setInitialDatePickerTimeForKey:@"eveningNotificationTime"];
+    }
 }
 
 -(void)rescheduleNotification {
@@ -111,6 +125,19 @@
             }];
         }
     }];
+}
+
+- (void)setInitialDatePickerTimeForKey:(NSString *)key {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setDateFormat:@"h:mm a"];
+    
+    NSString *stringToFormat = [[NSUserDefaults standardUserDefaults] stringForKey:key];
+    NSDate *formattedTime = [dateFormatter dateFromString:stringToFormat];
+    
+    NSLog(@"%@", formattedTime);
+    [_notificationDatePicker setDate:formattedTime];
 }
 
 @end
