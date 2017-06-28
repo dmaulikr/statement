@@ -24,6 +24,11 @@
     
     UIColor *blueGreenColor = [UIColor colorWithRed:56.0/255.0 green:199.0/255.0 blue:185.0/255.0 alpha:1.0];
     [_notificationDatePicker setValue:blueGreenColor forKey:@"textColor"];
+    
+    [[UNUserNotificationCenter currentNotificationCenter] getPendingNotificationRequestsWithCompletionHandler: ^(NSArray<UNNotificationRequest *> * _Nonnull requests) {
+        
+        NSLog(@"%@", requests);
+    }];
 }
 
 -(void)rescheduleNotification {

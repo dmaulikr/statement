@@ -18,6 +18,8 @@
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"initialNotificationsAdded"]) {
         
+        [[UNUserNotificationCenter currentNotificationCenter] removeAllPendingNotificationRequests];
+        
         [[UNUserNotificationCenter currentNotificationCenter] requestAuthorizationWithOptions:UNAuthorizationOptionAlert + UNAuthorizationOptionBadge + UNAuthorizationOptionSound completionHandler:^(BOOL granted, NSError * _Nullable error) {
             
             NSLog(@"Notification permission status: %d", granted);
@@ -27,7 +29,7 @@
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             
-            [self setNotificationWithTitle:@"How'd your day go?" andBody:@"Judge how your goals went today!" forHour:19 withIdentifer:@"eveningEvaluateIdentifier"];
+            [self setNotificationWithTitle:@"How'd your day go?" andBody:@"Judge how your goals went today!" forHour:19 withIdentifer:@"eveningGoalIdentifier"];
             [[NSUserDefaults standardUserDefaults] setObject:@"7:00 PM" forKey:@"eveningNotificationTime"];
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"initialNotificationsAdded"];
