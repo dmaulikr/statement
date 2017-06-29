@@ -433,13 +433,9 @@ UITextView *activeTextView;
 - (void)setViewUI {
     
     self.personalView.layer.borderWidth = 2;
-    //self.personalView.layer.borderColor = [UIColor colorWithRed:0.0f/255.0f green:181.0f/255.0f blue:244.0f/255.0f alpha:1.0f].CGColor;
-    //self.personalView.layer.borderColor = [UIColor colorWithRed:81.0f/255.0f green:143.0f/255.0f blue:149.0f/255.0f alpha:1.0f].CGColor;
     self.personalView.layer.borderColor = [UIColor colorWithRed:56.0f/255.0f green:199.0f/255.0f blue:185.0f/255.0f alpha:1.0f].CGColor;
     
     self.professionalView.layer.borderWidth = 2;
-    //self.professionalView.layer.borderColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f].CGColor;
-    //self.professionalView.layer.borderColor = [UIColor colorWithRed:81.0f/255.0f green:143.0f/255.0f blue:149.0f/255.0f alpha:1.0f].CGColor;
     self.professionalView.layer.borderColor = [UIColor colorWithRed:56.0f/255.0f green:199.0f/255.0f blue:185.0f/255.0f alpha:1.0f].CGColor;
 }
 

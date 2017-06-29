@@ -14,7 +14,7 @@
 @property (weak, nonatomic) NSString *statementIdentifier;
 @property (weak, nonatomic) Statement *pastStatement;
 
-@property (strong, nonatomic) IBOutlet UIView *statementDetailsView;
+@property (weak, nonatomic) IBOutlet UIView *statementDetailsView;
 @property (weak, nonatomic) IBOutlet UILabel *statementDetailsTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statementDetailsDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *statementDetailsCommentsLabel;
