@@ -113,6 +113,9 @@
             if (_pastStatement.comments != nil) {
                 
                 cell.detailsLabel.text = _pastStatement.comments;
+            } else {
+                
+                cell.detailsLabel.text = @"No comments provided";
             }
         }
     }
@@ -134,17 +137,6 @@
     
     return @"";
 }
-
-/*- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 1) {
-        
-        return 120;
-    } else {
-        
-        return 50;
-    }
-}*/
 
 #pragma mark - Helper Functions
 
