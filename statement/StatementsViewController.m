@@ -43,6 +43,8 @@ UITextView *activeTextView;
     
     [self setPersonalButtonStates];
     [self setProfessionalButtonStates];
+    
+    NSLog(@"%@", professionalStatementArray);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -61,7 +63,7 @@ UITextView *activeTextView;
         _personalTextView.text = @"How did your personal goal go today?";
         _personalTextView.textColor = [UIColor lightGrayColor];
         
-        NSLog(@"%@", personalStatement);
+        ////NSLog(@"%@", personalStatement);
         
         [statementsVCAppDelegate saveContext];
         
@@ -77,7 +79,7 @@ UITextView *activeTextView;
         _professionalTextView.text = @"How did your professional goal go today?";
         _professionalTextView.textColor = [UIColor lightGrayColor];
         
-        NSLog(@"%@", professionalStatement);
+        ////NSLog(@"%@", professionalStatement);
         
         [statementsVCAppDelegate saveContext];
         
@@ -98,6 +100,15 @@ UITextView *activeTextView;
     
     if ([_personalStatementTextField isFirstResponder]) {
         
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@ AND status == %@", @"personal", @"new"]];
+        
+        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
+        
+        NSError *error = nil;
+        
+        [_context executeRequest:deleteRequest error:&error];
+        
         personalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         personalStatement.statementText = _personalStatementTextField.text;
         personalStatement.type = @"personal";
@@ -105,7 +116,7 @@ UITextView *activeTextView;
         personalStatement.completed = 0;
         personalStatement.createdDate = [NSDate date];
         
-        NSLog(@"%@", personalStatement);
+        ////NSLog(@"%@", personalStatement);
         
         [statementsVCAppDelegate saveContext];
         
@@ -124,6 +135,15 @@ UITextView *activeTextView;
         
     } else if ([_professionalStatementTextField isFirstResponder]) {
         
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+        [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@ AND status == %@", @"professional", @"new"]];
+        
+        NSBatchDeleteRequest *deleteRequest = [[NSBatchDeleteRequest alloc] initWithFetchRequest:fetchRequest];
+        
+        NSError *error = nil;
+        
+        [_context executeRequest:deleteRequest error:&error];
+        
         professionalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
         professionalStatement.statementText = _professionalStatementTextField.text;
         professionalStatement.type = @"professional";
@@ -131,7 +151,7 @@ UITextView *activeTextView;
         professionalStatement.completed = 0;
         professionalStatement.createdDate = [NSDate date];
         
-        NSLog(@"%@", professionalStatement);
+        //NSLog(@"%@", professionalStatement);
         
         [statementsVCAppDelegate saveContext];
         
@@ -162,14 +182,14 @@ UITextView *activeTextView;
             [_personalYesButton setSelected:YES];
             [_personalNoButton setSelected:NO];
             
-            NSLog(@"%@", personalStatement);
+            //NSLog(@"%@", personalStatement);
             
         } else if (personalStatement.completed == 2) {
             
             personalStatement.completed = 1;
             [_personalYesButton setSelected:NO];
             
-            NSLog(@"%@", personalStatement);
+            //NSLog(@"%@", personalStatement);
         }
     }
     
@@ -181,14 +201,14 @@ UITextView *activeTextView;
             [_professionalYesButton setSelected:YES];
             [_professionalNoButton setSelected:NO];
             
-            NSLog(@"%@", professionalStatement);
+            //NSLog(@"%@", professionalStatement);
             
         } else if (professionalStatement.completed == 2) {
             
             professionalStatement.completed = 1;
             [_professionalYesButton setSelected:NO];
             
-            NSLog(@"%@", professionalStatement);
+            //NSLog(@"%@", professionalStatement);
         }
     }
 }
@@ -203,13 +223,13 @@ UITextView *activeTextView;
             [_personalNoButton setSelected:YES];
             [_personalYesButton setSelected:NO];
             
-            NSLog(@"%@", personalStatement);
+            //NSLog(@"%@", personalStatement);
         } else if (personalStatement.completed == 1) {
             
             personalStatement.completed = 0;
             [_personalNoButton setSelected:NO];
             
-            NSLog(@"%@", personalStatement);
+            //NSLog(@"%@", personalStatement);
         }
         
     } else if ([sender tag] == 4) {
@@ -220,14 +240,14 @@ UITextView *activeTextView;
             [_professionalNoButton setSelected:YES];
             [_professionalYesButton setSelected:NO];
             
-            NSLog(@"%@", professionalStatement);
+            //NSLog(@"%@", professionalStatement);
             
         } else if (professionalStatement.completed == 1) {
             
             professionalStatement.completed = 0;
             [_professionalNoButton setSelected:NO];
             
-            NSLog(@"%@", professionalStatement);
+            //NSLog(@"%@", professionalStatement);
         }
     }
 }
@@ -248,7 +268,7 @@ UITextView *activeTextView;
         
         if (CGRectContainsPoint(viewRect, activeField.frame.origin)) {
             
-            NSLog(@"%@", NSStringFromCGRect(activeField.frame));
+            //NSLog(@"%@", NSStringFromCGRect(activeField.frame));
             
             CGPoint scrollPoint = CGPointMake(0.0, activeField.frame.origin.y);
             [_scrollView setContentOffset:scrollPoint animated:YES];
@@ -260,7 +280,7 @@ UITextView *activeTextView;
         
         if (CGRectContainsPoint(viewRect, activeTextView.frame.origin)) {
             
-            NSLog(@"%@", NSStringFromCGRect(activeTextView.frame));
+            //NSLog(@"%@", NSStringFromCGRect(activeTextView.frame));
             
             CGPoint scrollPoint = CGPointMake(0.0, activeTextView.frame.origin.y + 40);
             [_scrollView setContentOffset:scrollPoint animated:YES];
@@ -292,7 +312,7 @@ UITextView *activeTextView;
         return nil;
     }
     
-    NSLog(@"%@", fetchedPersonal[0]);
+    //NSLog(@"%@", fetchedPersonal[0]);
     
     return fetchedPersonal;
 }
@@ -406,13 +426,13 @@ UITextView *activeTextView;
         if (textView == _personalTextView ) {
             
             personalStatement.comments = textView.text;
-            NSLog(@"%@", personalStatement.comments);
+            //NSLog(@"%@", personalStatement.comments);
         }
         
         if (textView == _professionalTextView) {
             
             professionalStatement.comments = textView.text;
-            NSLog(@"%@", professionalStatement.comments);
+            //NSLog(@"%@", professionalStatement.comments);
         }
     }
 }
@@ -572,7 +592,7 @@ UITextView *activeTextView;
         
         if (convertedOldDate < convertedCurrentDate) {
             
-            NSLog(@"Statement is from yesterday");
+            //NSLog(@"Statement is from yesterday");
             return YES;
             
         } else {
