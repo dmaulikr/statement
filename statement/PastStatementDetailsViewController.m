@@ -7,6 +7,7 @@
 //
 
 #import "PastStatementDetailsViewController.h"
+#import "StatementDetailsTableViewCell.h"
 
 @interface PastStatementDetailsViewController ()
 
@@ -19,13 +20,15 @@
     
     NSLog(@"%@", _pastStatement);
     
-    [self setUiColor];
+    _statementDetailsTableView.delegate = self;
+    
+    _statementDetailsTableView.rowHeight = UITableViewAutomaticDimension;
+    _statementDetailsTableView.estimatedRowHeight = 60;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self setStatementUi];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,17 +36,13 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)setUiColor {
+/*- (void)setUiColor {
     
     if ([_pastStatement.type isEqualToString:@"personal"]) {
         
         UIColor *blueColor = [UIColor colorWithRed:0.0/255.0 green:181.0/255.0 blue:244.0/255.0 alpha:1.0];
         _statementDetailsView.layer.borderWidth = 2;
         _statementDetailsView.layer.borderColor = blueColor.CGColor;
-        _statementDetailsTextLabel.textColor = blueColor;
-        _statementDetailsDateLabel.textColor = blueColor;
-        _statementDetailsCompletedLabel.textColor = blueColor;
-        _statementDetailsCommentsLabel.textColor = blueColor;
     }
     
     if ([_pastStatement.type isEqualToString:@"professional"]) {
@@ -51,45 +50,103 @@
         UIColor *greenColor = [UIColor colorWithRed:112.0/255.0 green:217.0/255.0 blue:125.0/255.0 alpha:1.0];
         _statementDetailsView.layer.borderWidth = 2;
         _statementDetailsView.layer.borderColor = greenColor.CGColor;
-        _statementDetailsTextLabel.textColor = greenColor;
-        _statementDetailsDateLabel.textColor = greenColor;
-        _statementDetailsCompletedLabel.textColor = greenColor;
-        _statementDetailsCommentsLabel.textColor = greenColor;
     }
+}*/
+
+#pragma mark - Table View Delegate Methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return 2;
 }
 
-- (void)setStatementUi {
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (_pastStatement.statementText != nil) {
+    return 2;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    StatementDetailsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"statementDetailsCell" forIndexPath:indexPath];
+    
+    if (indexPath.section == 0) {
         
-        _statementDetailsTextLabel.text = _pastStatement.statementText;
+        if (indexPath.row == 0) {
+            
+            if (_pastStatement.statementText != nil) {
+                
+                cell.detailsLabel.text = _pastStatement.statementText;
+            }
+        }
+        
+        if (indexPath.row == 1) {
+            
+            if (_pastStatement.createdDate != nil) {
+                
+                cell.detailsLabel.text = [self formatDate:_pastStatement.createdDate];
+            }
+        }
     }
     
-    if (_pastStatement.comments != nil) {
+    if (indexPath.section == 1) {
         
-        _statementDetailsCommentsLabel.text = _pastStatement.comments;
+        if (indexPath.row == 0) {
+            
+            if (_pastStatement.completed == 0) {
+                
+                cell.detailsLabel.text = @"🤔 Looks like you never judged this goal!";
+            }
+            
+            if (_pastStatement.completed == 1) {
+                
+                cell.detailsLabel.text = @"You didn't complete this one. Give it another try!";
+            }
+            
+            if (_pastStatement.completed == 2) {
+                
+                cell.detailsLabel.text = @"You did it! Nice work 😁";
+            }
+        }
+        
+        if (indexPath.row == 1) {
+            
+            if (_pastStatement.comments != nil) {
+                
+                cell.detailsLabel.text = _pastStatement.comments;
+            } else {
+                
+                cell.detailsLabel.text = @"No comments provided";
+            }
+        }
     }
     
-    if (_pastStatement.createdDate != nil) {
+    return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if (section == 0) {
         
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy"];
-        NSString *dateString = [dateFormatter stringFromDate:_pastStatement.createdDate];
-        _statementDetailsDateLabel.text = dateString;
+        return @"Statement Details";
     }
     
-    if (_pastStatement.completed == 0) {
+    if (section == 1) {
         
-        _statementDetailsCompletedLabel.text = @"Completed? 🤔 It looks like you forgot to judge your progress that day!";
-        
-    } else if (_pastStatement.completed == 1) {
-        
-        _statementDetailsCompletedLabel.text = @"Completed? Doesn't look like you finished this goal, but keep trying!";
-        
-    } else if (_pastStatement.completed == 2) {
-        
-        _statementDetailsCompletedLabel.text = @"Completed? Yes! Nice work 😁👍";
+        return @"How'd you do?";
     }
+    
+    return @"";
+}
+
+#pragma mark - Helper Functions
+
+- (NSString *)formatDate:(NSDate *)date {
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterLongStyle];
+    
+    NSString *formattedString = [dateFormatter stringFromDate:date];
+    return formattedString;
 }
 
 @end

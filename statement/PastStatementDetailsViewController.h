@@ -9,15 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "Statement+CoreDataClass.h"
 
-@interface PastStatementDetailsViewController : UIViewController
+@interface PastStatementDetailsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) NSString *statementIdentifier;
 @property (weak, nonatomic) Statement *pastStatement;
 
 @property (weak, nonatomic) IBOutlet UIView *statementDetailsView;
-@property (weak, nonatomic) IBOutlet UILabel *statementDetailsTextLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statementDetailsDateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statementDetailsCommentsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *statementDetailsCompletedLabel;
+@property (weak, nonatomic) IBOutlet UITableView *statementDetailsTableView;
 
 @end
