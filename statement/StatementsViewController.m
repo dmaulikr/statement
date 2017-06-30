@@ -280,28 +280,6 @@ UITextView *activeTextView;
     _scrollView.scrollIndicatorInsets = contentInsets;
 }
 
-#pragma mark - Core Data Helper Functions
-
--(NSArray *)fetchStatementWithType:(NSString *)type andStatus:(NSString *)status {
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@ AND status == %@", type, status]];
-    [fetchRequest setReturnsObjectsAsFaults:NO];
-
-    NSError *error = nil;
-    
-    NSArray *fetchedPersonal = [_context executeFetchRequest:fetchRequest error:&error];
-    
-    if ([fetchedPersonal count] < 1) {
-        
-        return nil;
-    }
-    
-    //NSLog(@"%@", fetchedPersonal[0]);
-    
-    return fetchedPersonal;
-}
-
 #pragma mark - Text Field Delegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
@@ -451,6 +429,28 @@ UITextView *activeTextView;
     }
     
     return YES;
+}
+
+#pragma mark - Core Data Helper Functions
+
+-(NSArray *)fetchStatementWithType:(NSString *)type andStatus:(NSString *)status {
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"Statement"];
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"type == %@ AND status == %@", type, status]];
+    [fetchRequest setReturnsObjectsAsFaults:NO];
+    
+    NSError *error = nil;
+    
+    NSArray *fetchedStatements = [_context executeFetchRequest:fetchRequest error:&error];
+    
+    if ([fetchedStatements count] < 1) {
+        
+        return nil;
+    }
+    
+    //NSLog(@"%@", fetchedStatements[0]);
+    
+    return fetchedStatements;
 }
 
 #pragma mark - Helper Functions 
