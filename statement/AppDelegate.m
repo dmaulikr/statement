@@ -16,7 +16,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
+    // Checks if initial notifications have been added and adds default notifications if not.
+    
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"initialNotificationsAdded"]) {
+        
+        // Removes any pending notifications to prevent duplicate notifications.
         
         [[UNUserNotificationCenter currentNotificationCenter] removeAllPendingNotificationRequests];
         
@@ -72,18 +76,11 @@
     
 }
 
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
-    
-}
-
-- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
-    
-    NSLog(@"Registration failed: %@", error);
-}
-
 #pragma mark - Core Data Stack
 
 @synthesize persistentContainer = _persistentContainer;
+
+// Initializes NSPersistentContainer and Core Data Stack
 
 - (NSPersistentContainer *)persistentContainer {
     
@@ -95,11 +92,7 @@
                 
                 if (error != nil) {
                     
-                    // Replace this implementation with code to handle the error appropriately.
-                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                    
                     NSLog(@"Unresolved error creating persistent container: %@, %@", error, error.userInfo);
-                    abort();
                 }
             }];
         }
@@ -117,11 +110,8 @@
     
     if ([context hasChanges] && ![context save:&error]) {
         
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        
         NSLog(@"Unresolved error saving context: %@, %@", error, error.userInfo);
-        abort();
+        
     } else {
         
         NSLog(@"Context successfully saved.");;
@@ -171,6 +161,8 @@
             notificationContent.sound = [UNNotificationSound defaultSound];
             
             NSDate *date = [NSDate date];
+            
+            // Creates trigger that will determine when the push notification is sent
             
             NSDateComponents *triggerComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond) fromDate:date];
             

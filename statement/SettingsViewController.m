@@ -141,6 +141,8 @@ UNNotificationSettings *notificationSettings;
 
 - (void)enableNotifications {
     
+    // Presents alert with button that redirects to app settings so user can enable notifications
+    
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"We need your permission to send you reminder notifications." message:@"Tap 'Settings' to grant that access." preferredStyle:UIAlertControllerStyleAlert];
     
     [alert addAction:[UIAlertAction actionWithTitle:@"Settings" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {

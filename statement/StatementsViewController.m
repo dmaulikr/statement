@@ -52,6 +52,8 @@ UITextView *activeTextView;
     
     [self subscribeToKeyboard];
     
+    // Compares the created date of current Statements with the current date to retire old Statements
+    
     NSDateComponents *todayComponents = [[NSCalendar currentCalendar] components:(NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay) fromDate:[NSDate date]];
     NSDate *today = [[NSCalendar autoupdatingCurrentCalendar] dateFromComponents:todayComponents];
     
@@ -252,7 +254,11 @@ UITextView *activeTextView;
     }
 }
 
+#pragma mark - Keyboard Management
+
 - (void)keyboardWasShown:(NSNotification *)keyboardNotification {
+    
+    // Moves the scroll view when the keyboard covers up an active text field or view
     
     NSDictionary *userInfo = [keyboardNotification userInfo];
     CGSize keyboardSize = [[userInfo objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;

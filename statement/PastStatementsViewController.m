@@ -155,6 +155,8 @@ AppDelegate *pastStatementsAppDelegate;
         
         if (_oldPersonalStatementArray != nil) {
             
+            // Assigns selectedStatement property which is passed to next VC
+            
             _selectedStatement = _oldPersonalStatementArray[indexPath.row];
             [self performSegueWithIdentifier:@"statementDetailsSegue" sender:self];
         }
@@ -163,6 +165,8 @@ AppDelegate *pastStatementsAppDelegate;
     if (tableView == _pastProfessionalTableView) {
         
         if (_oldProfessionalStatementArray != nil) {
+            
+            // Assigns selectedStatement property which is passed to next VC
             
             _selectedStatement = _oldProfessionalStatementArray[indexPath.row];
             [self performSegueWithIdentifier:@"statementDetailsSegue" sender:self];

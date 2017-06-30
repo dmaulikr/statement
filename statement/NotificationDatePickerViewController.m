@@ -76,7 +76,6 @@
             notificationContent.title = title;
             notificationContent.body = body;
             notificationContent.sound = [UNNotificationSound defaultSound];
-            //NSLog(@"%@", notificationContent);
             
             NSDate *date = [NSDate date];
             
@@ -85,7 +84,6 @@
             triggerComponents.hour = currentDateComponents.hour;
             triggerComponents.minute = currentDateComponents.minute;
             triggerComponents.second = 0;
-            //NSLog(@"%@", triggerComponents);
             
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             [dateFormatter setDateFormat:@"h:mm a"];
@@ -128,6 +126,8 @@
 }
 
 - (void)setInitialDatePickerTimeForKey:(NSString *)key {
+    
+    // Sets the time that the date picker shows when first displayed. Time is based off of saved value in NSUserDefaults.
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setLocale:[NSLocale currentLocale]];
