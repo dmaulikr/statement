@@ -43,8 +43,6 @@ UITextView *activeTextView;
     
     [self setPersonalButtonStates];
     [self setProfessionalButtonStates];
-    
-    NSLog(@"%@", professionalStatementArray);
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -78,8 +76,6 @@ UITextView *activeTextView;
         _professionalStatementTextField.text = nil;
         _professionalTextView.text = @"How did your professional goal go today?";
         _professionalTextView.textColor = [UIColor lightGrayColor];
-        
-        ////NSLog(@"%@", professionalStatement);
         
         [statementsVCAppDelegate saveContext];
         
@@ -116,7 +112,7 @@ UITextView *activeTextView;
         personalStatement.completed = 0;
         personalStatement.createdDate = [NSDate date];
         
-        ////NSLog(@"%@", personalStatement);
+        //NSLog(@"%@", personalStatement);
         
         [statementsVCAppDelegate saveContext];
         
@@ -182,14 +178,10 @@ UITextView *activeTextView;
             [_personalYesButton setSelected:YES];
             [_personalNoButton setSelected:NO];
             
-            //NSLog(@"%@", personalStatement);
-            
         } else if (personalStatement.completed == 2) {
             
             personalStatement.completed = 1;
             [_personalYesButton setSelected:NO];
-            
-            //NSLog(@"%@", personalStatement);
         }
     }
     
@@ -205,7 +197,7 @@ UITextView *activeTextView;
             
         } else if (professionalStatement.completed == 2) {
             
-            professionalStatement.completed = 1;
+            professionalStatement.completed = 0;
             [_professionalYesButton setSelected:NO];
             
             //NSLog(@"%@", professionalStatement);
@@ -223,13 +215,10 @@ UITextView *activeTextView;
             [_personalNoButton setSelected:YES];
             [_personalYesButton setSelected:NO];
             
-            //NSLog(@"%@", personalStatement);
         } else if (personalStatement.completed == 1) {
             
             personalStatement.completed = 0;
             [_personalNoButton setSelected:NO];
-            
-            //NSLog(@"%@", personalStatement);
         }
         
     } else if ([sender tag] == 4) {
@@ -240,14 +229,10 @@ UITextView *activeTextView;
             [_professionalNoButton setSelected:YES];
             [_professionalYesButton setSelected:NO];
             
-            //NSLog(@"%@", professionalStatement);
-            
         } else if (professionalStatement.completed == 1) {
             
             professionalStatement.completed = 0;
             [_professionalNoButton setSelected:NO];
-            
-            //NSLog(@"%@", professionalStatement);
         }
     }
 }

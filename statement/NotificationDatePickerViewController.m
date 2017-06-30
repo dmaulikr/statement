@@ -18,13 +18,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //NSLog(@"%@", _notificationIdentifier);
-    
-    [[UNUserNotificationCenter currentNotificationCenter] getPendingNotificationRequestsWithCompletionHandler: ^(NSArray<UNNotificationRequest *> * _Nonnull requests) {
-        
-        NSLog(@"%@", requests);
-    }];
-    
     [_notificationDatePicker addTarget:self action:@selector(rescheduleNotification) forControlEvents:UIControlEventValueChanged];
     
     UIColor *blueGreenColor = [UIColor colorWithRed:56.0/255.0 green:199.0/255.0 blue:185.0/255.0 alpha:1.0];
@@ -90,13 +83,10 @@
             
             NSDate *dateToFormat = [[NSCalendar currentCalendar] dateFromComponents:triggerComponents];
             NSString *formattedDateString = [dateFormatter stringFromDate:dateToFormat];
-            NSLog(@"%@", formattedDateString);
             
             UNCalendarNotificationTrigger *trigger = [UNCalendarNotificationTrigger triggerWithDateMatchingComponents:triggerComponents repeats:YES];
-            //NSLog(@"%@", trigger);
         
             UNNotificationRequest *request = [UNNotificationRequest requestWithIdentifier:_notificationIdentifier content:notificationContent trigger:trigger];
-            //NSLog(@"%@", request.identifier);
             
             [[UNUserNotificationCenter currentNotificationCenter] addNotificationRequest:request withCompletionHandler:^(NSError * _Nullable error) {
                 

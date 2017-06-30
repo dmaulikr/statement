@@ -26,33 +26,6 @@
     _statementDetailsTableView.estimatedRowHeight = 60;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*- (void)setUiColor {
-    
-    if ([_pastStatement.type isEqualToString:@"personal"]) {
-        
-        UIColor *blueColor = [UIColor colorWithRed:0.0/255.0 green:181.0/255.0 blue:244.0/255.0 alpha:1.0];
-        _statementDetailsView.layer.borderWidth = 2;
-        _statementDetailsView.layer.borderColor = blueColor.CGColor;
-    }
-    
-    if ([_pastStatement.type isEqualToString:@"professional"]) {
-        
-        UIColor *greenColor = [UIColor colorWithRed:112.0/255.0 green:217.0/255.0 blue:125.0/255.0 alpha:1.0];
-        _statementDetailsView.layer.borderWidth = 2;
-        _statementDetailsView.layer.borderColor = greenColor.CGColor;
-    }
-}*/
-
 #pragma mark - Table View Delegate Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
