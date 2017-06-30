@@ -80,22 +80,36 @@ UNNotificationSettings *notificationSettings;
         if (indexPath.row == 0) {
             
             NotificationTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"morningNotificationCell"];
+            
+            if (notificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized) {
+                
+                NSString *morningNotificationTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"morningNotificationTime"];
+                
+                cell.notificationTimeLabel.text = [NSString
+                                                   stringWithFormat:@"Morning Notification Time: %@", morningNotificationTime];
+            } else {
+                
+                cell.notificationTimeLabel.text = @"Morning Notifications Disabled";
+                cell.notificationTimeLabel.textColor = [UIColor lightGrayColor];
+            }
     
-            NSString *morningNotificationTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"morningNotificationTime"];
-            
-            cell.notificationTimeLabel.text = [NSString
-                                               stringWithFormat:@"Morning Notification Time: %@", morningNotificationTime];
-            
             return cell;
             
         } else if (indexPath.row == 1) {
             
             NotificationTimeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"eveningNotificationCell"];
             
-            NSString *eveningNotificationTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"eveningNotificationTime"];
-            
-            cell.notificationTimeLabel.text = [NSString
-                                               stringWithFormat:@"Evening Notification Time: %@", eveningNotificationTime];
+            if (notificationSettings.authorizationStatus == UNAuthorizationStatusAuthorized ) {
+                
+                NSString *eveningNotificationTime = [[NSUserDefaults standardUserDefaults] stringForKey:@"eveningNotificationTime"];
+                
+                cell.notificationTimeLabel.text = [NSString
+                                                   stringWithFormat:@"Evening Notification Time: %@", eveningNotificationTime];
+            } else {
+                
+                cell.notificationTimeLabel.text = @"Evening Notifications Disabled";
+                cell.notificationTimeLabel.textColor = [UIColor lightGrayColor];
+            }
             
             return cell;
         }
