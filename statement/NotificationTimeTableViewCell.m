@@ -10,6 +10,8 @@
 
 @implementation NotificationTimeTableViewCell
 
+@synthesize notificationTimeLabel;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

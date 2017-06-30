@@ -10,6 +10,8 @@
 
 @implementation StatementDetailsTableViewCell
 
+@synthesize detailsLabel;
+
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
