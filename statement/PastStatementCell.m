@@ -11,7 +11,7 @@
 @implementation PastStatementCell
 
 @synthesize statementText;
-@synthesize statementType;
+@synthesize statementCreatedDate;
 @synthesize completionStatusImage;
 
 - (void)awakeFromNib {

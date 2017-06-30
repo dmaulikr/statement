@@ -11,7 +11,7 @@
 @interface PastStatementCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *statementText;
-@property (weak, nonatomic) IBOutlet UILabel *statementType;
+@property (weak, nonatomic) IBOutlet UILabel *statementCreatedDate;
 @property (weak, nonatomic) IBOutlet UIImageView *completionStatusImage;
 
 @end

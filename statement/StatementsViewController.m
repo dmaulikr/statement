@@ -65,8 +65,6 @@ UITextView *activeTextView;
         _personalTextView.text = @"How did your personal goal go today?";
         _personalTextView.textColor = [UIColor lightGrayColor];
         
-        ////NSLog(@"%@", personalStatement);
-        
         [statementsVCAppDelegate saveContext];
         
         personalStatement = nil;

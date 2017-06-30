@@ -89,7 +89,7 @@ AppDelegate *pastStatementsAppDelegate;
         //NSLog(@"%@", statementIndexObject.statementText);
         
         cell.statementText.text = statementIndexObject.statementText;
-        cell.statementType.text = [self setStringFromDate:statementIndexObject.createdDate];
+        cell.statementCreatedDate.text = [self setStringFromDate:statementIndexObject.createdDate];
         
         if (statementIndexObject.completed == 1) {
             
@@ -116,7 +116,7 @@ AppDelegate *pastStatementsAppDelegate;
         //NSLog(@"%@", statementIndexObject);
         
         cell.statementText.text = statementIndexObject.statementText;
-        cell.statementType.text = [self setStringFromDate:statementIndexObject.createdDate];
+        cell.statementCreatedDate.text = [self setStringFromDate:statementIndexObject.createdDate];
         
         if (statementIndexObject.completed == 1) {
             

@@ -467,6 +467,7 @@
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="completionStatusImage" destination="RCZ-5g-iwK" id="WN6-Yc-3KX"/>
+                                                    <outlet property="statementCreatedDate" destination="wkK-hw-0Px" id="LK2-XX-nT1"/>
                                                     <outlet property="statementText" destination="FhY-qQ-9Ut" id="WuG-NF-PyS"/>
                                                     <outlet property="statementType" destination="wkK-hw-0Px" id="7Ov-sr-LTy"/>
                                                 </connections>
