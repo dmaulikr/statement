@@ -180,7 +180,7 @@ UITextView *activeTextView;
             
         } else if (personalStatement.completed == 2) {
             
-            personalStatement.completed = 1;
+            personalStatement.completed = 0;
             [_personalYesButton setSelected:NO];
         }
     }
@@ -193,14 +193,10 @@ UITextView *activeTextView;
             [_professionalYesButton setSelected:YES];
             [_professionalNoButton setSelected:NO];
             
-            //NSLog(@"%@", professionalStatement);
-            
         } else if (professionalStatement.completed == 2) {
             
             professionalStatement.completed = 0;
             [_professionalYesButton setSelected:NO];
-            
-            //NSLog(@"%@", professionalStatement);
         }
     }
 }
