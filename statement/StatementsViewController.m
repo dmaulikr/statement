@@ -317,6 +317,25 @@ UITextView *activeTextView;
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     
     activeField = nil;
+    
+    if (![textField.text  isEqual: @""]) {
+        
+        [self createStatement];
+    }
+    
+    if (textField == _personalStatementTextField) {
+        
+        NSArray *personalStatementArray = [self fetchStatementWithType:@"personal" andStatus:@"new"];
+        Statement *thisPersonalStatement = personalStatementArray[0];
+        textField.text = thisPersonalStatement.statementText;
+    }
+    
+    if (textField == _professionalStatementTextField) {
+        
+        NSArray *professionalStatementArray = [self fetchStatementWithType:@"professional" andStatus:@"new"];
+        Statement *thisProfessionalStatement = professionalStatementArray[0];
+        textField.text = thisProfessionalStatement.statementText;
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -384,6 +403,7 @@ UITextView *activeTextView;
         if ([textView.text isEqualToString: @""]) {
             
             textView.text = @"How did your personal goal go today?";
+            textView.textColor = [UIColor lightGrayColor];
             
         } else {
             
@@ -396,7 +416,7 @@ UITextView *activeTextView;
         if ([textView.text isEqualToString:@""]) {
             
             textView.text = @"How did your professional goal go today?";
-            
+            textView.textColor = [UIColor lightGrayColor];
         } else {
             
             textView.textColor = [UIColor colorWithRed:112.0f/255.0f green:217.0f/255.0f blue:125.0f/255.0f alpha:1.0f];
