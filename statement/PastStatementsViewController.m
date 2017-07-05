@@ -33,26 +33,6 @@ AppDelegate *pastStatementsAppDelegate;
     
     _oldPersonalStatementArray = [self fetchOldStatementsWithType:@"personal"];
     _oldProfessionalStatementArray = [self fetchOldStatementsWithType:@"professional"];
-    
-    //NSLog(@"%@, %@", _oldPersonalStatementArray, _oldProfessionalStatementArray);
-    
-    /*Statement *examplePersonalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
-    examplePersonalStatement.statementText = @"example personal3";
-    examplePersonalStatement.comments = @"example personal comments";
-    examplePersonalStatement.completed = 0;
-    examplePersonalStatement.status = @"old";
-    examplePersonalStatement.createdDate = [NSDate date];
-    examplePersonalStatement.type = @"personal";
-    
-    Statement *exampleProfessionalStatement = [NSEntityDescription insertNewObjectForEntityForName:@"Statement" inManagedObjectContext:_context];
-    exampleProfessionalStatement.statementText = @"example professional3";
-    exampleProfessionalStatement.comments = @"example professional comments";
-    exampleProfessionalStatement.completed = 0;
-    exampleProfessionalStatement.status = @"old";
-    exampleProfessionalStatement.createdDate = [NSDate date];
-    exampleProfessionalStatement.type = @"professional";
-    
-    [pastStatementsAppDelegate saveContext];*/
 }
 
 - (void)viewWillAppear:(BOOL)animated {
