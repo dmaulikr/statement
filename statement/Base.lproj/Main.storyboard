@@ -438,7 +438,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statement Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkK-hw-0Px">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statement Created Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wkK-hw-0Px">
                                                             <rect key="frame" x="18" y="36.5" width="237" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
@@ -469,7 +469,6 @@
                                                     <outlet property="completionStatusImage" destination="RCZ-5g-iwK" id="WN6-Yc-3KX"/>
                                                     <outlet property="statementCreatedDate" destination="wkK-hw-0Px" id="LK2-XX-nT1"/>
                                                     <outlet property="statementText" destination="FhY-qQ-9Ut" id="WuG-NF-PyS"/>
-                                                    <outlet property="statementType" destination="wkK-hw-0Px" id="7Ov-sr-LTy"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -495,7 +494,7 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statement Type" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzn-ek-IKW">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Statement Created Date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzn-ek-IKW">
                                                             <rect key="frame" x="18" y="36.5" width="237" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
@@ -524,8 +523,8 @@
                                                 </constraints>
                                                 <connections>
                                                     <outlet property="completionStatusImage" destination="Ghk-fb-kc3" id="Hxp-wU-Pvd"/>
+                                                    <outlet property="statementCreatedDate" destination="Bzn-ek-IKW" id="eEv-HJ-84f"/>
                                                     <outlet property="statementText" destination="knd-0W-LaM" id="pLk-nH-Btv"/>
-                                                    <outlet property="statementType" destination="Bzn-ek-IKW" id="mB6-Sl-K3B"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

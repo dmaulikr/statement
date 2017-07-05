@@ -108,7 +108,9 @@ AppDelegate *pastStatementsAppDelegate;
         
         return cell;
         
-    } else {
+    }
+    
+    if (tableView == _pastProfessionalTableView) {
         
         PastStatementCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pastProfessionalStatement" forIndexPath:indexPath];
         
@@ -135,6 +137,10 @@ AppDelegate *pastStatementsAppDelegate;
         
         return cell;
     }
+    
+    UITableViewCell *cell;
+    
+    return cell;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
