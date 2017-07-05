@@ -121,7 +121,6 @@
 				A1DD3C331EA137A800A21F3D /* Controller */,
 				A1DD3C321EA1379700A21F3D /* View */,
 				A1DD3C311EA1378A00A21F3D /* Model */,
-				A10B445B1E94675100D4517B /* LaunchScreen.storyboard */,
 				A10B445E1E94675100D4517B /* Info.plist */,
 				A1C2152F1EF19534000E2AE0 /* statement.entitlements */,
 				A10B444D1E94675100D4517B /* Supporting Files */,
@@ -153,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				A10B44561E94675100D4517B /* Main.storyboard */,
+				A10B445B1E94675100D4517B /* LaunchScreen.storyboard */,
 				A10B44591E94675100D4517B /* Assets.xcassets */,
 				A11B2E0B1EFAF836000F0F78 /* PastStatementCell.h */,
 				A11B2E0C1EFAF836000F0F78 /* PastStatementCell.m */,
